@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// Importando componentes:
+import InputBorderBottom from "../componentes/InputBorderBottom";
 // importando icones:
 import { seta } from '../icons/icones'
+import ButtonWithIcon from "../componentes/ButtonWithIcon";
 
 export default function SingIn(){
     const fundo = {
@@ -9,31 +12,25 @@ export default function SingIn(){
     }
     return(
         <div className="flex flex-row items-center w-full">
-            {/*
-            <span className="self-center mt-2 text-zinc-500 text-xl font-semibold tracking-widest">LOGIN</span>
-             */}
             <div style={fundo}
             className="w-[50%] h-screen bg-left bg-auto"
             >
                 <Link to={'/'} className="text-center text-2xl text-zinc-100 font-bold absolute left-3 top-2 no-underline hover:text-cyan-800">NullBank</Link>
             </div>
             <div className="h-screen w-[50%] flex flex-col">
-                <div className="w-full h-[80%] flex flex-col p-10 items-center justify-center gap-2">
-                    <span className="text-2xl font-semibold">Acesse sua conta</span>
-                    <form action="" className="flex flex-col w-[50%] h-[40%]">
+                <div className="w-[88%] h-[80%] flex flex-col p-10 items-center self-center justify-center gap-2">
+                    <span className="text-3xl font-semibold self-start ml-[13%] mb-3">Acesse sua conta</span>
+                    <form action="" className="flex flex-col w-[75%] h-[50%] border-solid border-red-500">
                         <span className="self-start text-sm">CPF</span>
-                        <input type="text"/>
-                        <span className="self-start text-sm">Senha</span>
-                        <input type="password"/>
+                        <InputBorderBottom width={'full'}/>
+                        <span className="self-start text-sm mt-4">Senha</span>
+                        <InputBorderBottom width={'full'}/>
                     </form>
-                    <Link to={'###'}
-                    className="w-full h-12 rounded-3xl mb-2 p-3 flex flex-row justify-between no-underline text-zinc-200 bg-cyan-900 self-center items-center">
-                    <span className="font-semibold">Continuar</span>
-                    <span>{seta}</span>
-                    </Link>
+                    <ButtonWithIcon width={'[75%]'} route={'###'} content={'Continuar'} icon={seta}/>
                 </div>
-                <div>
-                    <Link to={'/signUp'} className="no-underline text-sm text-zinc-400 hover:text-zinc-500 hover:font-semibold">I'm not client</Link>
+                <div className="bg-zinc-200 flex flex-row items-center justify-around w-full h-[20%]">
+                    <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou funcionário</Link>
+                    <Link to={'/signUp'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Não sou cliente</Link>
                 </div>
             </div>
         </div>

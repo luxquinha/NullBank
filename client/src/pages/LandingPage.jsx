@@ -1,8 +1,12 @@
+// Importando bibliotecas e seus componentes:
 import React from "react";
+// import { Link } from "react-router-dom";
+// Importando componentes:
 import Header from "../componentes/Header";
-import { Link } from "react-router-dom";
+import InputBorderBottom from "../componentes/InputBorderBottom";
 // importando icones:
 import { seta } from "../icons/icones";
+import ButtonWithIcon from "../componentes/ButtonWithIcon";
 
 export default function LandingPage(){
     const fundo = {
@@ -18,14 +22,8 @@ export default function LandingPage(){
             </div>
             <div className="h-[50%] w-[24%] bg-zinc-100 rounded-4 p-6 flex flex-col justify-between">
                 <span className="text-2xl font-semibold">Peça sua conta e cartão de crédito do Nullbank</span>
-                <input type="text" 
-                placeholder="Digite seu CPF" 
-                className="w-full p-2 outline-none text-sm border-solid border-bottom border-bottom-2 border-zinc-400 hover:border-black bg-transparent self-center "/>
-                <Link to={'/signUp'}
-                className="w-full h-12 rounded-3xl mb-2 p-3 flex flex-row justify-between no-underline text-zinc-200 bg-cyan-900 self-center items-center">
-                    <span className="font-semibold">Continuar</span>
-                    <span>{seta}</span>
-                    </Link>
+                <InputBorderBottom placeholder={'Digite seu CPF'} width={"full"}/>
+                <ButtonWithIcon width={'full'} content={'Continuar'} icon={seta} route={'/signUp'}/>
             </div>
           </div>
         </div>
