@@ -1,11 +1,11 @@
 // Importando bibliotecas e seus componentes:
 import React from "react";
 // Importando componentes:
-import Header from "../componentes/Header";
-import InputBorderBottom from "../componentes/InputBorderBottom";
-import ButtonWithIcon from "../componentes/ButtonWithIcon";
+import Header from "../../componentes/Header";
+import InputBorderBottom from "../../componentes/InputBorderBottom";
+import ButtonWithIcon from "../../componentes/ButtonWithIcon";
 // importando icones:
-import { seta } from "../icons/icones";
+import { seta } from "../../icons/icones";
 
 export default function LandingPage(){
     const fundo = {

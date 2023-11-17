@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // Importando componentes:
-import InputBorderBottom from "../componentes/InputBorderBottom";
-import ButtonWithIcon from "../componentes/ButtonWithIcon";
+import InputBorderBottom from "../../componentes/InputBorderBottom";
+import ButtonWithIcon from "../../componentes/ButtonWithIcon";
 // importando icones:
-import { seta } from '../icons/icones'
+import { seta } from '../../icons/icones'
 
 export default function SingIn(){
     const fundo = {
@@ -24,9 +24,9 @@ export default function SingIn(){
                         <span className="self-start text-sm">CPF</span>
                         <InputBorderBottom width={'full'}/>
                         <span className="self-start text-sm mt-4">Senha</span>
-                        <InputBorderBottom width={'full'}/>
+                        <InputBorderBottom width={'full'} type={'password'}/>
                     </form>
-                    <ButtonWithIcon width={'[75%]'} route={'###'} content={'Continuar'} icon={seta}/>
+                    <ButtonWithIcon width={'[75%]'} route={'/home'} content={'Entrar'} icon={seta}/>
                 </div>
                 <div className="bg-zinc-200 flex flex-row items-center justify-around w-full h-[20%]">
                     <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou funcionário</Link>

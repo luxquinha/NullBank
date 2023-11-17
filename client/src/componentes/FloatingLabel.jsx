@@ -24,12 +24,12 @@ const FloatingLabel = ({ label, width, type }) => {
         type={type}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        className="w-full px-2 py-0 border-b border-gray-300 focus:outline-none focus:border-blue-500"
+        className="w-full px-2 py-0 border-b border-gray-300 focus:outline-none focus:border-cyan-500"
       />
       <label
         className={`absolute left-1 ${
         (inputRef.current || inputRef.current?.value) && isFocused ? '-top-4 text-sm' : (type==='date')? '-top-4 text-sm' :  'top-0'
-        } text-gray-500 text-md transition-all duration-300 cursor-text `}
+        } text-cyan-500 text-semibold text-md transition-all duration-300 cursor-text `}
         onClick={handleClick}
       >
         {label}
