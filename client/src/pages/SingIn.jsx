@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 // Importando componentes:
 import InputBorderBottom from "../componentes/InputBorderBottom";
+import ButtonWithIcon from "../componentes/ButtonWithIcon";
 // importando icones:
 import { seta } from '../icons/icones'
-import ButtonWithIcon from "../componentes/ButtonWithIcon";
 
 export default function SingIn(){
     const fundo = {
@@ -30,7 +30,7 @@ export default function SingIn(){
                 </div>
                 <div className="bg-zinc-200 flex flex-row items-center justify-around w-full h-[20%]">
                     <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou funcionário</Link>
-                    <Link to={'/signUp'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Não sou cliente</Link>
+                    <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Não sou cliente</Link>
                 </div>
             </div>
         </div>

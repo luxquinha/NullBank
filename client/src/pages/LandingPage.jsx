@@ -1,12 +1,11 @@
 // Importando bibliotecas e seus componentes:
 import React from "react";
-// import { Link } from "react-router-dom";
 // Importando componentes:
 import Header from "../componentes/Header";
 import InputBorderBottom from "../componentes/InputBorderBottom";
+import ButtonWithIcon from "../componentes/ButtonWithIcon";
 // importando icones:
 import { seta } from "../icons/icones";
-import ButtonWithIcon from "../componentes/ButtonWithIcon";
 
 export default function LandingPage(){
     const fundo = {
