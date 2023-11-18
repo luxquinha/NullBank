@@ -26,7 +26,7 @@ export default function SingIn(){
                         <span className="self-start text-sm">Senha</span>
                         <input type="password"/>
                     </form>
-                    <Link to={'###'}
+                    <Link to={'/admin'}
                     className="w-full h-12 rounded-3xl mb-2 p-3 flex flex-row justify-between no-underline text-zinc-200 bg-cyan-900 self-center items-center">
                     <span className="font-semibold">Continuar</span>
                     <span>{seta}</span>

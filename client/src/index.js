@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LandingPage from './pages/LandingPage'
 import SignIn from './pages/SingIn'
 import SignUp from './pages/SignUp'
+import AdminPage from './pages/AdminPage'
+import Agency from './pages/admin/Agency'
 
 const routes = createBrowserRouter([
   {
@@ -20,7 +22,17 @@ const routes = createBrowserRouter([
   {
     path: '/signUp',
     element: <SignUp/>
+  },
+  {
+    path: '/admin',
+    element: <AdminPage/>
+  },
+  {
+    path: '/agency',
+    element: <Agency/>
   }
+
+
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
