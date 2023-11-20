@@ -1,5 +1,6 @@
 // Importando bibliotecas e seus componentes:
 import React from "react";
+import { useForm } from 'react-hook-form'
 // Importando componentes:
 import Header from "../../componentes/Header";
 import InputBorderBottom from "../../componentes/InputBorderBottom";
@@ -11,6 +12,12 @@ export default function LandingPage(){
     const fundo = {
         backgroundImage: "url('https://cdn.pixabay.com/photo/2014/02/01/18/00/money-256315_1280.jpg')",
     }
+    const { register, handleSubmit, formState: { errors } } = useForm()
+
+    const onSubmit = (data)=>{
+      console.log(data)
+    }
+
     return (
         <div className="w-screen h-screen">
           <Header/>
@@ -19,11 +26,11 @@ export default function LandingPage(){
                 <h2 className="text-5xl tracking-wide font-semibold w-[80%] h-[20%] text-start">Tenha N Possibilidades de produtos para N Possibilidades na vida</h2>
                 <span className="text-2xl font-medium text-start tracking-wide w-[80%] h-[10%]">O que você precisa pra ficar no controle da sua vida financeira tem no app do Nullbank.</span>
             </div>
-            <div className="h-[50%] w-[24%] bg-zinc-100 rounded-4 p-6 flex flex-col justify-between">
+            <form onSubmit={handleSubmit(onSubmit)} className="h-[50%] w-[24%] bg-zinc-100 rounded-4 p-6 flex flex-col justify-between">
                 <span className="text-2xl font-semibold">Peça sua conta e cartão de crédito do Nullbank</span>
-                <InputBorderBottom placeholder={'Digite seu CPF'} width={"full"}/>
+                <InputBorderBottom placeholder={'Digite seu CPF'} width={"full"} register={register} label={'cpf'}/>
                 <ButtonWithIcon width={'full'} content={'Continuar'} icon={seta} route={'/signUp'}/>
-            </div>
+            </form>
           </div>
         </div>
       );

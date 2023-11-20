@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 
-const FloatingLabel = ({ label, width, type }) => {
+const FloatingLabel = ({ content, label, width, type, register }) => {
     const inputRef = useRef(null)
     const [isFocused, setIsFocused] = useState(false)
   
@@ -15,11 +15,13 @@ const FloatingLabel = ({ label, width, type }) => {
   
     const handleClick = () => {
         inputRef.current.focus()
+        // handleFocus()
       }
 
   return (
     <div className={`relative w-${width} h-fit mr-5 mb-4`}>
       <input
+        {...register(label)}
         ref={inputRef}
         type={type}
         onFocus={handleFocus}
@@ -28,11 +30,11 @@ const FloatingLabel = ({ label, width, type }) => {
       />
       <label
         className={`absolute left-1 ${
-        (inputRef.current || inputRef.current?.value) && isFocused ? '-top-4 text-sm' : (type==='date')? '-top-4 text-sm' :  'top-0'
+        isFocused ? '-top-4 text-sm' : (type==='date')? '-top-4 text-sm' :  'top-0'
         } text-cyan-500 text-semibold text-md transition-all duration-300 cursor-text `}
         onClick={handleClick}
       >
-        {label}
+        {content}
       </label>
     </div>
   );
