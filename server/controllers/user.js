@@ -385,5 +385,120 @@ export const deleteDependente = (req, res) => {
   });
 };
 
+// Get all telefones
+export const getTelefones = (_, res) => {
+  const q = "SELECT * FROM equipe511330.telefones";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new telefone
+export const addTelefone = (req, res) => {
+  const q =
+    "INSERT INTO telefones(`telefone`, `tipo_telefone`, `cliente_cpf`) VALUES(?)";
+
+  const values = [
+    req.body.telefone,
+    req.body.tipo_telefone,
+    req.body.cliente_cpf,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Telefone adicionado com sucesso.");
+  });
+};
+
+// Update a telefone
+export const updateTelefone = (req, res) => {
+  const q =
+    "UPDATE telefones SET `telefone` = ?, `tipo_telefone` = ?, `cliente_cpf` = ? WHERE `telefone` = ?";
+
+  const values = [
+    req.body.telefone,
+    req.body.tipo_telefone,
+    req.body.cliente_cpf,
+  ];
+
+  db.query(q, [...values, req.params.telefone], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Telefone atualizado com sucesso.");
+  });
+};
+
+// Delete a telefone
+export const deleteTelefone = (req, res) => {
+  const q = "DELETE FROM telefones WHERE `telefone` = ?";
+
+  db.query(q, [req.params.telefone], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Telefone deletado com sucesso.");
+  });
+};
+
+// Get all dependents
+export const getEmails = (_, res) => {
+  const q = "SELECT * FROM equipe511330.emails";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new dependent
+export const addEmail = (req, res) => {
+  const q =
+    "INSERT INTO `emails`(`email`, `tipo_email`, `clientes_cpf`) VALUES(?)";
+
+  const values = [
+    req.body.email,
+    req.body.tipo_email,
+    req.body.clientes_cpf,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Emails criado com sucesso.");
+  });
+};
+
+// Update a dependent
+export const updateEmail = (req, res) => {
+  const q =
+    "UPDATE emails SET `email` = ?, `tipo_email` = ?, `clientes_cpf` = ? WHERE `email` = ?";
+
+  const values = [
+    req.body.email,
+    req.body.tipo_email,
+    req.body.clientes_cpf,
+  ];
+
+  db.query(q, [...values, req.params.email], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Email atualizado com sucesso.");
+  });
+};
+
+// Delete a dependent
+export const deleteEmail = (req, res) => {
+  const q = "DELETE FROM emails WHERE (`email` = ?)";
+
+  db.query(q, [req.params.email], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Email deletado com sucesso.");
+  });
+};
 
 

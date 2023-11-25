@@ -5,6 +5,8 @@ import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '.
 import { getClientes, addCliente, updateCliente, deleteCliente } from '../controllers/user.js';
 import { getContas, addConta, updateConta, deleteConta } from '../controllers/user.js';
 import { getDependentes, addDependente, updateDependente, deleteDependente } from '../controllers/user.js';
+import { getTelefones, addTelefone, updateTelefone, deleteTelefone } from '../controllers/user.js';
+import { getEmails, addEmail, updateEmail, deleteEmail } from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -50,6 +52,19 @@ router.get('/dependentes', getDependentes);
 router.post('/dependentes', addDependente);
 router.put('/dependentes/:nome_completo', updateDependente);
 router.delete('/dependentes/:nome_completo', deleteDependente);
+
+// Routes for telefones
+router.get('/telefones', getTelefones);
+router.post('/telefones', addTelefone);
+router.put('/telefones/:telefone', updateTelefone);
+router.delete('/telefones/:telefone', deleteTelefone);
+
+// Routes for emails
+router.get('/emails', getEmails);
+router.post('/emails', addEmail);
+router.put('/emails/:email', updateEmail);
+router.delete('/emails/:email', deleteEmail);
+
 
 
 export default router;

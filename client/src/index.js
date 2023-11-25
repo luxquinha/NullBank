@@ -14,6 +14,8 @@ import Trans from './pages/transacoes/Trans'
 import Clientes from './pages/clientes/Clientes'
 import Contas from './pages/contas/Contas'
 import Dependente from './pages/dependentes/Dependente'
+import Telefones from './pages/telefones/Telefones'
+import Emails from './pages/emails/Emails'
 
 const routes = createBrowserRouter([
   {
@@ -55,8 +57,15 @@ const routes = createBrowserRouter([
   {
     path: '/dependentes',
     element: <Dependente/>
+  },
+  {
+    path: '/telefones',
+    element: <Telefones/>
+  },
+  {
+    path: '/emails',
+    element: <Emails/>
   }
-
 
 ])
 
