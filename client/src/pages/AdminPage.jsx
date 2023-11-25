@@ -46,6 +46,26 @@ const AdminPage = () => {
             Emails - Clientes
           </button>
         </Link>
+        <Link to="/conta_cliente">
+          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
+            Contas - Cliente
+          </button>
+        </Link>
+        <Link to="/conta_corrente">
+          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
+            Conta Corrente
+          </button>
+        </Link>
+        <Link to="/conta_especial">
+          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
+            Conta Especial
+          </button>
+        </Link>
+        <Link to="/conta_poupanca">
+          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
+            Conta Poupança
+          </button>
+        </Link>
       </div>
     </div>
   );

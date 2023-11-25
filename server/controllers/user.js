@@ -501,4 +501,232 @@ export const deleteEmail = (req, res) => {
   });
 };
 
+// Get all conta_cliente relationships
+export const getContaClientes = (_, res) => {
+  const q = "SELECT * FROM equipe511330.conta_cliente";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new conta_cliente relationship
+export const addContaCliente = (req, res) => {
+  const q =
+    "INSERT INTO `conta_cliente`(`clientes_cpf`, `contas_numero`) VALUES(?)";
+
+  const values = [
+    req.body.clientes_cpf,
+    req.body.contas_numero,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Relacionamento conta_cliente criado com sucesso.");
+  });
+};
+
+// Update a conta_cliente relationship
+export const updateContaCliente = (req, res) => {
+  const q =
+    "UPDATE conta_cliente SET `clientes_cpf` = ?, `contas_numero` = ? WHERE `clientes_cpf` = ? AND `contas_numero` = ?";
+
+  const values = [
+    req.body.clientes_cpf,
+    req.body.contas_numero,
+  ];
+
+  db.query(q, [...values, req.params.clientes_cpf, req.params.contas_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Relacionamento conta_cliente atualizado com sucesso.");
+  });
+};
+
+// Delete a conta_cliente relationship
+export const deleteContaCliente = (req, res) => {
+  const q = "DELETE FROM conta_cliente WHERE (`clientes_cpf` = ? AND `contas_numero` = ?)";
+
+  db.query(q, [req.params.clientes_cpf, req.params.contas_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Relacionamento conta_cliente deletado com sucesso.");
+  });
+};
+
+// Get all conta_corrente relationships
+export const getContaCorrente = (_, res) => {
+  const q = "SELECT * FROM equipe511330.conta_corrente";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new conta_corrente relationship
+export const addContaCorrente = (req, res) => {
+  const q =
+    "INSERT INTO `conta_corrente`(`conta_numero`, `aniversario_contrato`) VALUES(?)";
+
+  const values = [
+    
+    req.body.conta_numero,
+    req.body.aniversario_contrato,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Corrente criado com sucesso.");
+  });
+};
+
+// Update a conta_cliente relationship
+export const updateContaCorrente = (req, res) => {
+  const q =
+    "UPDATE conta_corrente SET `conta_numero` = ?, `aniversario_contrato` = ? WHERE `conta_numero` = ?";
+
+  const values = [
+    req.body.conta_numero,
+    req.body.aniversario_contrato,
+  ];
+
+  db.query(q, [...values, req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Corrente atualizado com sucesso.");
+  });
+};
+
+// Delete a conta_cliente relationship
+export const deleteContaCorrente = (req, res) => {
+  const q = "DELETE FROM conta_corrente WHERE `conta_numero` = ?";
+
+  db.query(q, [req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Corrente deletado com sucesso.");
+  });
+};
+
+// Get all conta_corrente relationships
+export const getContaEspecial = (_, res) => {
+  const q = "SELECT * FROM equipe511330.conta_especial";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new conta_corrente relationship
+export const addContaEspecial = (req, res) => {
+  const q =
+    "INSERT INTO `conta_especial`(`conta_numero`, `limite_credito`) VALUES(?)";
+
+  const values = [
+    
+    req.body.conta_numero,
+    req.body.limite_credito,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Especial criado com sucesso.");
+  });
+};
+
+// Update a conta_cliente relationship
+export const updateContaEspecial = (req, res) => {
+  const q =
+    "UPDATE conta_especial SET `conta_numero` = ?, `limite_credito` = ? WHERE `conta_numero` = ?";
+
+  const values = [
+    req.body.conta_numero,
+    req.body.limite_credito,
+  ];
+
+  db.query(q, [...values, req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Especial atualizado com sucesso.");
+  });
+};
+
+// Delete a conta_cliente relationship
+export const deleteContaEspecial = (req, res) => {
+  const q = "DELETE FROM conta_especial WHERE `conta_numero` = ?";
+
+  db.query(q, [req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Especial deletado com sucesso.");
+  });
+};
+
+// Get all conta_poupanca relationships
+export const getContaPoupanca = (_, res) => {
+  const q = "SELECT * FROM equipe511330.conta_poupanca";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new conta_poupanca relationship
+export const addContaPoupanca = (req, res) => {
+  const q =
+    "INSERT INTO `conta_poupanca`(`conta_numero`, `taxa_juros`) VALUES(?)";
+
+  const values = [
+    req.body.conta_numero,
+    req.body.taxa_juros,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Poupança criado com sucesso.");
+  });
+};
+
+// Update a conta_poupanca relationship
+export const updateContaPoupanca = (req, res) => {
+  const q =
+    "UPDATE conta_poupanca SET `conta_numero` = ?, `taxa_juros` = ? WHERE `conta_numero` = ?";
+
+  const values = [
+    req.body.conta_numero,
+    req.body.taxa_juros,
+  ];
+
+  db.query(q, [...values, req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Poupança atualizado com sucesso.");
+  });
+};
+
+// Delete a conta_poupanca relationship
+export const deleteContaPoupanca = (req, res) => {
+  const q = "DELETE FROM conta_poupanca WHERE `conta_numero` = ?";
+
+  db.query(q, [req.params.conta_numero], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Conta Poupança deletado com sucesso.");
+  });
+};
+
+
+
 

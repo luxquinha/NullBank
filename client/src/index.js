@@ -16,6 +16,10 @@ import Contas from './pages/contas/Contas'
 import Dependente from './pages/dependentes/Dependente'
 import Telefones from './pages/telefones/Telefones'
 import Emails from './pages/emails/Emails'
+import Conta_cliente from './pages/conta_cliente/Conta_cliente'
+import ContaCorrente from './pages/conta_corrente/ContaCorrente';
+import ContaEspecial from './pages/conta_especial/ContaEspecial';
+import ContaPoupanca from './pages/conta_poupanca/ContaPoupanca';
 
 const routes = createBrowserRouter([
   {
@@ -65,6 +69,22 @@ const routes = createBrowserRouter([
   {
     path: '/emails',
     element: <Emails/>
+  },
+  {
+    path: '/conta_cliente',
+    element: <Conta_cliente/>
+  },
+  {
+    path: '/conta_corrente',
+    element: <ContaCorrente/>
+  },
+  {
+    path: 'conta_especial',
+    element: <ContaEspecial/>
+  },
+  {
+    path: 'conta_poupanca',
+    element: <ContaPoupanca/>
   }
 
 ])

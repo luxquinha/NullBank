@@ -1,0 +1,114 @@
+import axios from "axios";
+import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
+import { toast } from "react-toastify";
+
+const FormContainer = styled.form`
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 0px 5px #ccc;
+  border-radius: 5px;
+`;
+
+const InputArea = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  width: 120px;
+  padding: 0 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  height: 40px;
+`;
+
+const Label = styled.label``;
+
+const Button = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #2c73d2;
+  color: white;
+  height: 42px;
+`;
+
+const Form = ({ getUsers, onEdit, setOnEdit }) => {
+
+  const ref = useRef();
+
+  useEffect(() => {
+    if (onEdit) {
+      const conta_corrente = ref.current;
+
+      conta_corrente.conta_numero.value = onEdit.conta_numero;
+      const formattedDate = new Date(onEdit.aniversario_contrato).toISOString().split('T')[0];
+      conta_corrente.aniversario_contrato.value = formattedDate;
+    }
+  }, [onEdit]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const conta_corrente = ref.current;
+
+    if (
+      !conta_corrente.conta_numero.value ||
+      !conta_corrente.aniversario_contrato.value
+      
+    ) {
+      return toast.warn("Preencha todos os campos!");
+    }
+
+    if (onEdit) {
+      await axios
+        .put("http://localhost:8800/conta_corrente/" + onEdit.conta_numero, {
+          
+          conta_numero: conta_corrente.conta_numero.value,
+          aniversario_contrato: conta_corrente.aniversario_contrato.value
+      
+          
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    } else {
+      await axios
+        .post("http://localhost:8800/conta_corrente/", {
+          conta_numero: conta_corrente.conta_numero.value,
+          aniversario_contrato: conta_corrente.aniversario_contrato.value
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    }
+
+    conta_corrente.conta_numero.value = "";
+    conta_corrente.aniversario_contrato.value = "";
+    
+
+    setOnEdit(null);
+    getUsers();
+  };
+
+  return (
+    <FormContainer ref={ref} onSubmit={handleSubmit}>
+      <InputArea>
+        <Label>Conta</Label>
+        <Input name="conta_numero" />
+      </InputArea>
+      <InputArea>
+        <Label>Aniversário Contrato</Label>
+        <Input name="aniversario_contrato" />
+      </InputArea>
+
+      <Button type="submit">SALVAR</Button>
+    </FormContainer>
+  );
+};
+
+export default Form;

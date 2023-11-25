@@ -7,6 +7,10 @@ import { getContas, addConta, updateConta, deleteConta } from '../controllers/us
 import { getDependentes, addDependente, updateDependente, deleteDependente } from '../controllers/user.js';
 import { getTelefones, addTelefone, updateTelefone, deleteTelefone } from '../controllers/user.js';
 import { getEmails, addEmail, updateEmail, deleteEmail } from '../controllers/user.js';
+import { getContaClientes, addContaCliente, updateContaCliente, deleteContaCliente } from '../controllers/user.js';
+import { getContaCorrente, addContaCorrente, updateContaCorrente, deleteContaCorrente } from '../controllers/user.js';
+import { getContaEspecial, addContaEspecial, updateContaEspecial, deleteContaEspecial } from '../controllers/user.js';
+import { getContaPoupanca, addContaPoupanca, updateContaPoupanca, deleteContaPoupanca } from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -65,6 +69,30 @@ router.post('/emails', addEmail);
 router.put('/emails/:email', updateEmail);
 router.delete('/emails/:email', deleteEmail);
 
+// Routes for conta_cliente
+router.get('/conta_cliente', getContaClientes);
+router.post('/conta_cliente', addContaCliente);
+router.put('/conta_cliente/:clientes_cpf/:contas_numero', updateContaCliente);
+router.delete('/conta_cliente/:clientes_cpf/:contas_numero', deleteContaCliente);
 
+// Routes for conta_corrente
+router.get('/conta_corrente', getContaCorrente);
+router.post('/conta_corrente', addContaCorrente);
+router.put('/conta_corrente/:conta_numero', updateContaCorrente);
+router.delete('/conta_corrente/:conta_numero', deleteContaCorrente);
+
+// Routes for conta_especial
+router.get('/conta_especial', getContaEspecial);
+router.post('/conta_especial', addContaEspecial);
+router.put('/conta_especial/:conta_numero', updateContaEspecial);
+router.delete('/conta_especial/:conta_numero', deleteContaEspecial);
+
+
+
+// Routes for conta_poupanca
+router.get('/conta_poupanca', getContaPoupanca);
+router.post('/conta_poupanca', addContaPoupanca);
+router.put('/conta_poupanca/:conta_numero', updateContaPoupanca);
+router.delete('/conta_poupanca/:conta_numero', deleteContaPoupanca);
 
 export default router;
