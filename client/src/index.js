@@ -13,6 +13,7 @@ import Func from './pages/employee/Func'
 import Trans from './pages/transacoes/Trans'
 import Clientes from './pages/clientes/Clientes'
 import Contas from './pages/contas/Contas'
+import Dependente from './pages/dependentes/Dependente'
 
 const routes = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const routes = createBrowserRouter([
   {
     path: '/contas',
     element: <Contas/>
+  },
+  {
+    path: '/dependentes',
+    element: <Dependente/>
   }
 
 

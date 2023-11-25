@@ -4,6 +4,7 @@ import { getFunc, addFunc, updateFunc, deleteFunc} from '../controllers/user.js'
 import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '../controllers/user.js';
 import { getClientes, addCliente, updateCliente, deleteCliente } from '../controllers/user.js';
 import { getContas, addConta, updateConta, deleteConta } from '../controllers/user.js';
+import { getDependentes, addDependente, updateDependente, deleteDependente } from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -43,5 +44,12 @@ router.get('/contas', getContas);
 router.post('/contas', addConta);
 router.put('/contas/:numero', updateConta);
 router.delete('/contas/:numero', deleteConta);
+
+// Routes for dependentes
+router.get('/dependentes', getDependentes);
+router.post('/dependentes', addDependente);
+router.put('/dependentes/:nome_completo', updateDependente);
+router.delete('/dependentes/:nome_completo', deleteDependente);
+
 
 export default router;

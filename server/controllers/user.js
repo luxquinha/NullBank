@@ -323,4 +323,67 @@ export const deleteConta = (req, res) => {
   });
 };
 
+// Get all dependents
+export const getDependentes = (_, res) => {
+  const q = "SELECT * FROM equipe511330.dependentes";
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+// Add a new dependent
+export const addDependente = (req, res) => {
+  const q =
+    "INSERT INTO dependentes(`nome_completo`, `data_nascimento`, `parentesco`, `idade`, `funcionarios_mat`) VALUES(?)";
+
+  const values = [
+    req.body.nome_completo,
+    req.body.data_nascimento,
+    req.body.parentesco,
+    req.body.idade,
+    req.body.funcionarios_mat,
+  ];
+
+  db.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Dependente criado com sucesso.");
+  });
+};
+
+// Update a dependent
+export const updateDependente = (req, res) => {
+  const q =
+    "UPDATE dependentes SET `nome_completo` = ?, `data_nascimento` = ?, `parentesco` = ?, `idade` = ?, `funcionarios_mat` = ? WHERE `nome_completo` = ?";
+
+  const values = [
+    req.body.nome_completo,
+    req.body.data_nascimento,
+    req.body.parentesco,
+    req.body.idade,
+    req.body.funcionarios_mat,
+  ];
+
+  db.query(q, [...values, req.params.nome_completo], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Dependente atualizado com sucesso.");
+  });
+};
+
+// Delete a dependent
+export const deleteDependente = (req, res) => {
+  const q = "DELETE FROM dependentes WHERE (`nome_completo` = ?)";
+
+  db.query(q, [req.params.nome_completo], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Dependente deletado com sucesso.");
+  });
+};
+
+
 

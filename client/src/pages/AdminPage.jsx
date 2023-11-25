@@ -16,6 +16,11 @@ const AdminPage = () => {
             Funcionários
           </button>
         </Link>
+        <Link to="/dependentes">
+          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
+            Dependentes
+          </button>
+        </Link>
         <Link to="/clientes">
           <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
             Clientes
