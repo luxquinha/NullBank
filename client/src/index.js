@@ -8,7 +8,8 @@ import LandingPage from './pages/LandingPage'
 import SignIn from './pages/SingIn'
 import SignUp from './pages/SignUp'
 import AdminPage from './pages/AdminPage'
-import Agency from './pages/admin/Agency'
+import Agency from './pages/agency/Agency'
+import Func from './pages/employee/Func'
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
   {
     path: '/agency',
     element: <Agency/>
+  },
+  {
+    path: '/func',
+    element: <Func/>
   }
 
 
