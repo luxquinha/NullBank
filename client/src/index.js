@@ -10,6 +10,9 @@ import SignUp from './pages/SignUp'
 import AdminPage from './pages/AdminPage'
 import Agency from './pages/agency/Agency'
 import Func from './pages/employee/Func'
+import Trans from './pages/transacoes/Trans'
+import Clientes from './pages/clientes/Clientes'
+import Contas from './pages/contas/Contas'
 
 const routes = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const routes = createBrowserRouter([
   {
     path: '/func',
     element: <Func/>
+  },
+  {
+    path: '/transacoes',
+    element: <Trans/>
+  },
+  {
+    path: '/clientes',
+    element: <Clientes/>
+  },
+  {
+    path: '/contas',
+    element: <Contas/>
   }
 
 
