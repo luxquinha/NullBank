@@ -21,7 +21,7 @@ const routes = createBrowserRouter([
     element: <SignIn/>
   },
   {
-    path: '/signUp',
+    path: '/signUp/:cpf',
     element: <SignUp/>
   },
   {

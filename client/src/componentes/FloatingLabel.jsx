@@ -19,7 +19,7 @@ const FloatingLabel = ({ content, label, width, type, register }) => {
       }
 
   return (
-    <div className={`relative w-${width} h-fit mr-5 mb-4`}>
+    <div className={`relative w-${width} h-fit mr-5 mb-3`}>
       <input
         {...register(label)}
         ref={inputRef}

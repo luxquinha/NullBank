@@ -2,13 +2,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 // Importando componentes:
 import FloatingLabel from "../../componentes/FloatingLabel";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon"
+import ErrorMessage from "../../componentes/ErrorMessage";
 // Importando ícones:
 import { seta } from "../../icons/icones";
+
+// const createUserSchema = z.object({
+
+//     name: z.string().array().min(10, {message: 'Informe o nome completo'}),
+//     password: z.string().min(6, {message: 'Deve conter 6 caracteres'}),
+//     birth_date: z.date({message: 'data error'}),
+
+//     uf: z.string().length(2, {message: 'Informe uma UF válida'}),
+//     cpf: z.string().length(11, {message: 'Digite um cpf válido'}),
+//     rg: z.string().length(11, {message: 'Digite um cpf válido'}),
+//     ssp: z.string().length(2, {message: 'Informe um orgão válido'}),
+
+//     zipCode: z.string().length(8, {message: 'Informe um CEP válido'}),
+//     state: z.string().min(4, {message: 'Informe um estado válido'}),
+//     city: z.string().min(5, {message: 'Informe uma cidade válida'}),
+//     district: z.string().min(5, {message: 'Informe uma bairro válido'}),
+//     streetType: z.string().min(3, {message: 'Informe um tipo de logradouro válido'}),
+//     end: z.string().min(8, {message: 'Informe um endereço válido'}),
+//     num: z.string().min(1, {message: 'Campo obrigatório'}),
+
+//     phoneType: z.string().min(5, {message: 'Informe um tipo válido'}),
+//     phoneNumber: z.string().min(11, {message: 'Informe um telefone válido'}),
+//     emailType: z.string().min(5, {message: 'Informe um tipo válido'}),
+//     email: z.string(),
+// }).refine(data => data.name !== undefined || data.password !== undefined || data.birth_date !== undefined
+//     || data.uf !== undefined || data.cpf !== undefined || data.rg !== undefined || data.ssp !== undefined
+//     || data.zipCode !== undefined || data.state !== undefined || data.city !== undefined || data.district !== undefined 
+//     || data.streetType !== undefined || data.end !== undefined || data.num !== undefined || data.phoneType !== undefined
+//     || data.phoneNumber !== undefined || data.emailType !== undefined || data.email !== undefined, {
+//     message: 'Campo obrigatório'
+// })
+
 export default function SignUp(){
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        // resolver: zodResolver(createUserSchema)
+    })
     const fundo = {
         backgroundImage: "url('https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
     }
@@ -35,47 +72,99 @@ export default function SignUp(){
                 <span className="self-center mt-2 text-cyan-500 text-xl font-light tracking-widest mt-4 mb-4">Insira seus dados</span>
                 {/* Parte do formulário */}
                 <form onSubmit={handleSubmit(onSubmit)}
-                className="w-[90%] h-[90%] px-4 py-2 flex flex-col items-start flex-wrap text-zinc-400 text-medium">
+                className="w-[90%] h-[90%] px-4 py-2 flex flex-col items-start flex-wrap text-zinc-400 text-medium gap-y-6">
                     {/* Dados pessoais */}
-                    <div className="flex flex-row items-center w-full mb-8 justify-between">
-                        <FloatingLabel width={'[50%]'} type={'text'} content={'Nome completo'} label={'name'} register={register}/>
-                        <FloatingLabel width={'[20%]'} type={'date'} content={'Data de Nascimento'} label={'birth_date'} register={register}/>
-                        <FloatingLabel width={'[15%]'} type={'text'} content={'UF'} label={'UF'} register={register}/>
+                    <div className="flex flex-row items-start w-full h-12 justify-between">
+                            <FloatingLabel width={'[90%]'} type={'text'} content={'Nome completo'} label={'name'} register={register}/>
+                            {errors.name && <ErrorMessage message={errors.name?.message}/>}
+                        <div className="flex flex-col w-[25%]">
+                            <FloatingLabel width={'full'} type={'date'} content={'Data de Nascimento'} label={'birth_date'} register={register}/>
+                            {errors.birth_date && <ErrorMessage message={errors.birth_date?.message}/>}
+                        </div>
+                        <div className="flex flex-col w-[20%]">
+                            <FloatingLabel width={'full'} type={'text'} content={'UF'} label={'uf'} register={register}/>
+                            {errors.uf && <ErrorMessage message={errors.uf?.message}/>}
+                        </div>
                     </div>
                     {/* Documentos */}
-                    <div className="flex flex-row items-center justify-between w-full">
-                        <div className="flex flex-col items-start w-[38%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[90%]'} type={'number-format'} content={'RG'} label={'rg'} register={register}/>
-                            <FloatingLabel width={'[90%]'} type={'number_format'} content={'CPF'} label={'cpf'} register={register}/>
+                    <div className="flex flex-row items-center justify-between w-full h-28">
+                        <div className="flex flex-col items-start h-full w-[38%] gap-y-6">
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'RG'} label={'rg'} register={register}/>
+                                {errors.rg && <ErrorMessage message={errors.rg?.message}/>}
+                            </div>
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'CPF'} label={'cpf'} register={register}/>
+                                {errors.cpf && <ErrorMessage message={errors.cpf?.message}/>}
+                            </div>
                         </div>
-                        <div className="flex flex-col items-start w-[30%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[70%]'} type={'text'} content={'Orgão Emissor'} label={'ssp'} register={register}/>
-                            <FloatingLabel width={'[70%]'} type={'number_format'} content={'CEP'} label={'cep'} register={register}/>
+                        <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
+                            <div  className="w-full flex flex-col">
+                                <FloatingLabel width={'[70%]'} type={'text'} content={'Orgão Emissor'} label={'ssp'} register={register}/>
+                                {errors.ssp && <ErrorMessage message={errors.ssp?.message}/>}
+                            </div>
+                            <div  className="w-full flex flex-col">
+                                <FloatingLabel width={'[70%]'} type={'text'} content={'CEP'} label={'zipCode'} register={register}/>
+                                {errors.zipCode && <ErrorMessage message={errors.zipCode?.message}/>}
+                            </div>
                         </div>
                     {/* Endereço */}
-                        <div className="flex flex-col items-start w-[30%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Cidade'} label={'city'} register={register}/>
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Estado'} label={'state'} register={register}/>
+                        <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
+                            <div  className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Cidade'} label={'city'} register={register}/>
+                                {errors.city && <ErrorMessage message={errors.city?.message}/>}
+                            </div>
+                            <div  className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Estado'} label={'state'} register={register}/>
+                                {errors.state && <ErrorMessage message={errors.state?.message}/>}
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-row items-center justify-between w-full mb-8">
-                        <FloatingLabel width={'[25%]'} type={'text'} content={'Tipo de logradouro'} label={'street_type'} register={register}/>
-                        <FloatingLabel width={'[50%]'} type={'text'} content={'Nome do logradouro'} label={'end'} register={register}/>
-                        <FloatingLabel width={'[20%]'} type={'number_format'} content={'Número'} label={'num'} register={register}/>
+                    <div className="flex flex-row items-start justify-between w-full h-12">
+                        <div className="w-[25%] flex flex-col">
+                            <FloatingLabel width={'full'} type={'text'} content={'Tipo de logradouro'} label={'streetType'} register={register}/>
+                            {errors.streetType && <ErrorMessage message={errors.streetType?.message}/>}
+                        </div>
+                        <div className="w-[50%] flex flex-col">
+                            <FloatingLabel width={'full'} type={'text'} content={'Nome do logradouro'} label={'end'} register={register}/>
+                            {errors.end && <ErrorMessage message={errors.end?.message}/>}
+                        </div>
+                        <div className="w-[20%] flex flex-col">
+                            <FloatingLabel width={'full'} type={'text'} content={'Número'} label={'num'} register={register}/>
+                            {errors.num && <ErrorMessage message={errors.num?.message}/>}
+                        </div>
                     </div>
                     {/* Contato */}
-                    <div className="flex flex-row items-center justify-between w-full">
-                        <div className="flex flex-col items-start w-[28%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[70%]'} type={'number-format'} content={'Tipo de Telefone'} label={'phone_type'} register={register}/>
-                            <FloatingLabel width={'[70%]'} type={'text'} content={'Tipo de email'} label={'email_type'} register={register}/>
+                    <div className="flex flex-row items-start justify-between w-full">
+                        <div className="flex flex-col items-start w-[28%] gap-y-6 h-28 justify-around">
+                            <div className="w-[90%] flex flex-col"> 
+                                <FloatingLabel width={'full'} type={'text'} content={'Tipo de Telefone'} label={'phoneType'} register={register}/>
+                                {errors.phoneType && <ErrorMessage message={errors.phoneType?.message}/>}
+                            </div>
+                            <div className="w-[90%] flex flex-col">
+                                <FloatingLabel width={'full'} type={'text'} content={'Tipo de email'} label={'emailType'} register={register}/>
+                                {errors.emailType && <ErrorMessage message={errors.emailType?.message}/>}
+                            </div>
                         </div>
-                        <div className="flex flex-col items-start w-[37%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[90%]'} type={'number_format'} content={'Telefone'} label={'phone_number'} register={register}/>
-                            <FloatingLabel width={'[90%]'} type={'number_format'} content={'email'} label={'email'} register={register}/>
+                        <div className="flex flex-col items-start w-[37%] gap-y-6 h-28 justify-around">
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Telefone'} label={'phoneNumber'} register={register}/>
+                                {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber?.message}/>}
+                            </div>
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'email'} label={'email'} register={register}/>
+                                {errors.email && <ErrorMessage message={errors.email?.message}/>}
+                            </div>
                         </div>
-                        <div className="flex flex-col w-[25%] mb-8 gap-y-8">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Bairro'} label={'neighborhood'} register={register}/>
-                            <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register}/>
+                        <div className="flex flex-col items-start w-[25%] gap-y-6 h-28 justify-around">
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Bairro'} label={'district'} register={register}/>
+                                {errors.district && <ErrorMessage message={errors.district.message}/>}
+                            </div>
+                            <div className="w-full flex flex-col">
+                                <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register}/>
+                                {errors.password && <ErrorMessage message={errors.password.message}/>}
+                            </div>
                         </div>
                     </div>
                     <ButtonWithIcon width={'[50%]'} icon={seta} content={'Confirmar'}/>

@@ -1,0 +1,5 @@
+# pack-refs with: peeled fully-peeled sorted 
+7ddd1be4cfd9935eb462a6eae8bc0fc6ea1c8817 refs/heads/main
+406f3b894de1cfc44d2559df8a9f3eeef6dafd99 refs/heads/telas-iniciais
+7ddd1be4cfd9935eb462a6eae8bc0fc6ea1c8817 refs/remotes/origin/main
+b04abaee6b2a5023e052ff70a9272878832307de refs/remotes/origin/telas-iniciais

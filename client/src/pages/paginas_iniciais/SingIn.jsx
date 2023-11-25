@@ -1,17 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
+import ErrorMessage from "../../componentes/ErrorMessage";
 // importando icones:
 import { seta } from '../../icons/icones'
+
+const loginAcessSchema = z.object({
+    cpf: z.string().length(11, {message: 'Digite um cpf válido'}),
+    password: z.string().min(6, {message: 'Deve conter 6 caracteres'})
+}).refine(data => data.cpf === undefined || data.password === undefined, {
+    message: 'Campo obrigatório'
+})
 
 export default function SingIn(){
     const fundo = {
         backgroundImage: "url('https://media.istockphoto.com/id/1442295199/pt/foto/successful-financier-investor-works-inside-office-at-work-businessman-in-business-suit-uses.jpg?s=1024x1024&w=is&k=20&c=0SNAhOhTTARN8a85GRk9AtNgl5dF0RFK7NvvZhNGEw8=')"
     }
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(loginAcessSchema)
+    })
     const onSubmit = (data)=>{
         console.log(data)
     }
@@ -25,11 +37,17 @@ export default function SingIn(){
             <div className="h-screen w-[50%] flex flex-col">
                 <div className="w-[88%] h-[80%] flex flex-col p-10 items-center self-center justify-center gap-2">
                     <span className="text-3xl font-semibold self-start ml-[13%] mb-3">Acesse sua conta</span>
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[75%] h-[50%] border-solid border-red-500">
-                        <span className="self-start text-sm">CPF</span>
-                        <InputBorderBottom width={'full'} register={register} label={'cpf'}/>
-                        <span className="self-start text-sm mt-4">Senha</span>
-                        <InputBorderBottom width={'full'} type={'password'} register={register} label={'password'} />
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[75%] h-[50%] border-solid border-red-500 gap-y-6">
+                        <div>
+                            <span className="self-start text-sm">CPF</span>
+                            <InputBorderBottom width={'full'} register={register} label={'cpf'}/>
+                            {errors.cpf && <ErrorMessage message={errors.cpf?.message}/>}
+                        </div>
+                        <div>
+                            <span className="self-start text-sm mt-4">Senha</span>
+                            <InputBorderBottom width={'full'} type={'password'} register={register} label={'password'} />
+                            {errors.cpf && <ErrorMessage message={errors.password?.message}/>}
+                        </div>
                         <ButtonWithIcon width={'[90%]'} route={'/home'} content={'Entrar'} icon={seta}/>
                     </form>
                 </div>
