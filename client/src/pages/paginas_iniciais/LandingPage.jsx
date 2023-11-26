@@ -26,8 +26,8 @@ export default function LandingPage(){
     })
 
     const onSubmit = (data)=>{
-      console.log(data)
-      // irPara(`/signUp/${data.cpf}`)
+      // console.log(data)
+      irPara(`/signUp/${data.cpf}`)
     }
 
     return (

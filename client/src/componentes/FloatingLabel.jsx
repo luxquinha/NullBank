@@ -15,7 +15,6 @@ const FloatingLabel = ({ content, label, width, type, register }) => {
   
     const handleClick = () => {
         inputRef.current.focus()
-        // handleFocus()
       }
 
   return (
