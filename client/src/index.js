@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Importando as páginas da aplicação:
-<<<<<<< HEAD
 // Páginas pais:
 import LandingPage from './pages/LandingPage'
 import SignIn from './pages/SingIn'
@@ -23,14 +22,12 @@ import ContaCliente from './componentes/conta_cliente/ContaCliente'
 import ContaCorrente from './componentes/conta_corrente/ContaCorrente';
 import ContaEspecial from './componentes/conta_especial/ContaEspecial';
 import ContaPoupanca from './componentes/conta_poupanca/ContaPoupanca';
-=======
 import LandingPage from './pages/paginas_iniciais/LandingPage'
 import SignIn from './pages/paginas_iniciais/SingIn'
 import SignUp from './pages/paginas_iniciais/SignUp'
 import HomeCliente from './pages/paginas_cliente/HomeCliente'
 import HomeAdmin from './pages/paginas_admin/HomeAdmin'
 import HomeFuncionario from './pages/paginas_func/HomeFuncionario'
->>>>>>> main
 
 const routes = createBrowserRouter([
   {
@@ -46,7 +43,6 @@ const routes = createBrowserRouter([
     element: <SignUp/>
   },
   {
-<<<<<<< HEAD
     path: '/admin',
     element: <AdminPage/>
   },
@@ -97,7 +93,8 @@ const routes = createBrowserRouter([
   {
     path: 'conta_poupanca',
     element: <ContaPoupanca/>
-=======
+  },
+  {
     path: '/home',
     element: <HomeCliente/>,
     // children=
@@ -111,7 +108,6 @@ const routes = createBrowserRouter([
     path: '/funcionario',
     element: <HomeFuncionario/>,
     // children=
->>>>>>> main
   }
 
 ])
