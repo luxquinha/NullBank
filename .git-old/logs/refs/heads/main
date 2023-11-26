@@ -1,7 +1,0 @@
-0000000000000000000000000000000000000000 20bb8b7ffc0eb74ada26323a855e0ba94c40b443 root <root@LucasRamos> 1700148049 -0300	commit (initial): Commit inicial
-20bb8b7ffc0eb74ada26323a855e0ba94c40b443 20bb8b7ffc0eb74ada26323a855e0ba94c40b443 root <root@LucasRamos> 1700148239 -0300	Branch: renamed refs/heads/master to refs/heads/main
-20bb8b7ffc0eb74ada26323a855e0ba94c40b443 c19f77fbe9d430a9baad4c13d52a43f5b75dacd7 root <root@LucasRamos> 1700149352 -0300	commit: consertando bugs
-c19f77fbe9d430a9baad4c13d52a43f5b75dacd7 8b9a4e5207f5429c76a83047800ccacc926156e6 root <root@LucasRamos> 1700149787 -0300	commit: recriando o client folder
-8b9a4e5207f5429c76a83047800ccacc926156e6 bbe4152a6965911f4045a91040847609a9e0fbca root <root@LucasRamos> 1700149948 -0300	commit: limpando o projeto react
-bbe4152a6965911f4045a91040847609a9e0fbca 278451f3471e1a49e5beed4b584755fa22d2c849 root <root@LucasRamos> 1700154807 -0300	commit: Adicionando as rotas iniciais
-278451f3471e1a49e5beed4b584755fa22d2c849 7ddd1be4cfd9935eb462a6eae8bc0fc6ea1c8817 root <root@LucasRamos> 1700172071 -0300	commit: Atualizando dependencias do projeto
