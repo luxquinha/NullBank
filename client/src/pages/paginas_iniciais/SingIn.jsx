@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from "react-router-dom";
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
@@ -18,6 +19,7 @@ const loginAcessSchema = z.object({
 })
 
 export default function SingIn(){
+    const irPara = useNavigate()
     const fundo = {
         backgroundImage: "url('https://media.istockphoto.com/id/1442295199/pt/foto/successful-financier-investor-works-inside-office-at-work-businessman-in-business-suit-uses.jpg?s=1024x1024&w=is&k=20&c=0SNAhOhTTARN8a85GRk9AtNgl5dF0RFK7NvvZhNGEw8=')"
     }
@@ -26,6 +28,7 @@ export default function SingIn(){
     })
     const onSubmit = (data)=>{
         console.log(data)
+        irPara('/admin')
     }
     return(
         <div className="flex flex-row items-center w-full">

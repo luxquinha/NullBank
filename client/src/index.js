@@ -5,10 +5,12 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Importando as páginas da aplicação:
 // Páginas pais:
-import LandingPage from './pages/LandingPage'
-import SignIn from './pages/SingIn'
-import SignUp from './pages/SignUp'
+import LandingPage from './pages/paginas_iniciais/LandingPage'
+import SignIn from './pages/paginas_iniciais/SingIn'
+import SignUp from './pages/paginas_iniciais/SignUp'
 import AdminPage from './pages/paginas_admin/AdminPage'
+import HomeFuncionario from './pages/paginas_func/HomeFuncionario'
+import HomeCliente from './pages/paginas_cliente/HomeCliente'
 // Paginas filhos de ADMIN:
 import Agency from './componentes/agency/Agency'
 import Func from './componentes/employee/Func'
@@ -22,12 +24,6 @@ import ContaCliente from './componentes/conta_cliente/ContaCliente'
 import ContaCorrente from './componentes/conta_corrente/ContaCorrente';
 import ContaEspecial from './componentes/conta_especial/ContaEspecial';
 import ContaPoupanca from './componentes/conta_poupanca/ContaPoupanca';
-import LandingPage from './pages/paginas_iniciais/LandingPage'
-import SignIn from './pages/paginas_iniciais/SingIn'
-import SignUp from './pages/paginas_iniciais/SignUp'
-import HomeCliente from './pages/paginas_cliente/HomeCliente'
-import HomeAdmin from './pages/paginas_admin/HomeAdmin'
-import HomeFuncionario from './pages/paginas_func/HomeFuncionario'
 
 const routes = createBrowserRouter([
   {
@@ -44,7 +40,8 @@ const routes = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <AdminPage/>
+    element: <AdminPage/>,
+    // children=
   },
   {
     path: '/agency',
@@ -97,11 +94,6 @@ const routes = createBrowserRouter([
   {
     path: '/home',
     element: <HomeCliente/>,
-    // children=
-  },
-  {
-    path: '/Admin',
-    element: <HomeAdmin/>,
     // children=
   },
   {
