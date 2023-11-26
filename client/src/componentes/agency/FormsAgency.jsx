@@ -45,50 +45,55 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
   useEffect(() => {
     if (onEdit) {
-      const conta_cliente = ref.current;
+      const agency = ref.current;
 
-      conta_cliente.clientes_cpf.value = onEdit.clientes_cpf;
-      conta_cliente.contas_numero.value = onEdit.contas_numero;
+      agency.numero.value = onEdit.numero;
+      agency.nome.value = onEdit.nome;
+      agency.salario_total_montante.value = onEdit.salario_total_montante;
+      agency.cidade.value = onEdit.cidade;
     }
   }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const conta_cliente = ref.current;
+    const agency = ref.current;
 
     if (
-      !conta_cliente.clientes_cpf.value ||
-      !conta_cliente.contas_numero.value
-      
+      !agency.numero.value ||
+      !agency.nome.value ||
+      !agency.salario_total_montante.value ||
+      !agency.cidade.value
     ) {
       return toast.warn("Preencha todos os campos!");
     }
 
     if (onEdit) {
       await axios
-        .put("http://localhost:8800/conta_cliente/" + onEdit.clientes_cpf + "/" + onEdit.conta_cliente, {
-          
-          clientes_cpf: conta_cliente.clientes_cpf.value,
-          contas_numero: conta_cliente.contas_numero.value
-      
-          
+        .put("http://localhost:8800/" + onEdit.numero, {
+          numero: agency.numero.value,
+          nome: agency.nome.value,
+          salario_total_montante: agency.salario_total_montante.value,
+          cidade: agency.cidade.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://localhost:8800/conta_cliente/", {
-          clientes_cpf: conta_cliente.clientes_cpf.value,
-          contas_numero: conta_cliente.contas_numero.value
+        .post("http://localhost:8800", {
+          numero: agency.numero.value,
+          nome: agency.nome.value,
+          salario_total_montante: agency.salario_total_montante.value,
+          cidade: agency.cidade.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     }
 
-    conta_cliente.clientes_cpf.value = "";
-    conta_cliente.contas_numero.value = "";
-    
+    agency.numero.value = "";
+    agency.nome.value = "";
+    agency.salario_total_montante.value= "";
+    agency.cidade.value = "";
 
     setOnEdit(null);
     getUsers();
@@ -97,12 +102,20 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Cliente</Label>
-        <Input name="clientes_cpf" />
+        <Label>Numero</Label>
+        <Input name="numero" />
       </InputArea>
       <InputArea>
-        <Label>Conta</Label>
-        <Input name="contas_numero" />
+        <Label>Nome</Label>
+        <Input name="nome" />
+      </InputArea>
+      <InputArea>
+        <Label>Salario Montante</Label>
+        <Input name="salario_total_montante" />
+      </InputArea>
+      <InputArea>
+        <Label>Cidade</Label>
+        <Input name="cidade"/>
       </InputArea>
 
       <Button type="submit">SALVAR</Button>

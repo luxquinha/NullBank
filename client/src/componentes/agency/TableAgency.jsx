@@ -2,10 +2,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
+// import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
-
 
 const Table = styled.table`
   width: 100%;
@@ -22,10 +21,7 @@ export const Thead = styled.thead``;
 
 export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr`
-  display: flex;
-  justify-content: space-between;
-`;
+export const Tr = styled.tr``;
 
 export const Th = styled.th`
   text-align: start;
@@ -50,17 +46,17 @@ export const Td = styled.td`
   }
 `;
 
-const TableConta_cliente = ({ users, setUsers, setOnEdit }) => {
+function TableAgency ({ users, setUsers, setOnEdit }) {
 
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
-  const handleDelete = async (clientes_cpf, contas_numero) => {
+  const handleDelete = async (numero) => {
     await axios
-      .delete("http://localhost:8800/conta_cliente/" + clientes_cpf + "/" + contas_numero)
+      .delete("http://localhost:8800/" + numero)
       .then(({ data }) => {
-        const newArray = users.filter((user) => user.clientes_cpf !== clientes_cpf, (user) => user.contas_numero !== contas_numero);
+        const newArray = users.filter((user) => user.numero !== numero);
 
         setUsers(newArray);
         toast.success(data);
@@ -74,8 +70,10 @@ const TableConta_cliente = ({ users, setUsers, setOnEdit }) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>Clientes</Th>
-          <Th>Conta</Th>
+          <Th>Numero</Th>
+          <Th>Nome</Th>
+          <Th>Montante Salário</Th>
+          <Th onlyWeb>Cidade</Th>
           <Th></Th>
           <Th></Th>
         </Tr>
@@ -83,14 +81,17 @@ const TableConta_cliente = ({ users, setUsers, setOnEdit }) => {
       <Tbody>
         {users.map((item, i) => (
           <Tr key={i}>
-            <Td width="30%">{item.clientes_cpf}</Td>
-            <Td width="30%">{item.contas_numero} </Td>
-
+            <Td width="30%">{item.numero}</Td>
+            <Td width="30%">{item.nome}</Td>
+            <Td width="30%">{item.salario_total_montante}</Td>
+            <Td width="20%" onlyWeb>
+              {item.cidade}
+            </Td>
             <Td alignCenter width="5%">
               <FaEdit onClick={() => handleEdit(item)} />
             </Td>
             <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.clientes_cpf, item.contas_numero)} />
+              <FaTrash onClick={() => handleDelete(item.numero)} />
             </Td>
           </Tr>
         ))}
@@ -99,4 +100,4 @@ const TableConta_cliente = ({ users, setUsers, setOnEdit }) => {
   );
 };
 
-export default TableConta_cliente;
+export default TableAgency;

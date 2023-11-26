@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -39,61 +39,56 @@ const Button = styled.button`
   height: 42px;
 `;
 
-const Form = ({ getUsers, onEdit, setOnEdit }) => {
+const FormsContaCliente = ({ getUsers, onEdit, setOnEdit }) => {
 
   const ref = useRef();
 
   useEffect(() => {
     if (onEdit) {
-      const agency = ref.current;
+      const conta_cliente = ref.current;
 
-      agency.numero.value = onEdit.numero;
-      agency.nome.value = onEdit.nome;
-      agency.salario_total_montante.value = onEdit.salario_total_montante;
-      agency.cidade.value = onEdit.cidade;
+      conta_cliente.clientes_cpf.value = onEdit.clientes_cpf;
+      conta_cliente.contas_numero.value = onEdit.contas_numero;
     }
   }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const agency = ref.current;
+    const conta_cliente = ref.current;
 
     if (
-      !agency.numero.value ||
-      !agency.nome.value ||
-      !agency.salario_total_montante.value ||
-      !agency.cidade.value
+      !conta_cliente.clientes_cpf.value ||
+      !conta_cliente.contas_numero.value
+      
     ) {
       return toast.warn("Preencha todos os campos!");
     }
 
     if (onEdit) {
       await axios
-        .put("http://localhost:8800/" + onEdit.numero, {
-          numero: agency.numero.value,
-          nome: agency.nome.value,
-          salario_total_montante: agency.salario_total_montante.value,
-          cidade: agency.cidade.value,
+        .put("http://localhost:8800/conta_cliente/" + onEdit.clientes_cpf + "/" + onEdit.conta_cliente, {
+          
+          clientes_cpf: conta_cliente.clientes_cpf.value,
+          contas_numero: conta_cliente.contas_numero.value
+      
+          
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://localhost:8800", {
-          numero: agency.numero.value,
-          nome: agency.nome.value,
-          salario_total_montante: agency.salario_total_montante.value,
-          cidade: agency.cidade.value,
+        .post("http://localhost:8800/conta_cliente/", {
+          clientes_cpf: conta_cliente.clientes_cpf.value,
+          contas_numero: conta_cliente.contas_numero.value
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     }
 
-    agency.numero.value = "";
-    agency.nome.value = "";
-    agency.salario_total_montante.value= "";
-    agency.cidade.value = "";
+    conta_cliente.clientes_cpf.value = "";
+    conta_cliente.contas_numero.value = "";
+    
 
     setOnEdit(null);
     getUsers();
@@ -102,20 +97,12 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Numero</Label>
-        <Input name="numero" />
+        <Label>Cliente</Label>
+        <Input name="clientes_cpf" />
       </InputArea>
       <InputArea>
-        <Label>Nome</Label>
-        <Input name="nome" />
-      </InputArea>
-      <InputArea>
-        <Label>Salario Montante</Label>
-        <Input name="salario_total_montante" />
-      </InputArea>
-      <InputArea>
-        <Label>Cidade</Label>
-        <Input name="cidade"/>
+        <Label>Conta</Label>
+        <Input name="contas_numero" />
       </InputArea>
 
       <Button type="submit">SALVAR</Button>
@@ -123,4 +110,4 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   );
 };
 
-export default Form;
+export default FormsContaCliente;

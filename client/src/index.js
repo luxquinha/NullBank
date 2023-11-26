@@ -4,22 +4,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Importando as páginas da aplicação:
+// Páginas pais:
 import LandingPage from './pages/LandingPage'
 import SignIn from './pages/SingIn'
 import SignUp from './pages/SignUp'
-import AdminPage from './pages/AdminPage'
-import Agency from './pages/agency/Agency'
-import Func from './pages/employee/Func'
-import Trans from './pages/transacoes/Trans'
-import Clientes from './pages/clientes/Clientes'
-import Contas from './pages/contas/Contas'
-import Dependente from './pages/dependentes/Dependente'
-import Telefones from './pages/telefones/Telefones'
-import Emails from './pages/emails/Emails'
-import Conta_cliente from './pages/conta_cliente/Conta_cliente'
-import ContaCorrente from './pages/conta_corrente/ContaCorrente';
-import ContaEspecial from './pages/conta_especial/ContaEspecial';
-import ContaPoupanca from './pages/conta_poupanca/ContaPoupanca';
+import AdminPage from './pages/paginas_admin/AdminPage'
+// Paginas filhos de ADMIN:
+import Agency from './componentes/agency/Agency'
+import Func from './componentes/employee/Func'
+import Trans from './componentes/transacoes/Trans'
+import Clientes from './componentes/clientes/Clientes'
+import Contas from './componentes/contas/Contas'
+import Dependente from './componentes/dependentes/Dependente'
+import Telefones from './componentes/telefones/Telefones'
+import Emails from './componentes/emails/Emails'
+import ContaCliente from './componentes/conta_cliente/ContaCliente'
+import ContaCorrente from './componentes/conta_corrente/ContaCorrente';
+import ContaEspecial from './componentes/conta_especial/ContaEspecial';
+import ContaPoupanca from './componentes/conta_poupanca/ContaPoupanca';
 
 const routes = createBrowserRouter([
   {
@@ -72,7 +74,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/conta_cliente',
-    element: <Conta_cliente/>
+    element: <ContaCliente/>
   },
   {
     path: '/conta_corrente',

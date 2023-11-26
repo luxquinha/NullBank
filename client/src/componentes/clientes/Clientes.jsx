@@ -1,7 +1,6 @@
-
 import styled from "styled-components";
-import Form from "./FormsConta_cliente";
-import TableConta_cliente from "./TableConta_cliente";
+import Form from "./FormsClientes";
+import TableClientes from "./TableClientes";
 import { toast, ToastContainer } from "react-toastify";
 import GlobalStyle from "../../styles/global";
 import React, { useEffect, useState } from "react";
@@ -20,13 +19,13 @@ const Container = styled.div`
 
 const Title = styled.h2``;
 
-function Conta_cliente() {
+function Clientes() {
     const [users, setUsers] = useState([]);
     const [onEdit, setOnEdit] = useState(null);
   
     const getUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/conta_cliente/");
+        const res = await axios.get("http://localhost:8800/clientes/");
         setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
       } catch (error) {
         toast.error(error);
@@ -40,9 +39,9 @@ function Conta_cliente() {
   return (
     <>
       <Container>
-        <Title>Conta - Cliente</Title>
+        <Title>Clientes</Title>
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
-        <TableConta_cliente setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
+        <TableClientes setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
@@ -50,4 +49,4 @@ function Conta_cliente() {
   );
 }
 
-export default Conta_cliente;
+export default Clientes;

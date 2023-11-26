@@ -1,10 +1,9 @@
-
 import styled from "styled-components";
 import Form from "./FormsAgency";
 import TableAgency from "./TableAgency";
 import { toast, ToastContainer } from "react-toastify";
 import GlobalStyle from "../../styles/global";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -17,7 +16,6 @@ const Container = styled.div`
   align-items: center;
   gap: 10px;
 `;
-
 const Title = styled.h2``;
 
 function Agency() {
