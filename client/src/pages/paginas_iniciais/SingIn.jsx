@@ -51,7 +51,8 @@ export default function SingIn(){
                     </form>
                 </div>
                 <div className="bg-zinc-200 flex flex-row items-center justify-around w-full h-[20%]">
-                    <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou funcionário</Link>
+                    <Link to={'/loginFuncionario'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou funcionário</Link>
+                    <Link to={'/loginAdmin'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Sou DBA</Link>
                     <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Não sou cliente</Link>
                 </div>
             </div>
