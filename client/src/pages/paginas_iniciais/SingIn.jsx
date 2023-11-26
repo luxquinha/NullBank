@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
@@ -26,9 +27,13 @@ export default function SingIn(){
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginAcessSchema)
     })
-    const onSubmit = (data)=>{
-        console.log(data)
-        irPara('/admin')
+    const onSubmit = async(data)=>{
+        const resposta = await axios.post("http://localhost:8800/login", {
+            cpf: data.cpf,
+            senha: data.password
+        })
+        localStorage.setItem("token", resposta.data.token)
+        irPara('/agency')
     }
     return(
         <div className="flex flex-row items-center w-full">

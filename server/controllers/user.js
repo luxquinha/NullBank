@@ -1,4 +1,7 @@
 import {db} from "../db.js";
+import jwt from "jsonwebtoken";
+
+export const jwtSecret = '21882768cf09e701b45be2f9d8a85d36a260763722752628fa20856b18b54bb4685bc38bf4678c3fba299029612050f6f84905d48445dc1a3dcc80f5c3e55ca211f938093e9fc3aa034b0dc7e6b4d196b336cbe23d3c86ef5505a393e90ab79ade4dfb35c8ff1e1d35ce8feaf147f7c0cbbad60d87129514520ba2842b3d59eaed67dc6b76b69d7fe6d4b820ad059cb8ca681aa9fef3bf7846d84a989b0660fa870f84dd168a3049e0fca4b89d774348f2d04efa8ee439cddd7ac0d3a05b42e0847dc9c67b1b9bb2c3a7fe0f5387809b416ae3bf9a139842a71f81c3fa60bcee4b2555cac26caa3ff6a34b036076e44b865a54aec895c2d0b9734c719809965d303a3b400a07e120572c0988c4f507949a2d94c84a765dc2f005da6c3a8336c7557b11bb01f5ea079e9d11ffc35d5b24cd97331e6f578f15ad5285c8540d9cabc3a7fd37b69101f4f4ee8068eb92cbef04f9577d4f0e869cb222eea44f550376f2ce5d6a5b8dc9a73ea8db835d91b39c8731e7a6a4f7c79d6406e4b660d118bc20425f1392ff292a1e70b32285d660ee7902ecfd9eea91fe76d3d838c34ea364d5fba9879368c384c9a41d33b50f507a1ea55402cac0f8cbc2d8e1877c2395ad49a872c479521c03d6702ccfb46f81d545e4a94146c1e73f4ee28e68b374b2d4e74c082c2b968b9ad2914d5a40fd6d038c25f3ae50e34c67758d6f7b3fd17c03'
 
 export const getAgency = (_, res) => {
     const q = "SELECT * FROM equipe511330.agencias";
@@ -8,6 +11,41 @@ export const getAgency = (_, res) => {
         
         return res.status(200).json(data)
     });
+}
+
+export const getLogin = (req, res) => {
+  const {cpf, senha} = req.body;
+
+  const q = 
+    `select clientes_cpf, senha, rg
+    from conta_cliente ccl, contas c, clientes cl
+    where ccl.contas_numero = c.numero
+    and (\`cpf\` = ?)
+    and (\`clientes_cpf\`  = ?)`
+  
+  db.query(q, [cpf, cpf], (err, data) => {
+    if (err) return res.json(err);
+
+    data = data[0]
+
+    if(data === undefined) {
+      return res.status(401).json({success: false});
+    }
+    
+    if(senha === data.senha){
+      
+      delete data.senha
+      
+      const token = jwt.sign(JSON.parse(JSON.stringify(data)), jwtSecret);
+
+      return res.json({success: true, token});
+
+    }
+
+    return res.status(401).json({success: false});
+
+  });
+
 }
 
 export const addAgency = (req, res) => {

@@ -24,7 +24,11 @@ function Agency() {
   
     const getUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8800");
+        const token = localStorage.getItem("token")
+        console.log(token)
+        const res = await axios.get("http://localhost:8800", {
+          headers: {authorization: token}
+        });
         setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
       } catch (error) {
         toast.error(error);
