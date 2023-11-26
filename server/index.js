@@ -1,18 +1,13 @@
-import express from 'express'
-import mysql from 'mysql'
+import express from "express"
+import cors from "cors"
+import userRoutes from "./routes/users.js "
 
-const app = express()
+const app = express();
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'TrabalhofinalDB-NullBank'
-})
+app.use(express.json());
+app.use(cors());
 
-app.get('/', (req, res)=>{
-    res.json("This message came from back-end")
-})
+app.use("/", userRoutes)
 
 app.listen(8800, ()=>{
     console.log("Connected")
