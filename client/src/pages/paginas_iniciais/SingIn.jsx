@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
@@ -14,14 +15,14 @@ import { seta } from '../../icons/icones'
 const loginAcessSchema = z.object({
     key: z.string(),
     password: z.string().min(4, {message: 'Minimo 4 caracteres'})
-}).refine(data => data.cpf !== undefined || data.password !== undefined, {
+}).refine(data => data.key !== undefined || data.password !== undefined, {
     message: 'Campo obrigatório'
 })
 
 export default function SingIn(){
     const adminUser = {
         user: 'Admin',
-        password: '1234'
+        password: 'Root'
     }
     const [tipoUsuario, setTipoUsuario] = useState('dba')
     const irPara = useNavigate()
@@ -32,27 +33,33 @@ export default function SingIn(){
         resolver: zodResolver(loginAcessSchema)
     })
     const isAdmin = (data)=>{
+        console.log("AAAA")
         return (data.key === adminUser.user && data.password === adminUser.password)
     }
     const onSubmit = async (data)=>{
 
-        // const onSubmit = async(data)=>{
-        //     const resposta = await axios.post("http://localhost:8800/login", {
-        //         cpf: data.cpf,
-        //         senha: data.password
-        //     })
-        //     localStorage.setItem("token", resposta.data.token)
-        //     irPara('/agency')
-
-        if(isAdmin(data))
+        if(isAdmin(data)) {
             irPara('/admin')
-        else if(tipoUsuario === 'funcionario')
-            // Função que verifica se é um funcionário dentro de uma condicional
+        }
+        else if(tipoUsuario === 'funcionario'){
+            const resposta = await axios.post("http://localhost:8800/login", {
+                key: data.key,
+                senha: data.password,
+                tipo_usuario: tipoUsuario
+            })
+            localStorage.setItem("token", resposta.data.token)
             irPara('/funcionario')
-        // Caso seja um cliente:
-        else if(tipoUsuario === 'cliente')
-            // Função que verifica se é um cliente dentro de uma condicional
+        }
+        else if(tipoUsuario === 'cliente'){
+            const resposta = await axios.post("http://localhost:8800/login", {
+                key: data.key,
+                senha: data.password,
+                tipo_usuario: tipoUsuario
+            })
+            localStorage.setItem("token", resposta.data.token)
             irPara('/home')
+        }
+            
     }
     return(
         <div className="flex flex-row items-center w-full">
@@ -76,7 +83,7 @@ export default function SingIn(){
                         {errors.key && <ErrorMessage message={errors.key?.message}/>}
                         <span className="self-start text-sm mt-4">Senha</span>
                         <InputBorderBottom width={'full'} type={'password'} register={register} label={'password'} />
-                        {errors.cpf && <ErrorMessage message={errors.password?.message}/>}
+                        {errors.key && <ErrorMessage message={errors.password?.message}/>}
                         <ButtonWithIcon width={'[90%]'} route={'/home'} content={'Entrar'} icon={seta}/>
                     </form>
                 </div>

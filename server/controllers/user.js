@@ -14,37 +14,68 @@ export const getAgency = (_, res) => {
 }
 
 export const getLogin = (req, res) => {
-  const {cpf, senha} = req.body;
+  const {key, tipo_usuario, senha} = req.body;
 
-  const q = 
-    `select clientes_cpf, senha, rg
-    from conta_cliente ccl, contas c, clientes cl
-    where ccl.contas_numero = c.numero
-    and (\`cpf\` = ?)
-    and (\`clientes_cpf\`  = ?)`
-  
-  db.query(q, [cpf, cpf], (err, data) => {
-    if (err) return res.json(err);
-
-    data = data[0]
-
-    if(data === undefined) {
-      return res.status(401).json({success: false});
-    }
+  if (tipo_usuario === "cliente"){
+      const q = 
+      `select clientes_cpf, senha
+      from conta_cliente ccl, contas c, clientes cl
+      where ccl.contas_numero = c.numero
+      and (\`clientes_cpf\`  = ?)`
     
-    if(senha === data.senha){
+    db.query(q, [key, key], (err, data) => {
+      if (err) return res.json(err);
+
+      data = data[0]
+
+      if(data === undefined) {
+        return res.status(401).json({success: false});
+      }
       
-      delete data.senha
+      if(senha === data.senha){
+        
+        delete data.senha
+        
+        const token = jwt.sign(JSON.parse(JSON.stringify(data)), jwtSecret);
+
+        return res.json({success: true, token, tipo_usuario: tipo_usuario});
+
+      }
+
+      return res.status(401).json({success: false});
+
+    });
+  } else if(tipo_usuario === "funcionario") {
+    const q = 
+      `select mat, senha
+      from funcionarios
+      where (\`mat\`  = ?)`
+    
+    db.query(q, [key], (err, data) => {
+      if (err) return res.json(err);
+
+      data = data[0]
+
+      if(data === undefined) {
+        return res.status(401).json({success: false});
+      }
       
-      const token = jwt.sign(JSON.parse(JSON.stringify(data)), jwtSecret);
+      if(senha === data.senha){
+        
+        delete data.senha
+        
+        const token = jwt.sign(JSON.parse(JSON.stringify(data)), jwtSecret);
 
-      return res.json({success: true, token});
+        return res.json({success: true, token, tipo_usuario: tipo_usuario});
 
-    }
+      }
 
-    return res.status(401).json({success: false});
+      return res.status(401).json({success: false});
 
-  });
+    });
+  }
+
+  
 
 }
 
