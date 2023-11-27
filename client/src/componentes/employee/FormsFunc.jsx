@@ -30,15 +30,15 @@ const Input = styled.input`
 
 const Label = styled.label``;
 
-const Button = styled.button`
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #2c73d2;
-  color: white;
-  height: 42px;
-`;
+// const Button = styled.button`
+//   padding: 10px;
+//   cursor: pointer;
+//   border-radius: 5px;
+//   border: none;
+//   background-color: #2c73d2;
+//   color: white;
+//   height: 42px;
+// `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
@@ -159,7 +159,11 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Sexo</Label>
-        <Input name="sexo"/>
+        <select name="sexo" className="h-10 w-28 outline-none border border-zinc-800 rounded-2">
+          <option value={''}></option>
+          <option value={'M'}>Masculino</option>
+          <option value={'F'}>Feminino</option>
+        </select>
       </InputArea>
       <InputArea>
         <Label>Data Nascimento</Label>

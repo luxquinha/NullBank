@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -8,48 +8,48 @@ import { format } from 'date-fns';
 
 
 
-const Table = styled.table`
-  width: 100%;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0px 0px 5px #ccc;
-  border-radius: 5px;
-  max-width: 1120px;
-  margin: 20px auto;
-  word-break: break-all;
-`;
+// const Table = styled.table`
+//   width: 100%;
+//   background-color: #fff;
+//   padding: 20px;
+//   box-shadow: 0px 0px 5px #ccc;
+//   border-radius: 5px;
+//   max-width: 1120px;
+//   margin: 20px auto;
+//   word-break: break-all;
+// `;
 
-export const Thead = styled.thead``;
+// export const Thead = styled.thead``;
 
-export const Tbody = styled.tbody``;
+// export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr`
-  display: flex;
-  justify-content: space-between;
-`;
+// export const Tr = styled.tr`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-export const Th = styled.th`
-  text-align: start;
-  border-bottom: inset;
-  padding-bottom: 5px;
+// export const Th = styled.th`
+//   text-align: start;
+//   border-bottom: inset;
+//   padding-bottom: 5px;
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
-export const Td = styled.td`
-  padding-top: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  white-space: nowrap;
-  text-align: ${(props) => (props.alignCenter ? "center" : "start")};
-  width: ${(props) => (props.width ? props.width : "auto")};
+// export const Td = styled.td`
+//   padding-top: 15px;
+//   padding-left: 10px;
+//   padding-right: 10px;
+//   white-space: nowrap;
+//   text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+//   width: ${(props) => (props.width ? props.width : "auto")};
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
 const TableTrans = ({ users, setUsers, setOnEdit }) => {
 
@@ -74,39 +74,35 @@ const TableTrans = ({ users, setUsers, setOnEdit }) => {
   };
 
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Numero Transacao</Th>
-          <Th>Tipo</Th>
-          <Th>Data/Hora</Th>
-          <Th>Valor</Th>
-          <Th>Conta Principal</Th>
-          <Th>Conta Transação</Th>
-          <Th></Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
+    <table className="table table-striped text-center">
+      <thead>
+        <tr className="table-light align-middle">
+          <th className="table-light">Numero Transacao</th>
+          <th className="table-light">Tipo</th>
+          <th className="table-light">Data/Hora</th>
+          <th className="table-light">Valor</th>
+          <th className="table-light">Conta Principal</th>
+          <th className="table-light">Conta Transação</th>
+          <th className="table-light"></th>
+          <th className="table-light"></th>
+        </tr>
+      </thead>
+      <tbody>
         {users.map((item, i) => (
-          <Tr key={i}>
-            <Td width="30%">{item.numero_transacao}</Td>
-            <Td width="30%">{item.tipo} </Td>
-            <Td width="30%">{format(new Date(item.data_hora), 'yyyy-MM-dd HH:mm:ss')} </Td>
-            <Td width="30%">{item.valor} </Td>
-            <Td width="30%">{item.conta_principal} </Td>
-            <Td width="30%">{item.conta_transacao} </Td>
+          <tr className="table-light align-middle" key={i}>
+            <td className="table-light">{item.numero_transacao}</td>
+            <td className="table-light">{item.tipo} </td>
+            <td className="table-light">{format(new Date(item.data_hora), 'yyyy-MM-dd HH:mm:ss')} </td>
+            <td className="table-light">{item.valor} </td>
+            <td className="table-light">{item.conta_principal} </td>
+            <td className="table-light">{item.conta_transacao} </td>
 
-            <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.numero_transacao)} />
-            </Td>
-          </Tr>
+            <td className="table-light cursor-pointer hover:text-cyan-600"><FaEdit onClick={() => handleEdit(item)} /></td>
+            <td className="table-light cursor-pointer hover:text-red-600"><FaTrash onClick={() => handleDelete(item.numero_transacao)} /></td>
+          </tr>
         ))}
-      </Tbody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

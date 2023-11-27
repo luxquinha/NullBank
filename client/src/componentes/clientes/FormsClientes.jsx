@@ -171,7 +171,36 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>UF</Label>
-        <Input name="uf" />
+        <select name="uf" className="h-10 w-20 outline-none border border-zinc-800 rounded-2">
+          <option value={''}></option>
+          <option value={'AC'}>AC</option>
+          <option value={'AM'}>AM</option>
+          <option value={'RO'}>RO</option>
+          <option value={'RR'}>RR</option>
+          <option value={'PA'}>PA</option>
+          <option value={'AP'}>AP</option>
+          <option value={'TO'}>TO</option>
+          <option value={'MA'}>MA</option>
+          <option value={'PI'}>PI</option>
+          <option value={'CE'}>CE</option>
+          <option value={'RN'}>RN</option>
+          <option value={'PB'}>PB</option>
+          <option value={'PE'}>PE</option>
+          <option value={'AL'}>AL</option>
+          <option value={'SE'}>SE</option>
+          <option value={'BA'}>BA</option>
+          <option value={'MG'}>MG</option>
+          <option value={'ES'}>ES</option>
+          <option value={'RJ'}>RJ</option>
+          <option value={'SP'}>SP</option>
+          <option value={'PR'}>PR</option>
+          <option value={'SC'}>SC</option>
+          <option value={'RS'}>RS</option>
+          <option value={'MS'}>MS</option>
+          <option value={'MT'}>MT</option>
+          <option value={'GO'}>GO</option>
+          <option value={'DF'}>DF</option>
+        </select>
       </InputArea>
       <InputArea>
         <Label>Data de Nascimento</Label>
