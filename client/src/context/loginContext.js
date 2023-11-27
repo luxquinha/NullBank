@@ -26,6 +26,7 @@ export const LoginProvider= ({children}) => {
             }
         }
         else if(tipo === 'funcionario'){
+            console.log('Entrou na condicional de funcionário')
             if(usuarioExistente(data, tipo)){
                 setUserType('func')
                 return true
@@ -34,6 +35,7 @@ export const LoginProvider= ({children}) => {
             }
         }
         else if(tipo === 'cliente'){
+            console.log('Entrou na condicional de cliente')
             if(usuarioExistente(data, tipo)){
                 setUserType('cli')
                 return true
@@ -46,7 +48,7 @@ export const LoginProvider= ({children}) => {
     const isAdmin = (data)=>{
         return (data.key === adminUser.user && data.password === adminUser.password)
     }
-
+    // Aqui é onde fica a validação de usuários do tipo cliente e funcionário Davi:
     const usuarioExistente = async (data, tipo) => {
         const resposta = await axios.post("http://localhost:8800/login", {
             key: data.key,
@@ -54,10 +56,10 @@ export const LoginProvider= ({children}) => {
             tipo_usuario: tipo
         })
         if(resposta){
-            localStorage.setItem("token", resposta.data.token)
+            localStorage.setItem("token", JSON.stringify(resposta.data.token))
             return true
         }else{
-            // Mensagem de erro
+            console.log(`O usuário: ${data?.key} | ${data?.password} | ${tipo} não existe!`);
             return false
         }
     }
