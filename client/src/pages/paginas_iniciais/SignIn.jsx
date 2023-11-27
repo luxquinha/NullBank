@@ -38,8 +38,6 @@ export default function SignIn(){
             irPara('/funcionario')
         else if(tipoUsuario === 'cliente' && isOk)
             irPara('/home')
-        else
-            irPara('/')
     }
     return(
         <div className="flex flex-row items-center w-full">
