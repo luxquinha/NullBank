@@ -33,7 +33,6 @@ export default function SingIn(){
         resolver: zodResolver(loginAcessSchema)
     })
     const isAdmin = (data)=>{
-        console.log("AAAA")
         return (data.key === adminUser.user && data.password === adminUser.password)
     }
     const onSubmit = async (data)=>{
