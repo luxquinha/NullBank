@@ -75,7 +75,7 @@ const TableFunc = ({ users, setUsers, setOnEdit }) => {
   return (
 
     <table className="table table-striped text-center">
-      <thead>
+      <thead className="sticky top-12">
         <tr className="table-light align-middle">
           <th className="table-light">Matrícula</th>
           <th className="table-light">Nome</th>

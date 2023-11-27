@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function ContaCorrente() {
     const [users, setUsers] = useState([]);
@@ -40,7 +40,7 @@ function ContaCorrente() {
   return (
     <>
       <Container>
-        <Title>Conta Corrente</Title>
+        {/* <Title>Conta Corrente</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableContaCorrente setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

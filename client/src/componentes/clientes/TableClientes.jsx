@@ -71,7 +71,7 @@ const TableClientes = ({ users, setUsers, setOnEdit }) => {
 
   return (
     <table className="table table-striped text-center">
-      <thead>
+      <thead className="text-sm sticky top-12">
         <tr className="table-light align-middle">
           <th className="table-light">CPF</th>
           <th className="table-light">Nome Completo</th>

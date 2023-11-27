@@ -117,7 +117,12 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Parentesco</Label>
-        <Input name="parentesco" />
+        <select name="parentesco" className="h-10 w-28 outline-none border border-zinc-800 rounded-2">
+          <option value={''}></option>
+          <option value={'Filho(a)'}>Filho(a)</option>
+          <option value={'Conjulge'}>Conjulge</option>
+          <option value={'Genitor(a)'}>Genitor(a)</option>
+        </select>
       </InputArea>
       <InputArea>
         <Label>Idade</Label>

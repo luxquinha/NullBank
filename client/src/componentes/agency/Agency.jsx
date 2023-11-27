@@ -16,7 +16,7 @@ const Container = styled.div`
   align-items: center;
   gap: 10px;
 `;
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function Agency() {
     const [users, setUsers] = useState([]);
@@ -36,9 +36,9 @@ function Agency() {
     }, [setUsers]);
 
   return (
-    <div className="w-full h-full flex items-end">
+    <div className="">
       <Container>
-        <Title>AGÊNCIAS</Title>
+        {/* <Title>AGÊNCIAS</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableAgency setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

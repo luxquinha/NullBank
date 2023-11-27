@@ -72,7 +72,7 @@ const TabelContaCorrente = ({ users, setUsers, setOnEdit }) => {
 
   return (
     <table className="table table-striped text-center">
-      <thead>
+      <thead className="sticky top-12">
         <tr className="table-light">
           <th className="table-light">Conta</th>
           <th className="table-light">Aniversário Contrato</th>

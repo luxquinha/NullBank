@@ -16,7 +16,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function Clientes() {
     const [users, setUsers] = useState([]);
@@ -38,7 +38,7 @@ function Clientes() {
   return (
     <>
       <Container>
-        <Title>Clientes</Title>
+        {/* <Title>Clientes</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableClientes setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

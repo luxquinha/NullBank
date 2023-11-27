@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function ContaCliente() {
     const [users, setUsers] = useState([]);
@@ -40,7 +40,7 @@ function ContaCliente() {
   return (
     <>
       <Container>
-        <Title>Conta - Cliente</Title>
+        {/* <Title>Conta - Cliente</Title> */}
         <FormsContaCliente  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableContaCliente setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

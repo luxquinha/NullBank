@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from "react-router-dom";
+import useLoginContext from "../../hooks/useLoginContext";
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
@@ -18,12 +19,15 @@ const loginAcessSchema = z.object({
     message: 'Campo obrigatório'
 })
 
-export default function SingIn(){
+export default function SignIn(){
     const adminUser = {
         user: 'Admin',
         password: '1234'
     }
     const [tipoUsuario, setTipoUsuario] = useState('dba')
+    // const [adminAcess, setAdminAcess] = useState(false)
+    // const [funcAcess, setfuncAcess] = useState(false)
+    // const [clienteAcess, setclienteAcess] = useState(false)
     const irPara = useNavigate()
     const fundo = {
         backgroundImage: "url('https://media.istockphoto.com/id/1442295199/pt/foto/successful-financier-investor-works-inside-office-at-work-businessman-in-business-suit-uses.jpg?s=1024x1024&w=is&k=20&c=0SNAhOhTTARN8a85GRk9AtNgl5dF0RFK7NvvZhNGEw8=')"
@@ -31,22 +35,45 @@ export default function SingIn(){
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginAcessSchema)
     })
+    // Quando mudar o estado de admin:
+    // useEffect(()=>{
+    //     localStorage.setItem("isAdmin", JSON.stringify(adminAcess))
+    // },[adminAcess])
+    // // Quando mudar o estado de funcionário:
+    // useEffect(()=>{
+    //     localStorage.setItem("isFunc", JSON.stringify(funcAcess))
+    // },[funcAcess])
+    // // Quando mudar o estado de cliente:
+    // useEffect(()=>{
+    //     localStorage.setItem("isClient", JSON.stringify(clienteAcess))
+    // },[clienteAcess])
 
-    const isAdmin = (data)=>{
-        return (data.key === adminUser.user && data.password === adminUser.password)
-    }
-
+    // const isAdmin = (data)=>{
+    //     return (data.key === adminUser.user && data.password === adminUser.password)
+    // }
+    const { autenticarTipoUsuario } = useLoginContext()
     const onSubmit = (data)=>{
-        // Condicional que vai dizer qual pagina deve ser redicionada para o usuário:
-        if(isAdmin(data))
+        const isOk = autenticarTipoUsuario(data, tipoUsuario)
+        if(tipoUsuario === 'dba' && isOk)
             irPara('/admin')
-        else if(tipoUsuario === 'funcionario')
-            // Função que verifica se é um funcionário dentro de uma condicional
+        else if(tipoUsuario === 'funcionario' && isOk)
             irPara('/funcionario')
-        // Caso seja um cliente:
-        else if(tipoUsuario === 'cliente')
-            // Função que verifica se é um cliente dentro de uma condicional
+        else if(tipoUsuario === 'cliente' && isOk)
             irPara('/home')
+        else
+            irPara('/')
+        // Condicional que vai dizer qual pagina deve ser redicionada para o usuário:
+        // if(isAdmin(data)){
+        //     setAdminAcess(true)
+        //     irPara('/admin')
+        // }
+        // else if(tipoUsuario === 'funcionario')
+        //     // Função que verifica se é um funcionário dentro de uma condicional
+        //     irPara('/funcionario')
+        // // Caso seja um cliente:
+        // else if(tipoUsuario === 'cliente')
+        //     // Função que verifica se é um cliente dentro de uma condicional
+        //     irPara('/home')
     }
     return(
         <div className="flex flex-row items-center w-full">

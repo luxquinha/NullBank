@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from 'react-hook-form'
+import { toast } from "react-toastify";
 // import { z } from 'zod'
 // import { zodResolver } from '@hookform/resolvers/zod'
 // Importando componentes:
@@ -50,9 +51,29 @@ export default function SignUp(){
         backgroundImage: "url('https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log('entrou');
         console.log(data);
+        // Cria um cliente no BD:
+        // await axios
+        // .post("http://localhost:8800/clientes/", {
+        //   cpf: data.cpf,
+        //   nome_completo: data.name,
+        //   rg: data.rg,
+        //   orgao_emissor: data.ssp,
+        //   uf: data.uf,
+        //   data_nascimento: data.birth_date,
+        //   tipo_logradouro: data.streetType,
+        //   nome_logradouro: data.end,
+        //   numero: data.num,
+        //   bairro: data.district,
+        //   cep: data.zipCode,
+        //   cidade: data.city,
+        //   estado: data.state,
+        // //   senha: data.password
+        // })
+        // .then(({ message }) => toast.success(message))
+        // .catch(({ message }) => toast.error(message));
     };
 
     return(
