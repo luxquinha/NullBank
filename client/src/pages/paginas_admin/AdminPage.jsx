@@ -3,68 +3,56 @@ import { Link } from "react-router-dom";
 
 const AdminPage = () => {
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">Página do Administrador</h1>
-      <div className="grid grid-cols-2 gap-4">
-        <Link to="/agency">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-            Agências
-          </button>
+    <div className="container w-full h-full pt-3 flex flex-col items-center justify-items-center">
+      <h1 className="text-3xl font-bold mb-4 text-center">Página do Administrador</h1>
+      <div className="w-fit grid grid-cols-4 gap-3">
+        <Link to="/agency"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Agências
         </Link>
-        <Link to="/func">
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green active:bg-green-800">
-            Funcionários
-          </button>
+        <Link to="/func"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Funcionários
         </Link>
-        <Link to="/dependentes">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-            Dependentes
-          </button>
+        <Link to="/dependentes"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Dependentes
         </Link>
-        <Link to="/clientes">
-          <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
-            Clientes
-          </button>
+        <Link to="/clientes"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Clientes
         </Link>
-        <Link to="/contas">
-          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
-            Contas
-          </button>
+        <Link to="/contas"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Contas
         </Link>
-        <Link to="/transacoes">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-            Transações
-          </button>
+        <Link to="/transacoes"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Transações
         </Link>
-        <Link to="/telefones">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-            Telefones - Clientes
-          </button>
+        <Link to="/telefones"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Telefones - Clientes
         </Link>
-        <Link to="/emails">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-            Emails - Clientes
-          </button>
+        <Link to="/emails"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Emails - Clientes
         </Link>
-        <Link to="/conta_cliente">
-          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
-            Contas - Cliente
-          </button>
+        <Link to="/conta_cliente"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Contas - Cliente
         </Link>
-        <Link to="/conta_corrente">
-          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
-            Conta Corrente
-          </button>
+        <Link to="/conta_corrente"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Conta Corrente
         </Link>
-        <Link to="/conta_especial">
-          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
-            Conta Especial
-          </button>
+        <Link to="/conta_especial"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Conta Especial
         </Link>
-        <Link to="/conta_poupanca">
-          <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800">
-            Conta Poupança
-          </button>
+        <Link to="/conta_poupanca"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Conta Poupança
         </Link>
       </div>
     </div>
