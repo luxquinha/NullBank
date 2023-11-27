@@ -19,9 +19,15 @@ const loginAcessSchema = z.object({
     message: 'Campo obrigatório'
 })
 
-export default function SignIn(){
-    const { autenticarTipoUsuario } = useLoginContext()
+export default function SingIn(){
+    const adminUser = {
+        user: 'Admin',
+        password: '1234'
+    }
     const [tipoUsuario, setTipoUsuario] = useState('dba')
+    // const [adminAcess, setAdminAcess] = useState(false)
+    // const [funcAcess, setfuncAcess] = useState(false)
+    // const [clienteAcess, setclienteAcess] = useState(false)
     const irPara = useNavigate()
     const fundo = {
         backgroundImage: "url('https://media.istockphoto.com/id/1442295199/pt/foto/successful-financier-investor-works-inside-office-at-work-businessman-in-business-suit-uses.jpg?s=1024x1024&w=is&k=20&c=0SNAhOhTTARN8a85GRk9AtNgl5dF0RFK7NvvZhNGEw8=')"
