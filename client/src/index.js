@@ -11,6 +11,7 @@ import SignUp from './pages/paginas_iniciais/SignUp'
 import AdminPage from './pages/paginas_admin/AdminPage'
 import HomeFuncionario from './pages/paginas_func/HomeFuncionario'
 import HomeCliente from './pages/paginas_cliente/HomeCliente'
+import DadosConta from './pages/paginas_cliente/DadosConta';
 import LoginFuncionario from './pages/paginas_func/LoginFuncionario';
 // Paginas filhos de ADMIN:
 import Agency from './componentes/agency/Agency'
@@ -102,6 +103,10 @@ const routes = createBrowserRouter([
     path: '/funcionario',
     element: <HomeFuncionario/>,
     // children=
+  },
+  {
+    path: '/dados_conta',
+    element: <DadosConta/>
   },
   {
     path: '/loginFuncionario',
