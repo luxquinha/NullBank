@@ -2,6 +2,6 @@ import React from "react";
 
 export default function HomeFuncionario(){
     return(
-        <div> </div>
+        <span>Página de acesso do funcionário</span>
     )
 }
