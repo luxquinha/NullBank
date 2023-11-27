@@ -36,7 +36,7 @@ function Agency() {
     }, [setUsers]);
 
   return (
-    <>
+    <div className="w-full h-full flex items-end">
       <Container>
         <Title>AGÊNCIAS</Title>
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
@@ -44,7 +44,7 @@ function Agency() {
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
-    </>
+    </div>
   );
 }
 

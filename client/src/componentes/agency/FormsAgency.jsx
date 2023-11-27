@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import ButtonFormTable from "../ButtonFormTables";
 
 const FormContainer = styled.form`
   display: flex;
@@ -12,6 +13,7 @@ const FormContainer = styled.form`
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
+  width: 100%;
 `;
 
 const InputArea = styled.div`
@@ -100,26 +102,25 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   };
 
   return (
-    <FormContainer ref={ref} onSubmit={handleSubmit}>
-      <InputArea>
-        <Label>Numero</Label>
-        <Input name="numero" />
-      </InputArea>
-      <InputArea>
-        <Label>Nome</Label>
-        <Input name="nome" />
-      </InputArea>
-      <InputArea>
-        <Label>Salario Montante</Label>
-        <Input name="salario_total_montante" />
-      </InputArea>
-      <InputArea>
-        <Label>Cidade</Label>
-        <Input name="cidade"/>
-      </InputArea>
-
-      <Button type="submit">SALVAR</Button>
-    </FormContainer>
+      <FormContainer ref={ref} onSubmit={handleSubmit}>
+        <InputArea>
+          <Label>Numero</Label>
+          <Input name="numero" />
+        </InputArea>
+        <InputArea>
+          <Label>Nome</Label>
+          <Input name="nome" />
+        </InputArea>
+        <InputArea>
+          <Label>Salario Montante</Label>
+          <Input name="salario_total_montante" />
+        </InputArea>
+        <InputArea>
+          <Label>Cidade</Label>
+          <Input name="cidade"/>
+        </InputArea>
+        <ButtonFormTable/>
+      </FormContainer>
   );
 };
 

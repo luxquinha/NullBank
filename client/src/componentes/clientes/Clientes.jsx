@@ -8,8 +8,7 @@ import axios from "axios";
 
 
 const Container = styled.div`
-  width: auto;
-  max-width: 800px;
+  width: 90vw;
   margin-top: 20px;
   display: flex;
   flex-direction: column;

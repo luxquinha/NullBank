@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import ButtonFormTable from '../ButtonFormTables'
 
 const FormContainer = styled.form`
   display: flex;
@@ -126,7 +127,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Funcionário</Label>
         <Input name="funcionarios_mat" />
       </InputArea>
-      <Button type="submit">SALVAR</Button>
+      <ButtonFormTable/>
     </FormContainer>
   );
 };
