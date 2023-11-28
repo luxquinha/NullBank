@@ -23,6 +23,7 @@ import ContaPoupanca from '../componentes/conta_poupanca/ContaPoupanca';
 // Importando páginas do Cliente:
 import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
+import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
 // Importando páginas do Funcionário:
 import HomeFuncionario from '../pages/paginas_func/HomeFuncionario'
 
@@ -53,6 +54,7 @@ export default function MainRoutes(){
                 {/* Rotas do Cliente: */}
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
                     <Route path="/home/dadosConta" element={<DadosConta/>}/>
+                    <Route path="/home/transacoes" element={<TransacoesConta/>}/>
                 </Route>
                 {/* Rotas dos Funcionários: */}
                 <Route path="funcionario" element={<HomeFuncionario/>}>

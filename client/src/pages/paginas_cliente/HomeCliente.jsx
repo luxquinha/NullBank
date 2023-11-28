@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import HeaderPages from "../../componentes/HeaderPages";
 
 const HomeCliente = () => {
   return (
-    <div className="container w-full h-full pt-3 flex flex-col items-center justify-items-center">
-      <h1 className="text-3xl font-bold mb-4 text-center">Home Cliente</h1>
-      <div className="w-fit grid grid-cols-2 gap-3">
+    <div className="w-screen h-screen pt-3 flex flex-col items-center border justify-items-center">
+      <HeaderPages title={'Home Cliente'} route={'/home'}/>
+      <div className="w-fit grid grid-cols-2 gap-3 mt-12">
         <Link to="/home/dadosConta"
         className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
           Dados Contas
@@ -14,6 +15,9 @@ const HomeCliente = () => {
         className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
           Transações
         </Link>
+      </div>
+      <div className='w-screen flex justify-center items-start mt-5'>
+        <Outlet/>
       </div>
     </div>
   );
