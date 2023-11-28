@@ -27,6 +27,7 @@ import ContaCorrente from './componentes/conta_corrente/ContaCorrente';
 import ContaEspecial from './componentes/conta_especial/ContaEspecial';
 import ContaPoupanca from './componentes/conta_poupanca/ContaPoupanca';
 import LoginAdmin from './pages/paginas_admin/LoginAdmin';
+import DadosTransacoes from './pages/paginas_cliente/TransacoesConta';
 
 const routes = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ const routes = createBrowserRouter([
   {
     path: '/loginAdmin',
     element: <LoginAdmin/>
+  },
+  {
+    path: '/dados_transacoes',
+    element: <DadosTransacoes/>
   }
 
 ])
