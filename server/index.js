@@ -9,6 +9,9 @@ app.use(cors());
 
 app.use("/", userRoutes)
 
-app.listen(8800, ()=>{
-    console.log("Connected")
-})
+const PORT = process.env.PORT || 8800;
+
+// Iniciar o servidor
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

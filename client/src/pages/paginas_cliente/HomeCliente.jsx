@@ -15,6 +15,10 @@ const HomeCliente = () => {
         className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
           Transações
         </Link>
+        <Link to="/home/dadosCliente"
+        className="no-underline flex items-center justify-center bg-zinc-800 w-40 h-40 rounded-xl font-bold text-white text-md hover:bg-zinc-600">
+          Dados Cliente
+        </Link>
       </div>
       <div className='w-screen flex justify-center items-start mt-5'>
         <Outlet/>

@@ -7,6 +7,7 @@ export const db = mysql.createConnection({
     database: "equipe511330"
 })
 
+
 db.connect((err) => {
     if (err) {
       console.error('Erro ao conectar ao banco de dados:', err);
@@ -14,3 +15,8 @@ db.connect((err) => {
       console.log('Conexão bem-sucedida ao banco de dados!');
     }
   });
+
+
+
+
+

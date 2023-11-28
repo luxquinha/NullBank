@@ -23,10 +23,10 @@ import ContaPoupanca from '../componentes/conta_poupanca/ContaPoupanca';
 // Importando páginas do Cliente:
 import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
-import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
+import DadosCliente from "../pages/paginas_cliente/DadosCliente";
 // Importando páginas do Funcionário:
 import HomeFuncionario from '../pages/paginas_func/HomeFuncionario'
-
+import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
 
 export default function MainRoutes(){
     return(
@@ -54,7 +54,8 @@ export default function MainRoutes(){
                 {/* Rotas do Cliente: */}
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
                     <Route path="/home/dadosConta" element={<DadosConta/>}/>
-                    <Route path="/home/transacoes" element={<TransacoesConta/>}/>
+                    <Route path="/home/transacoes" element={<DadosTransacoes/>}/>
+                    <Route path="/home/dadosCliente" element={<DadosCliente/>}/>
                 </Route>
                 {/* Rotas dos Funcionários: */}
                 <Route path="funcionario" element={<HomeFuncionario/>}>
