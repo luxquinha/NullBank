@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminRoutes from "./AdminRoutes";
 import ClientRoutes from "./ClientRoutes";
+import FuncRoutes from './FuncRoutes';
 // Importando as páginas públicas:
 import LandingPage from '../pages/paginas_iniciais/LandingPage'
 import SignIn from '../pages/paginas_iniciais/SignIn'
@@ -25,9 +26,11 @@ import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
 import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
 import DadosCliente from "../pages/paginas_cliente/DadosCliente";
+import UmaContaForm from "../componentes/FormAcoes/UmaContaForm";
+import DuasContasForm from '../componentes/FormAcoes/DuasContasForm'
 // Importando páginas do Funcionário:
 import HomeFuncionario from '../pages/paginas_func/HomeFuncionario'
-import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+// import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
 
 export default function MainRoutes(){
     return(
@@ -54,10 +57,16 @@ export default function MainRoutes(){
                 </Route>
                 {/* Rotas do Cliente: */}
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
-                    <Route path="/home/dadosConta" element={<DadosConta/>}/>
+                    <Route path="/home/contas" element={<DadosConta/>}/>
+                    <Route path="/home/perfil" element={<DadosCliente/>}/>
+                    <Route path="/home/extrato" element={<TransacoesConta/>}/>
+                    <Route path="/home/saque" element={<UmaContaForm/>}/>
+                    <Route path="/home/deposito" element={<UmaContaForm/>}/>
+                    <Route path="/home/pagamento" element={<DuasContasForm/>}/>
+                    <Route path="/home/transferencia" element={<DuasContasForm/>}/>
                 </Route>
                 {/* Rotas dos Funcionários: */}
-                <Route path="funcionario" element={<HomeFuncionario/>}>
+                <Route path="funcionario" element={<FuncRoutes> <HomeFuncionario/> </FuncRoutes>}>
 
                 </Route>
 

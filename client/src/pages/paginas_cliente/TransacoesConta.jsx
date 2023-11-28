@@ -27,7 +27,8 @@ function DadosTransacoes() {
   
     const getUsers = async () => {
       try {
-        const clienteCpf = '12345678901';
+        const userStored = JSON.parse(localStorage.getItem('UserData'))
+        const clienteCpf = userStored.key
 
         // Obter contas associadas ao cliente
         const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
@@ -58,8 +59,8 @@ function DadosTransacoes() {
   return (
     <>
       <Container>
-        <Title>Transações</Title>
-        <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
+        <Title>Extrato</Title>
+        {/* <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/> */}
         <TableTrans setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />

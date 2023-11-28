@@ -19,21 +19,26 @@ export const LoginProvider= ({children}) => {
     }
 
     const autenticarTipoUsuario = async (data, tipo)=>{
+        const dataUser = {
+            key: data.key,
+            senha: data.password,
+            tipoUser: tipo
+        }
         if(tipo === 'dba'){
             if(isAdmin(data)){
                 setUserType('dba')
-                localStorage.setItem('UserData', JSON.stringify(data))
+                localStorage.setItem('UserData', JSON.stringify(dataUser))
                 return true
             }else{
                 return false
             }
         }
-        else if(tipo === 'funcionario'){
+        else if(tipo === 'func'){
             usuarioExistente(data, tipo)
             .then((dados)=>{
                 if(dados.success){
                     setUserType('func')
-                    localStorage.setItem('UserData', JSON.stringify(data))
+                    localStorage.setItem('UserData', JSON.stringify(dataUser))
                     return true
                 }
                 else{
@@ -41,12 +46,12 @@ export const LoginProvider= ({children}) => {
                 }
             })
         }
-        else if(tipo === 'cliente'){
+        else if(tipo === 'cli'){
             usuarioExistente(data, tipo)
             .then((dados)=>{
                 if(dados.success){
                     setUserType('cli')
-                    localStorage.setItem('UserData', JSON.stringify(data))
+                    localStorage.setItem('UserData', JSON.stringify(dataUser))
                     return true
                 }
                 else{
@@ -55,14 +60,6 @@ export const LoginProvider= ({children}) => {
             })
         }
     }
-
-    // const senhasFunc = async()=>{
-    //     try{
-    //         const response = await axios.get('http://localhost:8800//matSenhas')
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
 
     const isAdmin = (data)=>{
         return (data.key === adminUser.user && data.password === adminUser.password)
@@ -92,9 +89,8 @@ export const LoginProvider= ({children}) => {
             alert(error)
         }
     }
-
     return(
-        <LoginContext.Provider value={{autenticarTipoUsuario, userType, userLogOut, existeCpf}}>
+        <LoginContext.Provider value={{autenticarTipoUsuario, userType, setUserType, userLogOut, existeCpf}}>
             {children}
         </LoginContext.Provider>
     )

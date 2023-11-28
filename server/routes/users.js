@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserPassword, validaLogin } from '../controllers/user.js';
+import { getCliente, getUserPassword, validaLogin } from '../controllers/user.js';
 import { getAgency, addAgency, updateAgency, deleteAgency } from '../controllers/user.js';
 import { getFunc, addFunc, updateFunc, deleteFunc} from '../controllers/user.js';
 import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '../controllers/user.js';
@@ -38,6 +38,7 @@ router.delete('/transacoes/:numero_transacao', deleteTransacao);
 
 // Routes for clientes
 router.get('/clientes', getClientes);
+router.post('/getCliente', getCliente)
 router.post('/clientes', addCliente);
 router.put('/clientes/:cpf', updateCliente);
 router.delete('/clientes/:cpf', deleteCliente);

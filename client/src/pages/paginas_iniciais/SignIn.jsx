@@ -35,9 +35,9 @@ export default function SignIn(){
         setTimeout(()=>{
             if(tipoUsuario === 'dba' && hasPermission)
                 irPara('/admin')
-            else if(tipoUsuario === 'funcionario' && hasPermission)
+            else if(tipoUsuario === 'func' && hasPermission)
                 irPara('/funcionario')
-            else if(tipoUsuario === 'cliente' && hasPermission)
+            else if(tipoUsuario === 'cli' && hasPermission)
                 irPara('/home')
             else
                 irPara('/')
@@ -53,12 +53,12 @@ export default function SignIn(){
             <div className="h-screen w-[50%] flex flex-col">
                 <div className="w-[88%] h-[80%] flex flex-col p-10 items-center self-center justify-center gap-2">
                     <span className="text-3xl font-semibold self-start ml-[13%] mb-3">
-                        {(tipoUsuario === 'funcionario') ? 'Seja bem-vindo Funcionário' : (tipoUsuario === 'cliente') ? 
+                        {(tipoUsuario === 'func') ? 'Seja bem-vindo Funcionário' : (tipoUsuario === 'cli') ? 
                         'Acesse sua conta' : 'Seja bem-vindo Administrador'}
                     </span>
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[75%] h-[50%] border-solid border-red-500 gap-y-6">
                         <span className="self-start text-sm">
-                        {(tipoUsuario === 'funcionario') ? 'Matrícula' : (tipoUsuario === 'cliente') ? 
+                        {(tipoUsuario === 'func') ? 'Matrícula' : (tipoUsuario === 'cli') ? 
                         'CPF' : 'Usuário'}
                         </span>
                         <InputBorderBottom width={'full'} register={register} label={'key'}/>
@@ -70,8 +70,8 @@ export default function SignIn(){
                     </form>
                 </div>
                 <div className="bg-zinc-200 flex flex-row items-center justify-around w-full h-[20%]">
-                    <button className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500" onClick={()=>{setTipoUsuario('funcionario')}}>Sou funcionário</button>
-                    <button className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500" onClick={()=>{setTipoUsuario('cliente')}}>Sou Cliente</button>
+                    <button className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500" onClick={()=>{setTipoUsuario('func')}}>Sou funcionário</button>
+                    <button className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500" onClick={()=>{setTipoUsuario('cli')}}>Sou Cliente</button>
                     <button className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500" onClick={()=>{setTipoUsuario('dba')}}>Sou DBA</button>
                     {/* <Link to={'/'} className="no-underline font-semibold text-sm text-cyan-600 hover:text-cyan-500">Não sou cliente</Link> */}
                 </div>

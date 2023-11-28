@@ -15,14 +15,14 @@ export const getUserPassword = (_, res) => {
 export const validaLogin = async (req, res) => {
   const {key, tipo_usuario, senha} = req.body;
   let q
-  if (tipo_usuario === "cliente"){
+  if (tipo_usuario === "cli"){
     q = 
     `SELECT clientes_cpf, senha
     FROM conta_cliente ccl, contas c, clientes cl
     WHERE ccl.contas_numero = c.numero
     AND (\`clientes_cpf\`  = ?)`
   } 
-  else if(tipo_usuario === "funcionario") {
+  else if(tipo_usuario === "func") {
     q = 
     `SELECT mat, senha 
     FROM funcionarios 
@@ -226,6 +226,17 @@ export const deleteTransacao = (req, res) => {
   });
 };
 // CRUD para Clientes:
+export const getCliente = (req, res) =>{
+  const { key } = req.body;
+  const q = 
+  "SELECT  nome_completo, cpf FROM equipe511330.clientes WHERE (`clientes_cpf`  = ? )"
+  
+  db.query(q, [key], (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+}
 // Get all clients
 export const getClientes = (_, res) => {
   const q = "SELECT * FROM equipe511330.clientes";

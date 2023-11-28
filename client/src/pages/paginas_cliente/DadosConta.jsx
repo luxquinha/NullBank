@@ -27,8 +27,9 @@ function DadosConta() {
   
     const getUsers = async () => {
       try {
+        const userStored = JSON.parse(localStorage.getItem('UserData'))
         const res = await axios.get("http://localhost:8800/contas/");
-        const clienteCpf = '12345678901';
+        const clienteCpf = userStored.key;
         const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
         const contasAssociadas = resNumero.data
         .filter((conta) => conta.clientes_cpf === clienteCpf)
