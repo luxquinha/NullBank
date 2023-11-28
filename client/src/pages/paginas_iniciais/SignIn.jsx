@@ -31,15 +31,17 @@ export default function SignIn(){
     })
     // Verifica se é um usuário válido e envia para a rota correta:
     const onSubmit = (data)=>{
-        const isOk = autenticarTipoUsuario(data, tipoUsuario)
-        if(tipoUsuario === 'dba' && isOk)
-            irPara('/admin')
-        else if(tipoUsuario === 'funcionario' && isOk)
-            irPara('/funcionario')
-        else if(tipoUsuario === 'cliente' && isOk)
-            irPara('/home')
-        else
-            irPara('/')
+        let hasPermission = autenticarTipoUsuario(data, tipoUsuario)
+        setTimeout(()=>{
+            if(tipoUsuario === 'dba' && hasPermission)
+                irPara('/admin')
+            else if(tipoUsuario === 'funcionario' && hasPermission)
+                irPara('/funcionario')
+            else if(tipoUsuario === 'cliente' && hasPermission)
+                irPara('/home')
+            else
+                irPara('/')
+        },2000)
     }
     return(
         <div className="flex flex-row items-center w-full">

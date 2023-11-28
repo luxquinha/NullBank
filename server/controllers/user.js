@@ -1,5 +1,46 @@
 import {db} from "../db.js";
 
+// Função que pega todos os usuários ao lado de sua senha:
+export const getUserPassword = (_, res) => {
+  const q = 
+  "SELECT mat, senha FROM funcionarios"
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json(data);
+  });
+}
+
+// Rota para validação de login:
+export const validaLogin = async (req, res) => {
+  const {key, tipo_usuario, senha} = req.body;
+  let q
+  if (tipo_usuario === "cliente"){
+    q = 
+    `SELECT clientes_cpf, senha
+    FROM conta_cliente ccl, contas c, clientes cl
+    WHERE ccl.contas_numero = c.numero
+    AND (\`clientes_cpf\`  = ?)`
+  } 
+  else if(tipo_usuario === "funcionario") {
+    q = 
+    `SELECT mat, senha 
+    FROM funcionarios 
+    WHERE (\`mat\`  = ? )`
+  }
+
+  db.query(q, [key], (err, data) => {
+    if (err) return res.json(err);
+      data = data[0]
+      if(senha === data.senha){
+        return res.status(200).json({success: true})
+      }
+      // // Senha errada então retorna um erro:
+      return res.json({success: false});
+  });
+}
+
+// CRUD de Agências:
 export const getAgency = (_, res) => {
     const q = "SELECT * FROM equipe511330.agencias";
 
@@ -55,6 +96,7 @@ export const updateAgency = (req, res) => {
     });
   };
   
+  // CRUD de Funcionários:
   export const getFunc = (_, res) => {
     const q = "SELECT * FROM equipe511330.funcionarios";
 
@@ -123,6 +165,7 @@ export const deleteFunc = (req, res) => {
   });
 };
 
+// CRUD de Transações:
 export const getTransacoes = (_, res) => {
   const q = "SELECT * FROM equipe511330.transacoes";
 
@@ -182,7 +225,7 @@ export const deleteTransacao = (req, res) => {
     return res.status(200).json("Transação deletada com sucesso.");
   });
 };
-
+// CRUD para Clientes:
 // Get all clients
 export const getClientes = (_, res) => {
   const q = "SELECT * FROM equipe511330.clientes";

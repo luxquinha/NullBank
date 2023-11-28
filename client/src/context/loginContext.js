@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useRef } from "react";
 import axios from "axios";
 
 export const LoginContext = createContext(null)
@@ -6,6 +6,7 @@ export const LoginContext = createContext(null)
 // Adiciona usuários ao banco, verificando se o cpf e rg ja são existentes, caso seja ele avisa
 // Faz as requisições relacionadas a clientes
 export const LoginProvider= ({children}) => {
+    const users = useRef([{}])
     const adminUser = {
         user: 'Admin',
         password: '1234'
@@ -14,57 +15,86 @@ export const LoginProvider= ({children}) => {
 
     const userLogOut = ()=>{
         setUserType('')
+        localStorage.removeItem('UserData')
     }
 
-    const autenticarTipoUsuario = (data, tipo)=>{
+    const autenticarTipoUsuario = async (data, tipo)=>{
         if(tipo === 'dba'){
             if(isAdmin(data)){
                 setUserType('dba')
+                localStorage.setItem('UserData', JSON.stringify(data))
                 return true
             }else{
                 return false
             }
         }
         else if(tipo === 'funcionario'){
-            console.log('Entrou na condicional de funcionário')
-            if(usuarioExistente(data, tipo)){
-                setUserType('func')
-                return true
-            }else{
-                return false
-            }
+            usuarioExistente(data, tipo)
+            .then((dados)=>{
+                if(dados.success){
+                    setUserType('func')
+                    localStorage.setItem('UserData', JSON.stringify(data))
+                    return true
+                }
+                else{
+                    return false
+                }
+            })
         }
         else if(tipo === 'cliente'){
-            console.log('Entrou na condicional de cliente')
-            if(usuarioExistente(data, tipo)){
-                setUserType('cli')
-                return true
-            }else{
-                return false
-            }
+            usuarioExistente(data, tipo)
+            .then((dados)=>{
+                if(dados.success){
+                    setUserType('cli')
+                    localStorage.setItem('UserData', JSON.stringify(data))
+                    return true
+                }
+                else{
+                    return false
+                }
+            })
         }
     }
+
+    // const senhasFunc = async()=>{
+    //     try{
+    //         const response = await axios.get('http://localhost:8800//matSenhas')
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
 
     const isAdmin = (data)=>{
         return (data.key === adminUser.user && data.password === adminUser.password)
     }
     // Aqui é onde fica a validação de usuários do tipo cliente e funcionário Davi:
     const usuarioExistente = async (data, tipo) => {
-        const resposta = await axios.post("http://localhost:8800/login", {
-            key: data.key,
-            senha: data.password,
-            tipo_usuario: tipo
-        })
-        if(resposta){
-            localStorage.setItem("token", JSON.stringify(resposta.data.token))
-            return true
-        }else{
-            console.log(`O usuário: ${data?.key} | ${data?.password} | ${tipo} não existe!`);
-            return false
+        try{
+            const resposta = await axios.post("http://localhost:8800/validarLogin", {
+                key: data.key,
+                senha: data.password,
+                tipo_usuario: tipo
+            })
+            return resposta.data
+        }catch(err){
+            console.log(err);
         }
     }
+
+    // Verifica se o CPF está cadastrado no BD:
+    const existeCpf = async (cpf) =>{
+        try{
+            users.current = [{}]
+            const response = await axios.get('http://localhost:8800/clientes')
+            users.current = response.data.filter((cliente)=> cliente.cpf === cpf)
+            return (users.current.length === 1)
+        } catch(error){
+            alert(error)
+        }
+    }
+
     return(
-        <LoginContext.Provider value={{autenticarTipoUsuario, userType, userLogOut}}>
+        <LoginContext.Provider value={{autenticarTipoUsuario, userType, userLogOut, existeCpf}}>
             {children}
         </LoginContext.Provider>
     )

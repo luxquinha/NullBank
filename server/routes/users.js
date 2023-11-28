@@ -1,4 +1,5 @@
 import express from 'express';
+import { getUserPassword, validaLogin } from '../controllers/user.js';
 import { getAgency, addAgency, updateAgency, deleteAgency } from '../controllers/user.js';
 import { getFunc, addFunc, updateFunc, deleteFunc} from '../controllers/user.js';
 import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '../controllers/user.js';
@@ -14,12 +15,13 @@ import { getContaPoupanca, addContaPoupanca, updateContaPoupanca, deleteContaPou
 
 const router = express.Router();
 
+// Rota de validação de login:
+router.post('/validarLogin', validaLogin)
+router.get('/matSenha', getUserPassword)
+// Rotas para agências:
 router.get('/', getAgency)
-
 router.post("/", addAgency)
-
 router.put("/:numero", updateAgency)
-
 router.delete("/:numero", deleteAgency)
 
 // Rotas para funcionários
@@ -27,8 +29,6 @@ router.get('/func', getFunc);
 router.post('/func', addFunc);
 router.put('/func/:mat', updateFunc);
 router.delete('/func/:mat', deleteFunc);
-
-
   
   // Rotas para transações
 router.get('/transacoes', getTransacoes);
@@ -36,14 +36,11 @@ router.post('/transacoes', addTransacao);
 router.put('/transacoes/:numero_transacao', updateTransacao);
 router.delete('/transacoes/:numero_transacao', deleteTransacao);
 
-
 // Routes for clientes
 router.get('/clientes', getClientes);
 router.post('/clientes', addCliente);
 router.put('/clientes/:cpf', updateCliente);
 router.delete('/clientes/:cpf', deleteCliente);
-
-
 
 // Routes for contas
 router.get('/contas', getContas);
@@ -86,8 +83,6 @@ router.get('/conta_especial', getContaEspecial);
 router.post('/conta_especial', addContaEspecial);
 router.put('/conta_especial/:conta_numero', updateContaEspecial);
 router.delete('/conta_especial/:conta_numero', deleteContaEspecial);
-
-
 
 // Routes for conta_poupanca
 router.get('/conta_poupanca', getContaPoupanca);

@@ -1,6 +1,6 @@
 // Importando bibliotecas e seus componentes:
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { toast } from "react-toastify";
 // import { z } from 'zod'
@@ -44,6 +44,7 @@ import { seta } from "../../icons/icones";
 // })
 
 export default function SignUp(){
+    const { cpf } = useParams()
     const { register, handleSubmit, formState: { errors } } = useForm({
         // resolver: zodResolver(createUserSchema)
     })
@@ -97,62 +98,98 @@ export default function SignUp(){
                 className="w-[90%] h-[90%] px-4 py-2 flex flex-col items-start flex-wrap text-zinc-400 text-medium gap-y-6">
                     {/* Dados pessoais */}
                     <div className="flex flex-row items-start w-full h-12 justify-between">
-                        <FloatingLabel width={'[50%]'} type={'text'} content={'Nome completo'} label={'name'} register={register}/>
-                        {/* {errors.name && <ErrorMessage message={errors.name?.message}/>} */}
-                        <FloatingLabel width={'[25%]'} type={'date'} content={'Data de Nascimento'} label={'birth_date'} register={register}/>
-                        {/* {errors.birth_date && <ErrorMessage message={errors.birth_date?.message}/>} */}
-                        <FloatingLabel width={'[20%]'} type={'text'} content={'UF'} label={'uf'} register={register}/>
-                        {/* {errors.uf && <ErrorMessage message={errors.uf?.message}/>} */}
+                        <div className="flex flex-col w-[50%]">
+                            <FloatingLabel width={'full'} type={'text'} content={'Nome completo'} label={'name'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                            {errors.name && <ErrorMessage message={errors.name?.message}/>}
+                        </div>
+                        <div className="flex flex-col w-[25%]">
+                            <FloatingLabel width={'full'} type={'date'} content={'Data de Nascimento'} label={'birth_date'} register={register}  rules={{required: 'Campo obrigatório'}}/>
+                            {errors.birth_date && <ErrorMessage message={errors.birth_date?.message}/>}
+                        </div>
+                        <div className="flex flex-col w-[20%]">
+                            <FloatingLabel width={'[full]'} type={'text'} content={'UF'} label={'uf'} register={register}  rules={{required: 'Campo obrigatório'}}/>
+                            {errors.uf && <ErrorMessage message={errors.uf?.message}/>}
+                        </div>
                     </div>
                     {/* Documentos */}
                     <div className="flex flex-row items-center justify-between w-full h-28">
                         <div className="flex flex-col items-start h-full w-[38%] gap-y-6">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'RG'} label={'rg'} register={register}/>
-                            {/* {errors.rg && <ErrorMessage message={errors.rg?.message}/>} */}
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'CPF'} label={'cpf'} register={register}/>
-                            {/* {errors.cpf && <ErrorMessage message={errors.cpf?.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'RG'} label={'rg'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.rg && <ErrorMessage message={errors.rg?.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} value={cpf} content={'CPF'} label={'cpf'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.cpf && <ErrorMessage message={errors.cpf?.message}/>}
+                            </div>
                         </div>
                         <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
-                            <FloatingLabel width={'[70%]'} type={'text'} content={'Orgão Emissor'} label={'ssp'} register={register}/>
-                            {/* {errors.ssp && <ErrorMessage message={errors.ssp?.message}/>} */}
-                            <FloatingLabel width={'[70%]'} type={'text'} content={'CEP'} label={'zipCode'} register={register}/>
-                            {/* {errors.zipCode && <ErrorMessage message={errors.zipCode?.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[70%]'} type={'text'} content={'Orgão Emissor'} label={'ssp'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.ssp && <ErrorMessage message={errors.ssp?.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[70%]'} type={'text'} content={'CEP'} label={'zipCode'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.zipCode && <ErrorMessage message={errors.zipCode?.message}/>}
+                            </div>
                         </div>
                     {/* Endereço */}
                         <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Cidade'} label={'city'} register={register}/>
-                            {/* {errors.city && <ErrorMessage message={errors.city?.message}/>} */}
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Estado'} label={'state'} register={register}/>
-                            {/* {errors.state && <ErrorMessage message={errors.state?.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Cidade'} label={'city'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.city && <ErrorMessage message={errors.city?.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Estado'} label={'state'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.state && <ErrorMessage message={errors.state?.message}/>}
+                            </div>
                         </div>
                     </div>
                     <div className="flex flex-row items-start justify-between w-full h-12">
-                        <FloatingLabel width={'[25%]'} type={'text'} content={'Tipo de logradouro'} label={'streetType'} register={register}/>
-                        {/* {errors.streetType && <ErrorMessage message={errors.streetType?.message}/>} */}
-                        <FloatingLabel width={'[50%]'} type={'text'} content={'Nome do logradouro'} label={'end'} register={register}/>
-                        {/* {errors.end && <ErrorMessage message={errors.end?.message}/>} */}
-                        <FloatingLabel width={'[20%]'} type={'text'} content={'Número'} label={'num'} register={register}/>
-                        {/* {errors.num && <ErrorMessage message={errors.num?.message}/>} */}
+                        <div className="flex flex-col w-[25%]">
+                            <FloatingLabel width={'full'} type={'text'} content={'Tipo de logradouro'} label={'streetType'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                            {errors.streetType && <ErrorMessage message={errors.streetType?.message}/>}
+                        </div>
+                        <div className="flex flex-col w-[50%]">
+                            <FloatingLabel width={'full'} type={'text'} content={'Nome do logradouro'} label={'end'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                            {errors.end && <ErrorMessage message={errors.end?.message}/>}
+                        </div>
+                        <div className="flex flex-col w-[20%]">
+                            <FloatingLabel width={'full'} type={'text'} content={'Número'} label={'num'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                            {errors.num && <ErrorMessage message={errors.num?.message}/>}
+                        </div>
                     </div>
                     {/* Contato */}
                     <div className="flex flex-row items-start justify-between w-full">
                         <div className="flex flex-col items-start w-[28%] gap-y-6 h-28 justify-around">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de Telefone'} label={'phoneType'} register={register}/>
-                            {/* {errors.phoneType && <ErrorMessage message={errors.phoneType?.message}/>} */}
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de email'} label={'emailType'} register={register}/>
-                            {/* {errors.emailType && <ErrorMessage message={errors.emailType?.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de Telefone'} label={'phoneType'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.phoneType && <ErrorMessage message={errors.phoneType?.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de email'} label={'emailType'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.emailType && <ErrorMessage message={errors.emailType?.message}/>}
+                            </div>
                         </div>
                         <div className="flex flex-col items-start w-[37%] gap-y-6 h-28 justify-around">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Telefone'} label={'phoneNumber'} register={register}/>
-                            {/* {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber?.message}/>} */}
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'email'} label={'email'} register={register}/>
-                            {/* {errors.email && <ErrorMessage message={errors.email?.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Telefone'} label={'phoneNumber'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber?.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'email'} label={'email'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.email && <ErrorMessage message={errors.email?.message}/>}
+                            </div>
                         </div>
                         <div className="flex flex-col items-start w-[25%] gap-y-6 h-28 justify-around">
-                            <FloatingLabel width={'[90%]'} type={'text'} content={'Bairro'} label={'district'} register={register}/>
-                            {/* {errors.district && <ErrorMessage message={errors.district.message}/>} */}
-                            <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register}/>
-                            {/* {errors.password && <ErrorMessage message={errors.password.message}/>} */}
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'text'} content={'Bairro'} label={'district'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.district && <ErrorMessage message={errors.district.message}/>}
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register} rules={{required: 'Campo obrigatório'}}/>
+                                {errors.password && <ErrorMessage message={errors.password.message}/>}
+                            </div>
                         </div>
                     </div>
                     <ButtonWithIcon width={'[50%]'} icon={seta} content={'Confirmar'}/>
