@@ -29,8 +29,10 @@ import DadosCliente from "../pages/paginas_cliente/DadosCliente";
 import UmaContaForm from "../componentes/FormAcoes/UmaContaForm";
 import DuasContasForm from '../componentes/FormAcoes/DuasContasForm'
 // Importando páginas do Funcionário:
-import HomeFuncionario from '../pages/paginas_func/HomeFuncionario'
-// import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+import HomeGerente from '../pages/paginas_func/HomeGerente'
+import GerenteConta from "../pages/paginas_func/GerenteContas";
+import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+import AtendenteConta from "../pages/paginas_func/AtendenteContas";
 
 export default function MainRoutes(){
     return(
@@ -66,9 +68,10 @@ export default function MainRoutes(){
                     <Route path="/home/transferencia" element={<DuasContasForm/>}/>
                 </Route>
                 {/* Rotas dos Funcionários: */}
-                <Route path="funcionario" element={<FuncRoutes> <HomeFuncionario/> </FuncRoutes>}>
-
-                </Route>
+                <Route path="/gerente" element={<HomeGerente/>}></Route>
+                <Route path="/gerente/contas" element={<GerenteConta/>}></Route>
+                <Route path="/atendente" element={<AtendenteConta/>}></Route>
+                
 
             </Routes>
         </BrowserRouter>
