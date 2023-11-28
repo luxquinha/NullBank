@@ -11,9 +11,6 @@ const HomeCliente = () => {
       <div className='w-[84.5vw] h-screen ml-48 flex flex-col justify-start items-center'>
         <Outlet/>
       </div>
-      <div className='w-screen flex justify-center items-start mt-5'>
-        <Outlet/>
-      </div>
     </div>
   );
 };
