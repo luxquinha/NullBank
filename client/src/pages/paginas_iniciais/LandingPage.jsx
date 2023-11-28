@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import useLoginContext from '../../hooks/useLoginContext'
 // Importando componentes:
 import Header from "../../componentes/Header";
 import InputBorderBottom from "../../componentes/InputBorderBottom";
@@ -17,6 +18,7 @@ const cpfschema = z.object({
 })
 
 export default function LandingPage(){
+    const { existeCpf } = useLoginContext()
     const irPara = useNavigate()
     const fundo = {
         backgroundImage: "url('https://cdn.pixabay.com/photo/2014/02/01/18/00/money-256315_1280.jpg')",
@@ -24,10 +26,18 @@ export default function LandingPage(){
     const { register, handleSubmit, formState: { errors } } = useForm({
       resolver: zodResolver(cpfschema)
     })
-
+    // Verifica se existe algum cpf que dê match, evitando que crie dois clientes com a mesma chave:
     const onSubmit = (data)=>{
-      // console.log(data)
-      irPara(`/signUp/${data.cpf}`)
+      existeCpf(data.cpf).then((resultado)=>{
+        console.log(resultado);
+        if(resultado)
+          // Abraão coloca aquela tua mensagem de erro bonitinha kkk:
+          alert(`O cpf informado já possui uma conta`)
+        else
+          irPara(`/signUp/${data.cpf}`)
+      }).catch((erro)=>{
+        console.log(erro);
+      })
     }
 
     return (

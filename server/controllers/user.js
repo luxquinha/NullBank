@@ -36,7 +36,7 @@ export const validaLogin = (req, res) => {
   });
 
 }
-
+// CRUD de Agências:
 export const getAgency = (_, res) => {
     const q = "SELECT * FROM equipe511330.agencias";
 
@@ -92,6 +92,7 @@ export const updateAgency = (req, res) => {
     });
   };
   
+  // CRUD de Funcionários:
   export const getFunc = (_, res) => {
     const q = "SELECT * FROM equipe511330.funcionarios";
 
@@ -160,6 +161,7 @@ export const deleteFunc = (req, res) => {
   });
 };
 
+// CRUD de Transações:
 export const getTransacoes = (_, res) => {
   const q = "SELECT * FROM equipe511330.transacoes";
 
@@ -219,7 +221,7 @@ export const deleteTransacao = (req, res) => {
     return res.status(200).json("Transação deletada com sucesso.");
   });
 };
-
+// CRUD para Clientes:
 // Get all clients
 export const getClientes = (_, res) => {
   const q = "SELECT * FROM equipe511330.clientes";

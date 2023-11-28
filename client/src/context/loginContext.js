@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useRef } from "react";
 import axios from "axios";
 
 export const LoginContext = createContext(null)
@@ -6,6 +6,7 @@ export const LoginContext = createContext(null)
 // Adiciona usuários ao banco, verificando se o cpf e rg ja são existentes, caso seja ele avisa
 // Faz as requisições relacionadas a clientes
 export const LoginProvider= ({children}) => {
+    const users = useRef([{}])
     const adminUser = {
         user: 'Admin',
         password: '1234'
@@ -64,8 +65,19 @@ export const LoginProvider= ({children}) => {
             return false
         }
     }
+
+    const existeCpf = async (cpf) =>{
+        try{
+            users.current = [{}]
+            const response = await axios.get('http://localhost:8800/clientes')
+            users.current = response.data.filter((cliente)=> cliente.cpf === cpf)
+            return (users.current.length === 1)
+        } catch(error){
+            alert(error)
+        }
+    }
     return(
-        <LoginContext.Provider value={{autenticarTipoUsuario, userType, userLogOut}}>
+        <LoginContext.Provider value={{autenticarTipoUsuario, userType, userLogOut, existeCpf}}>
             {children}
         </LoginContext.Provider>
     )
