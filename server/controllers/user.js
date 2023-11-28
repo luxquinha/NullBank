@@ -39,7 +39,6 @@ export const validaLogin = async (req, res) => {
       return res.json({success: false});
   });
 }
-
 // CRUD de Agências:
 export const getAgency = (_, res) => {
     const q = "SELECT * FROM equipe511330.agencias";
