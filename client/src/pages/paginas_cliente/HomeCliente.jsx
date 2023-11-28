@@ -23,6 +23,9 @@ const HomeCliente = () => {
       <div className='w-screen flex justify-center items-start mt-5'>
         <Outlet/>
       </div>
+      <div className='w-screen flex justify-center items-start mt-5'>
+        <Outlet/>
+      </div>
     </div>
   );
 };
