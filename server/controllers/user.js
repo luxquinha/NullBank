@@ -1,5 +1,42 @@
 import {db} from "../db.js";
 
+// Rota para validação de login:
+export const validaLogin = (req, res) => {
+  const {key, tipo_usuario, senha} = req.body;
+  let q
+  if (tipo_usuario === "cliente"){
+    q = 
+    `select clientes_cpf, senha
+    from conta_cliente ccl, contas c, clientes cl
+    where ccl.contas_numero = c.numero
+    and (\`clientes_cpf\`  = ?)`
+  } 
+  else if(tipo_usuario === "funcionario") {
+    q = 
+    `select mat, senha
+    from funcionarios
+    where (\`mat\`  = ?)`
+  }
+
+  db.query(q, [key], (err, data) => {
+    if (err) return res.json(err);
+    data = data[0]
+    // Caso não exista usuário:
+    if(data === undefined) {
+      return res.status(401).json({success: false});
+    }
+    // Existe um usuário então verifica a senha:
+    if(senha === data.senha){
+      delete data.senha
+      const token = jwt.sign(JSON.parse(JSON.stringify(data)), jwtSecret);
+      return res.json({success: true, token, tipo_usuario: tipo_usuario});
+    }
+    // Senha errada então retorna um erro:
+    return res.status(401).json({success: false});
+  });
+
+}
+
 export const getAgency = (_, res) => {
     const q = "SELECT * FROM equipe511330.agencias";
 

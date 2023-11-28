@@ -50,13 +50,14 @@ export const LoginProvider= ({children}) => {
     }
     // Aqui é onde fica a validação de usuários do tipo cliente e funcionário Davi:
     const usuarioExistente = async (data, tipo) => {
-        const resposta = await axios.post("http://localhost:8800/login", {
+        const resposta = await axios.post("http://localhost:8800/validarLogin", {
             key: data.key,
             senha: data.password,
             tipo_usuario: tipo
         })
         if(resposta){
             localStorage.setItem("token", JSON.stringify(resposta.data.token))
+            debugger
             return true
         }else{
             console.log(`O usuário: ${data?.key} | ${data?.password} | ${tipo} não existe!`);
