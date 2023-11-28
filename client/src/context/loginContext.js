@@ -61,6 +61,14 @@ export const LoginProvider= ({children}) => {
         }
     }
 
+    // const senhasFunc = async()=>{
+    //     try{
+    //         const response = await axios.get('http://localhost:8800//matSenhas')
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+
     const isAdmin = (data)=>{
         return (data.key === adminUser.user && data.password === adminUser.password)
     }
@@ -89,6 +97,7 @@ export const LoginProvider= ({children}) => {
             alert(error)
         }
     }
+
     return(
         <LoginContext.Provider value={{autenticarTipoUsuario, userType, setUserType, userLogOut, existeCpf}}>
             {children}
