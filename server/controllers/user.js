@@ -1,5 +1,6 @@
 import {db} from "../db.js";
 
+
 // Função que pega todos os usuários ao lado de sua senha:
 export const getUserPassword = (_, res) => {
   const q = 
