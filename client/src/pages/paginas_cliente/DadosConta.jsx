@@ -34,7 +34,7 @@ function DadosConta() {
         .filter((conta) => conta.clientes_cpf === clienteCpf)
         .map((conta) => conta.contas_numero);
 
-        console.log("Contas associadas:", contasAssociadas);
+        // console.log("Contas associadas:", contasAssociadas);
         // Filtrar apenas os registros onde clientes_cpf seja igual ao clienteCpf
         
         setUsers(res.data.filter((conta) => contasAssociadas.includes(conta.numero)));

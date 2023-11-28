@@ -8,7 +8,7 @@ export default function ClientRoutes({ children }){
     //     setIsAdmin(JSON.parse(localStorage.getItem("isAdmin")))
     // },[])
 // Está vazio enquanto a autenticação do cliente não é feita:
-    return userType === '' ? (
+    return userType === 'cli' ? (
         <div className="w-full h-full">
             {children}
         </div>
