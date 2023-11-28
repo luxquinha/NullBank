@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function Trans() {
     const [users, setUsers] = useState([]);
@@ -40,7 +40,7 @@ function Trans() {
   return (
     <>
       <Container>
-        <Title>Transações</Title>
+        {/* <Title>Transações</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableTrans setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

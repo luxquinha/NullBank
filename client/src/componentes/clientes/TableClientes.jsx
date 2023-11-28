@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -8,48 +8,48 @@ import { format } from 'date-fns';
 
 
 
-const Table = styled.table`
-  width: 100%;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0px 0px 5px #ccc;
-  border-radius: 5px;
-  max-width: 1120px;
-  margin: 20px auto;
-  word-break: break-all;
-`;
+// const Table = styled.table`
+//   width: 100%;
+//   background-color: #fff;
+//   padding: 20px;
+//   box-shadow: 0px 0px 5px #ccc;
+//   border-radius: 5px;
+//   max-width: 1120px;
+//   margin: 20px auto;
+//   word-break: break-all;
+// `;
 
-export const Thead = styled.thead``;
+// export const Thead = styled.thead``;
 
-export const Tbody = styled.tbody``;
+// export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr`
-  display: flex;
-  justify-content: space-between;
-`;
+// export const Tr = styled.tr`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-export const Th = styled.th`
-  text-align: start;
-  border-bottom: inset;
-  padding-bottom: 5px;
+// export const Th = styled.th`
+//   text-align: start;
+//   border-bottom: inset;
+//   padding-bottom: 5px;
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
-export const Td = styled.td`
-  padding-top: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  white-space: nowrap;
-  text-align: ${(props) => (props.alignCenter ? "center" : "start")};
-  width: ${(props) => (props.width ? props.width : "auto")};
+// export const Td = styled.td`
+//   padding-top: 15px;
+//   padding-left: 10px;
+//   padding-right: 10px;
+//   white-space: nowrap;
+//   text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+//   width: ${(props) => (props.width ? props.width : "auto")};
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
 const TableClientes = ({ users, setUsers, setOnEdit }) => {
   const handleEdit = (item) => {
@@ -70,53 +70,49 @@ const TableClientes = ({ users, setUsers, setOnEdit }) => {
   };
 
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>CPF</Th>
-          <Th>Nome Completo</Th>
-          <Th>RG</Th>
-          <Th>Orgão Emissor</Th>
-          <Th>UF</Th>
-          <Th>Data Nascimento</Th>
-          <Th>Tipo Logradouro</Th>
-          <Th>Nome Logradouro</Th>
-          <Th>Número</Th>
-          <Th>Bairro</Th>
-          <Th>CEP</Th>
-          <Th>Cidade</Th>
-          <Th>Estado</Th>
-          <Th></Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
+    <table className="table table-striped text-center">
+      <thead className="text-sm sticky top-12">
+        <tr className="table-light align-middle">
+          <th className="table-light">CPF</th>
+          <th className="table-light">Nome Completo</th>
+          <th className="table-light">RG</th>
+          <th className="table-light">Orgão Emissor</th>
+          <th className="table-light">UF</th>
+          <th className="table-light">Data Nascimento</th>
+          <th className="table-light">Tipo Logradouro</th>
+          <th className="table-light">Nome Logradouro</th>
+          <th className="table-light">Número</th>
+          <th className="table-light">Bairro</th>
+          <th className="table-light">CEP</th>
+          <th className="table-light">Cidade</th>
+          <th className="table-light">Estado</th>
+          <th className="table-light"></th>
+          <th className="table-light"></th>
+        </tr>
+      </thead>
+      <tbody className="text-sm">
         {users.map((item, i) => (
-          <Tr key={i}>
-            <Td width="10%">{item.cpf}</Td>
-            <Td width="15%">{item.nome_completo}</Td>
-            <Td width="10%">{item.rg}</Td>
-            <Td width="10%">{item.orgao_emissor}</Td>
-            <Td width="5%">{item.uf}</Td>
-            <Td width="10%">{format(new Date(item.data_nascimento), 'yyyy-MM-dd')}</Td>
-            <Td width="5%">{item.tipo_logradouro}</Td>
-            <Td width="15%">{item.nome_logradouro}</Td>
-            <Td width="5%">{item.numero}</Td>
-            <Td width="10%">{item.bairro}</Td>
-            <Td width="10%">{item.cep}</Td>
-            <Td width="10%">{item.cidade}</Td>
-            <Td width="5%">{item.estado}</Td>
+          <tr key={i} className="table-light align-middle">
+            <td className="table-light">{item.cpf}</td>
+            <td className="table-light">{item.nome_completo}</td>
+            <td className="table-light">{item.rg}</td>
+            <td className="table-light">{item.orgao_emissor}</td>
+            <td className="table-light">{item.uf}</td>
+            <td className="table-light">{format(new Date(item.data_nascimento), 'yyyy-MM-dd')}</td>
+            <td className="table-light">{item.tipo_logradouro}</td>
+            <td className="table-light">{item.nome_logradouro}</td>
+            <td className="table-light">{item.numero}</td>
+            <td className="table-light">{item.bairro}</td>
+            <td className="table-light">{item.cep}</td>
+            <td className="table-light">{item.cidade}</td>
+            <td className="table-light">{item.estado}</td>
 
-            <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.cpf)} />
-            </Td>
-          </Tr>
+            <td className="table-light cursor-pointer hover:text-cyan-600"><FaEdit onClick={() => handleEdit(item)} /></td>
+            <td className="table-light cursor-pointer hover:text-red-600"><FaTrash onClick={() => handleDelete(item.cpf)} /></td>
+          </tr>
         ))}
-      </Tbody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

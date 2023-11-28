@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -8,48 +8,48 @@ import { format } from 'date-fns';
 
 
 
-const Table = styled.table`
-  width: 100%;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0px 0px 5px #ccc;
-  border-radius: 5px;
-  max-width: 1120px;
-  margin: 20px auto;
-  word-break: break-all;
-`;
+// const Table = styled.table`
+//   width: 100%;
+//   background-color: #fff;
+//   padding: 20px;
+//   box-shadow: 0px 0px 5px #ccc;
+//   border-radius: 5px;
+//   max-width: 1120px;
+//   margin: 20px auto;
+//   word-break: break-all;
+// `;
 
-export const Thead = styled.thead``;
+// export const Thead = styled.thead``;
 
-export const Tbody = styled.tbody``;
+// export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr`
-  display: flex;
-  justify-content: space-between;
-`;
+// export const Tr = styled.tr`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-export const Th = styled.th`
-  text-align: start;
-  border-bottom: inset;
-  padding-bottom: 5px;
+// export const Th = styled.th`
+//   text-align: start;
+//   border-bottom: inset;
+//   padding-bottom: 5px;
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
-export const Td = styled.td`
-  padding-top: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  white-space: nowrap;
-  text-align: ${(props) => (props.alignCenter ? "center" : "start")};
-  width: ${(props) => (props.width ? props.width : "auto")};
+// export const Td = styled.td`
+//   padding-top: 15px;
+//   padding-left: 10px;
+//   padding-right: 10px;
+//   white-space: nowrap;
+//   text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+//   width: ${(props) => (props.width ? props.width : "auto")};
 
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
-  }
-`;
+//   @media (max-width: 500px) {
+//     ${(props) => props.onlyWeb && "display: none"}
+//   }
+// `;
 
 const TableDependente = ({ users, setUsers, setOnEdit }) => {
   const handleEdit = (item) => {
@@ -70,36 +70,32 @@ const TableDependente = ({ users, setUsers, setOnEdit }) => {
   };
 
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Nome Completo</Th>
-          <Th>Data Nascimento</Th>
-          <Th>Parentesco</Th>
-          <Th>Idade</Th>
-          <Th>Funcionário</Th>
-          <Th></Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
+    <table className="table table-striped text-center">
+      <thead className="sticky top-12">
+        <tr className="table-light align-middle">
+          <th className="table-light">Nome Completo</th>
+          <th className="table-light">Data Nascimento</th>
+          <th className="table-light">Parentesco</th>
+          <th className="table-light">Idade</th>
+          <th className="table-light">Funcionário</th>
+          <th className="table-light"></th>
+          <th className="table-light"></th>
+        </tr>
+      </thead>
+      <tbody>
         {users.map((item, i) => (
-          <Tr key={i}>
-            <Td width="15%">{item.nome_completo}</Td>
-            <Td width="10%">{format(new Date(item.data_nascimento), 'yyyy-MM-dd')}</Td>
-            <Td width="5%">{item.parentesco}</Td>
-            <Td width="15%">{item.idade}</Td>
-            <Td width="5%">{item.funcionarios_mat}</Td>
-            <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.nome_completo)} />
-            </Td>
-          </Tr>
+          <tr key={i} className="table-light align-middle">
+            <td className="table-light">{item.nome_completo}</td>
+            <td className="table-light">{format(new Date(item.data_nascimento), 'yyyy-MM-dd')}</td>
+            <td className="table-light">{item.parentesco}</td>
+            <td className="table-light">{item.idade}</td>
+            <td className="table-light">{item.funcionarios_mat}</td>
+            <td className="table-light cursor-pointer hover:text-cyan-600"><FaEdit onClick={() => handleEdit(item)} /></td>
+            <td className="table-light cursor-pointer hover:text-red-600"><FaTrash onClick={() => handleDelete(item.nome_completo)} /></td>
+          </tr>
         ))}
-      </Tbody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

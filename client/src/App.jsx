@@ -1,6 +1,10 @@
+import React from "react";
+import MainRoutes from "./rotas/MainRoutes";
 function App() {
   return(
-    <span>app</span>
+    <div className="w-full h-full">
+      <MainRoutes/>
+    </div>
   )
 }
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import ButtonFormTable from "../ButtonFormTables";
 
 const FormContainer = styled.form`
   display: flex;
@@ -29,15 +30,15 @@ const Input = styled.input`
 
 const Label = styled.label``;
 
-const Button = styled.button`
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #2c73d2;
-  color: white;
-  height: 42px;
-`;
+// const Button = styled.button`
+//   padding: 10px;
+//   cursor: pointer;
+//   border-radius: 5px;
+//   border: none;
+//   background-color: #2c73d2;
+//   color: white;
+//   height: 42px;
+// `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
@@ -104,8 +105,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Limite Credito</Label>
         <Input name="limite_credito" />
       </InputArea>
-
-      <Button type="submit">SALVAR</Button>
+      <ButtonFormTable/>
     </FormContainer>
   );
 };

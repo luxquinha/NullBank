@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function ContaEspecial() {
     const [users, setUsers] = useState([]);
@@ -40,7 +40,7 @@ function ContaEspecial() {
   return (
     <>
       <Container>
-        <Title>Conta Especial</Title>
+        {/* <Title>Conta Especial</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableContaEspecial setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>

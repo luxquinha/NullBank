@@ -70,31 +70,27 @@ const TableContaEspecial = ({ users, setUsers, setOnEdit }) => {
   };
 
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Conta</Th>
-          <Th>Limite Credito</Th>
-          <Th></Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
+    <table className="table table-striped text-center">
+      <thead className="sticky top-12">
+        <tr className="table-light align-middle">
+          <th className="table-light">Conta</th>
+          <th className="table-light">Limite Credito</th>
+          <th className="table-light"></th>
+          <th className="table-light"></th>
+        </tr>
+      </thead>
+      <tbody>
         {users.map((item, i) => (
-          <Tr key={i}>
-            <Td width="30%">{item.conta_numero}</Td>
-            <Td width="30%">{item.limite_credito} </Td>
+          <tr className="table-light align-middle" key={i}>
+            <td className="table-light">{item.conta_numero}</td>
+            <td className="table-light">{item.limite_credito} </td>
 
-            <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.conta_numero)} />
-            </Td>
-          </Tr>
+            <td className="table-light cursor-pointer hover:text-cyan-600"><FaEdit onClick={() => handleEdit(item)} /></td>
+            <td className="table-light cursor-pointer hover:text-red-600"><FaTrash onClick={() => handleDelete(item.conta_numero)} /></td>
+          </tr>
         ))}
-      </Tbody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

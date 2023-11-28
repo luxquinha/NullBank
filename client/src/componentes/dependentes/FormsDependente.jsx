@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import ButtonFormTable from '../ButtonFormTables'
 
 const FormContainer = styled.form`
   display: flex;
@@ -29,15 +30,15 @@ const Input = styled.input`
 
 const Label = styled.label``;
 
-const Button = styled.button`
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #2c73d2;
-  color: white;
-  height: 42px;
-`;
+// const Button = styled.button`
+//   padding: 10px;
+//   cursor: pointer;
+//   border-radius: 5px;
+//   border: none;
+//   background-color: #2c73d2;
+//   color: white;
+//   height: 42px;
+// `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
@@ -116,7 +117,12 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Parentesco</Label>
-        <Input name="parentesco" />
+        <select name="parentesco" className="h-10 w-28 outline-none border border-zinc-800 rounded-2">
+          <option value={''}></option>
+          <option value={'Filho(a)'}>Filho(a)</option>
+          <option value={'Conjulge'}>Conjulge</option>
+          <option value={'Genitor(a)'}>Genitor(a)</option>
+        </select>
       </InputArea>
       <InputArea>
         <Label>Idade</Label>
@@ -126,7 +132,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Funcionário</Label>
         <Input name="funcionarios_mat" />
       </InputArea>
-      <Button type="submit">SALVAR</Button>
+      <ButtonFormTable/>
     </FormContainer>
   );
 };

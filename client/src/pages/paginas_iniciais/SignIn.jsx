@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from "react-router-dom";
+import useLoginContext from "../../hooks/useLoginContext";
 // Importando componentes:
 import InputBorderBottom from "../../componentes/InputBorderBottom";
 import ButtonWithIcon from "../../componentes/ButtonWithIcon";
@@ -18,11 +19,8 @@ const loginAcessSchema = z.object({
     message: 'Campo obrigatório'
 })
 
-export default function SingIn(){
-    const adminUser = {
-        user: 'Admin',
-        password: '1234'
-    }
+export default function SignIn(){
+    const { autenticarTipoUsuario } = useLoginContext()
     const [tipoUsuario, setTipoUsuario] = useState('dba')
     const irPara = useNavigate()
     const fundo = {
@@ -31,22 +29,17 @@ export default function SingIn(){
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginAcessSchema)
     })
-
-    const isAdmin = (data)=>{
-        return (data.key === adminUser.user && data.password === adminUser.password)
-    }
-
+    // Verifica se é um usuário válido e envia para a rota correta:
     const onSubmit = (data)=>{
-        // Condicional que vai dizer qual pagina deve ser redicionada para o usuário:
-        if(isAdmin(data))
+        const isOk = autenticarTipoUsuario(data, tipoUsuario)
+        if(tipoUsuario === 'dba' && isOk)
             irPara('/admin')
-        else if(tipoUsuario === 'funcionario')
-            // Função que verifica se é um funcionário dentro de uma condicional
+        else if(tipoUsuario === 'funcionario' && isOk)
             irPara('/funcionario')
-        // Caso seja um cliente:
-        else if(tipoUsuario === 'cliente')
-            // Função que verifica se é um cliente dentro de uma condicional
+        else if(tipoUsuario === 'cliente' && isOk)
             irPara('/home')
+        else
+            irPara('/')
     }
     return(
         <div className="flex flex-row items-center w-full">

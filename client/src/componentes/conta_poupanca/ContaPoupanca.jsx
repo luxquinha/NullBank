@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+// const Title = styled.h2``;
 
 function ContaPoupanca() {
     const [users, setUsers] = useState([]);
@@ -40,7 +40,7 @@ function ContaPoupanca() {
   return (
     <>
       <Container>
-        <Title>Conta Poupança</Title>
+        {/* <Title>Conta Poupança</Title> */}
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
         <TableContaPoupanca setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
