@@ -29,7 +29,6 @@ function DadosConta() {
       try {
         const res = await axios.get("http://localhost:8800/contas/");
         const clienteCpf = '78901234567';
-        const numero =  '90123456'
         const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
         const contasAssociadas = resNumero.data
         .filter((conta) => conta.clientes_cpf === clienteCpf)
