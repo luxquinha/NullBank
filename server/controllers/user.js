@@ -23,7 +23,7 @@ export const getLogin = (req, res) => {
       where ccl.contas_numero = c.numero
       and (\`clientes_cpf\`  = ?)`
     
-    db.query(q, [key, key], (err, data) => {
+    db.query(q, [key], (err, data) => {
       if (err) return res.json(err);
 
       data = data[0]
