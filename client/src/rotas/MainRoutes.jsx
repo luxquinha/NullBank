@@ -25,8 +25,10 @@ import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
 import DadosCliente from "../pages/paginas_cliente/DadosCliente";
 // Importando páginas do Funcionário:
-import HomeFuncionario from '../pages/paginas_func/HomeFuncionario'
+import HomeGerente from '../pages/paginas_func/HomeGerente'
+import GerenteConta from "../pages/paginas_func/GerenteContas";
 import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+import AtendenteConta from "../pages/paginas_func/AtendenteContas";
 
 export default function MainRoutes(){
     return(
@@ -58,9 +60,10 @@ export default function MainRoutes(){
                     <Route path="/home/dadosCliente" element={<DadosCliente/>}/>
                 </Route>
                 {/* Rotas dos Funcionários: */}
-                <Route path="funcionario" element={<HomeFuncionario/>}>
-
-                </Route>
+                <Route path="/gerente" element={<HomeGerente/>}></Route>
+                <Route path="/gerente/contas" element={<GerenteConta/>}></Route>
+                <Route path="/atendente" element={<AtendenteConta/>}></Route>
+                
 
             </Routes>
         </BrowserRouter>
