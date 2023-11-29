@@ -3,13 +3,16 @@ import { Navigate } from "react-router-dom";
 import useLoginContext from "../hooks/useLoginContext";
 // Verifica se quem ta tentando acessar é um admin, se não ele redireciona para a página anterior
 export default function AdminRoutes({ children }){
-    const { userType } = useLoginContext()
+    const { actualUserType } = useLoginContext()
 
-    return userType === 'dba' ? (
+    return actualUserType.current === 'dba' ? (
         <div className="w-full h-full">
             {children}
         </div>
     ):(
+        <>
+        {console.log(`Rota Home acionada ${actualUserType.current}`)}
         <Navigate to={'/'}/>
+        </>
     )
 }

@@ -29,7 +29,6 @@ export default function LandingPage(){
     // Verifica se existe algum cpf que dê match, evitando que crie dois clientes com a mesma chave:
     const onSubmit = (data)=>{
       existeCpf(data.cpf).then((resultado)=>{
-        console.log(resultado);
         if(resultado)
           // Abraão coloca aquela tua mensagem de erro bonitinha kkk:
           alert(`O cpf informado já possui uma conta`)

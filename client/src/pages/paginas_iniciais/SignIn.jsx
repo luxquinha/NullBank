@@ -20,7 +20,7 @@ const loginAcessSchema = z.object({
 })
 
 export default function SignIn(){
-    const { autenticarTipoUsuario, userType } = useLoginContext()
+    const { autenticarTipoUsuario, actualUserType } = useLoginContext()
     const [tipoUsuario, setTipoUsuario] = useState('dba')
     const irPara = useNavigate()
     const fundo = {
@@ -30,32 +30,29 @@ export default function SignIn(){
         resolver: zodResolver(loginAcessSchema)
     })
 
-    const paginasFunc =()=>{
-        if(userType === 'ger'){
-            irPara('/gerente')
+    // Retorna a rota de acordo com o tipo de usuário:
+    const getRoute = (vision) =>{
+        const route = {
+            dba: '/admin',
+            ger: '/gerente',
+            atd: '/atendente',
+            cai: '/caixa',
+            cli: '/home'
         }
-        else if(userType === 'atd'){
-            irPara('/atendente')
-        }
-        else if(userType === 'cai'){
-            irPara('/caixa')
-        }
+        return route[vision] || '/signIn'
     }
 
     // Verifica se é um usuário válido e envia para a rota correta:
-    const onSubmit = (data)=>{
-        let hasPermission = autenticarTipoUsuario(data, tipoUsuario)
+    const onSubmit = async (data)=>{
+        let hasPermission = await autenticarTipoUsuario(data, tipoUsuario)
         setTimeout(()=>{
-            if(tipoUsuario === 'dba' && hasPermission)
-                irPara('/admin')
-            else if(tipoUsuario === 'func' && hasPermission)
-                paginasFunc()
-            else if(tipoUsuario === 'cli' && hasPermission)
-                irPara('/home')
-            else
-                irPara('/')
+            // console.log(userType);
+            if(hasPermission){
+                irPara(getRoute(actualUserType.current))
+            }
         },2000)
     }
+
     return(
         <div className="flex flex-row items-center w-full">
             <div style={fundo}
