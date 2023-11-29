@@ -13,7 +13,7 @@ export default function SideBarClient(){
                 </Link>
             </div>
             <div className="w-[14vw] h-[80vh] flex flex-col items-center justify-around ">
-                <ActivedLink route={"/home/contas"} label={'Suas Contas'}/> 
+                <ActivedLink route={"/home/conta"} label={'Sua Conta'}/> 
                 <ActivedLink route={"/home/extrato"} label={'Ver Extrato'}/> 
                 <ActivedLink route={"/home/saque"} label={'Saque'}/>
                 <ActivedLink route={"/home/deposito"} label={'Depósito'}/>

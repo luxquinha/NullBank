@@ -28,22 +28,22 @@ function TransacoesConta() {
     const getUsers = async () => {
       try {
         const userStored = JSON.parse(localStorage.getItem('UserData'))
-        const clienteCpf = userStored.key
+        const contaCli = userStored.conta
 
-        // Obter contas associadas ao cliente
-        const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
-        const contasAssociadas = resNumero.data
-          .filter((conta) => conta.clientes_cpf === clienteCpf)
-          .map((conta) => conta.contas_numero);
+        // // Obter contas associadas ao cliente
+        // const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
+        // const contasAssociadas = resNumero.data
+        //   .filter((conta) => conta.clientes_cpf === clienteCpf)
+        //   .map((conta) => conta.contas_numero);
         
         // Obter todas as transações
         const resTransacao = await axios.get("http://localhost:8800/transacoes/");
         
-        // Filtrar as transações com base nas contas associadas
+        // Filtrar as transações com base na conta que o usuário logou
         const transacoesAssociadas = resTransacao.data.filter((transacao) =>
-          contasAssociadas.includes(transacao.conta_principal)
-        );
+        transacao.conta_principal === contaCli)
         
+        console.log(transacoesAssociadas);
         // Atualizar o estado com as transações associadas
         setUsers(transacoesAssociadas);
         

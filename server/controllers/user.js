@@ -1,9 +1,13 @@
 import {db} from "../db.js";
 
 // Função que pega todos os usuários ao lado de sua senha:
-export const getUserPassword = (_, res) => {
+export const getClientCont = (_, res) => {
   const q = 
-  "SELECT mat, senha FROM funcionarios"
+  `SELECT cl.nome_completo nome, cl.cpf cpf, c.numero conta, c.saldo saldo, c.num_agencia agencia, c.senha senha   
+  FROM clientes cl 
+  JOIN conta_cliente ccl ON cl.cpf = ccl.clientes_cpf
+  JOIN contas c ON c.numero = ccl.contas_numero
+  `
   db.query(q, (err, data) => {
     if (err) return res.json(err);
 
@@ -16,11 +20,18 @@ export const validaLogin = async (req, res) => {
   const { key, tipo_usuario, senha } = req.body;
   let q
   if (tipo_usuario === "cli"){
+    // q = 
+    // `SELECT clientes_cpf, senha
+    // FROM conta_cliente ccl, contas c, clientes cl
+    // WHERE ccl.contas_numero = c.numero
+    // AND (\`clientes_cpf\`  = ?)`
     q = 
-    `SELECT clientes_cpf, senha
-    FROM conta_cliente ccl, contas c, clientes cl
-    WHERE ccl.contas_numero = c.numero
-    AND (\`clientes_cpf\`  = ?)`
+    `SELECT cl.cpf AS cpf, c.numero AS conta, c.senha AS senha   
+     FROM clientes AS cl 
+     JOIN conta_cliente AS ccl ON cl.cpf = ccl.clientes_cpf
+     JOIN contas AS c ON c.numero = ccl.contas_numero
+     WHERE (c.numero = ?)
+    `
   } 
   else if(tipo_usuario === "func") {
     q = 
@@ -33,7 +44,7 @@ export const validaLogin = async (req, res) => {
     if (err) return res.json(err);
       data = data[0]
       if(senha === data.senha){
-        return res.status(200).json({success: true})
+        return res.status(200).json({success: true, obj: data})
       }
       // // Senha errada então retorna um erro:
       return res.json({success: false});

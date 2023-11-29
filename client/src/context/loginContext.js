@@ -1,4 +1,4 @@
-import { createContext, useRef } from "react";
+import { createContext, useReducer, useRef, useState } from "react";
 import axios from "axios";
 
 export const LoginContext = createContext(null)
@@ -12,6 +12,7 @@ export const LoginProvider= ({children}) => {
         user: 'Admin',
         password: 'Root'
     }
+    const cliente = useRef()
     const users = useRef([{}])
     const actualUserType = useRef('')
     // Limpar o tipo do usuário e o localStorage:
@@ -22,10 +23,11 @@ export const LoginProvider= ({children}) => {
     // Recebe o tipo de usuário e verifica se seus dados de login estão válidos
     const autenticarTipoUsuario = async(data, tipo)=>{
         // Objeto que será salvo no localStorage:
-        const dataUser = {
+        let dataUser = {
             key: data.key,
             senha: data.password,
-            tipoUser: tipo
+            tipoUser: tipo,
+            conta: ''
         }
         if(tipo === 'dba'){
             // Verificar se os dados são válidos
@@ -58,9 +60,15 @@ export const LoginProvider= ({children}) => {
         else if(tipo === 'cli'){
             // Aguarda a resposta da função para efetuar a condicional:
             let dados = await usuarioExistente(data, tipo)
-            if(dados){
+            if(dados.success){
                 // Guarda os dados do cliente no localStorage e retorna true para signIn
                 actualUserType.current = tipo
+                dataUser = {
+                    key: dados.obj.cpf,
+                    senha: dados.obj.senha,
+                    tipoUser: tipo,
+                    conta: dados.obj.conta
+                }
                 localStorage.setItem('UserData', JSON.stringify(dataUser))
                 return true
             }
@@ -83,7 +91,7 @@ export const LoginProvider= ({children}) => {
                 senha: data.password,
                 tipo_usuario: tipo
             })
-            return resposta.data.success
+            return resposta.data
         }catch(err){
             console.log(err);
         }
@@ -110,6 +118,14 @@ export const LoginProvider= ({children}) => {
         return tipo[cargo]
     }
 
+    const receberDadosCliente = (data) =>{
+        cliente.current = data
+        return 
+    }
+    const limparDadosCliente = () =>{
+        cliente.current = ''
+        return
+    }
 // ============================================== LÓGICA PARA CRIAR CLIENTES ===========================================================
     // Verifica se o CPF está cadastrado no BD:
     const existeCpf = async (cpf) =>{
@@ -123,9 +139,23 @@ export const LoginProvider= ({children}) => {
         }
     }
 
+    // Busca pelas contas atreladas ao cpf do cliente que acessou:
+    const getConts = async (cpf) => {
+        try {
+            // Recebe nome, conta, cpf, agencia, saldo e senha do BD:
+            const contasCliente = await axios.get("http://localhost:8800/clienteConta/");
+            // Filtrar apenas os registros onde cpf da conta seja igual ao cpf do cliente
+            const contasAssociadas = contasCliente.data.filter((conta) => conta.cpf === cpf)
+
+            return contasAssociadas
+        } catch (error) {
+            alert(error);
+        }
+      }
+
     return(
 
-        <LoginContext.Provider value={{autenticarTipoUsuario, actualUserType, userLogOut, existeCpf}}>
+        <LoginContext.Provider value={{autenticarTipoUsuario, actualUserType, cliente, receberDadosCliente, limparDadosCliente, userLogOut, existeCpf, getConts}}>
             {children}
         </LoginContext.Provider>
     )

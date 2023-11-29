@@ -28,17 +28,19 @@ function DadosConta() {
     const getUsers = async () => {
       try {
         const userStored = JSON.parse(localStorage.getItem('UserData'))
+        const contaCliente = userStored.conta;
+        // Pega todas as contas
         const res = await axios.get("http://localhost:8800/contas/");
-        const clienteCpf = userStored.key;
-        const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
-        const contasAssociadas = resNumero.data
-        .filter((conta) => conta.clientes_cpf === clienteCpf)
-        .map((conta) => conta.contas_numero);
+
+        // const resNumero = await axios.get("http://localhost:8800/conta_cliente/");
+        const dadosConta = res.data
+        .filter((conta) => conta.numero === contaCliente)
+        // .map((conta) => conta.contas_numero);
 
         // console.log("Contas associadas:", contasAssociadas);
         // Filtrar apenas os registros onde clientes_cpf seja igual ao clienteCpf
         
-        setUsers(res.data.filter((conta) => contasAssociadas.includes(conta.numero)));
+        setUsers(dadosConta);
         
       } catch (error) {
         toast.error(error);

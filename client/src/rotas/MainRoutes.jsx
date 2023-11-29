@@ -24,10 +24,11 @@ import ContaCorrente from '../componentes/conta_corrente/ContaCorrente';
 import ContaEspecial from '../componentes/conta_especial/ContaEspecial';
 import ContaPoupanca from '../componentes/conta_poupanca/ContaPoupanca';
 // Importando páginas do Cliente:
-import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
-import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
+import ChooseCont from "../pages/paginas_cliente/ChooseCont";
+import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosCliente from "../pages/paginas_cliente/DadosCliente";
+import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
 import UmaContaForm from "../componentes/FormAcoes/UmaContaForm";
 import DuasContasForm from '../componentes/FormAcoes/DuasContasForm'
 // Importando páginas do Gerente:
@@ -43,6 +44,7 @@ export default function MainRoutes(){
             <Routes>
                 {/* Rotas iniciais - públicas */}
                 <Route path="/" element={<LandingPage/>}/> 
+                <Route path="/signIn/:acesso" element={<SignIn/>}/> 
                 <Route path="/signIn" element={<SignIn/>}/> 
                 <Route path="/signUp/:cpf" element={<SignUp/>}/> 
                 {/* Rotas do Admin: */}
@@ -62,7 +64,7 @@ export default function MainRoutes(){
                 </Route>
                 {/* Rotas do Cliente: */}
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
-                    <Route path="/home/contas" element={<DadosConta/>}/>
+                    <Route path="/home/conta" element={<DadosConta/>}/>
                     <Route path="/home/perfil" element={<DadosCliente/>}/>
                     <Route path="/home/extrato" element={<TransacoesConta/>}/>
                     <Route path="/home/saque" element={<UmaContaForm/>}/>
@@ -82,6 +84,7 @@ export default function MainRoutes(){
                 {/* Rotas dos Caixas: */}
                 <Route path="/caixa" element={<CaiRoutes><span>Página do Caixa</span></CaiRoutes>}>
                 </Route>
+                <Route path="/chooseCont/:cpf" element={<ChooseCont/>}/>
             </Routes>
         </BrowserRouter>
     )
