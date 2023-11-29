@@ -1,15 +1,13 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
-const FloatingLabel = ({ content, label, width, type, register, value, rules }) => {
-    const inputRef = useRef(null)
+const FloatingLabel = ({ content, label, width, type, register, value, rules, placeholder }) => {
     const [valorInput, setValorInput] = useState('')
     
     
     const handleInputChange = (event) =>{
       setValorInput(event.target.value)
     }
-
 
   return (
     <div className={`relative w-${width} h-fit mr-5 mb-3`}>
@@ -18,6 +16,7 @@ const FloatingLabel = ({ content, label, width, type, register, value, rules }) 
         type={type}
         value={value ?? valorInput}
         onChange={handleInputChange}
+        placeholder={placeholder ?? ''}
         className="w-full px-2 py-0 border-b border-gray-300 focus:outline-none focus:border-cyan-500"
       />
       <label

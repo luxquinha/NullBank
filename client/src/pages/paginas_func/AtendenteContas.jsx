@@ -6,10 +6,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import styled from "styled-components";
 import "react-toastify/dist/ReactToastify.css";
+import HeaderPages from "../../componentes/HeaderPages";
 
-
-
-const Container = styled.div`
+const Container = styled.div `
   width: auto;
   max-width: 800px;
   margin-top: 20px;
@@ -58,6 +57,7 @@ function AtendenteConta() {
 
   return (
     <>
+      <HeaderPages title={'Atendente'} route={'/atendente'}/>
       <Container>
         <Title>Atendente - Contas</Title>
         <table className="table table-striped text-center">

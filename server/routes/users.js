@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserPassword, validaLogin } from '../controllers/user.js';
+import { getCliente, getFuncCargo, getUserPassword, validaLogin } from '../controllers/user.js';
 import { getAgency, addAgency, updateAgency, deleteAgency } from '../controllers/user.js';
 import { getFunc, addFunc, updateFunc, deleteFunc} from '../controllers/user.js';
 import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '../controllers/user.js';
@@ -25,6 +25,7 @@ router.put("/:numero", updateAgency)
 router.delete("/:numero", deleteAgency)
 
 // Rotas para funcionários
+router.post('/cargoFunc', getFuncCargo)
 router.get('/func', getFunc);
 router.post('/func', addFunc);
 router.put('/func/:mat', updateFunc);
@@ -38,6 +39,7 @@ router.delete('/transacoes/:numero_transacao', deleteTransacao);
 
 // Routes for clientes
 router.get('/clientes', getClientes);
+router.post('/getCliente', getCliente)
 router.post('/clientes', addCliente);
 router.put('/clientes/:cpf', updateCliente);
 router.delete('/clientes/:cpf', deleteCliente);

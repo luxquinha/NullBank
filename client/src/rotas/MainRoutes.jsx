@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminRoutes from "./AdminRoutes";
 import ClientRoutes from "./ClientRoutes";
+import GerRoutes from './GerRoutes';
+import CaiRoutes from './CaiRoutes';
+import AtdRoutes from './AtdRoutes';
 // Importando as páginas públicas:
 import LandingPage from '../pages/paginas_iniciais/LandingPage'
 import SignIn from '../pages/paginas_iniciais/SignIn'
@@ -23,11 +26,15 @@ import ContaPoupanca from '../componentes/conta_poupanca/ContaPoupanca';
 // Importando páginas do Cliente:
 import HomeCliente from '../pages/paginas_cliente/HomeCliente'
 import DadosConta from '../pages/paginas_cliente/DadosConta'
+import TransacoesConta from '../pages/paginas_cliente/TransacoesConta'
 import DadosCliente from "../pages/paginas_cliente/DadosCliente";
-// Importando páginas do Funcionário:
+import UmaContaForm from "../componentes/FormAcoes/UmaContaForm";
+import DuasContasForm from '../componentes/FormAcoes/DuasContasForm'
+// Importando páginas do Gerente:
 import HomeGerente from '../pages/paginas_func/HomeGerente'
 import GerenteConta from "../pages/paginas_func/GerenteContas";
-import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+import DadosGerente from '../pages/paginas_func/DadosGerente'
+// Importando páginas de Atendente
 import AtendenteConta from "../pages/paginas_func/AtendenteContas";
 
 export default function MainRoutes(){
@@ -55,16 +62,26 @@ export default function MainRoutes(){
                 </Route>
                 {/* Rotas do Cliente: */}
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
-                    <Route path="/home/dadosConta" element={<DadosConta/>}/>
-                    <Route path="/home/transacoes" element={<DadosTransacoes/>}/>
-                    <Route path="/home/dadosCliente" element={<DadosCliente/>}/>
+                    <Route path="/home/contas" element={<DadosConta/>}/>
+                    <Route path="/home/perfil" element={<DadosCliente/>}/>
+                    <Route path="/home/extrato" element={<TransacoesConta/>}/>
+                    <Route path="/home/saque" element={<UmaContaForm/>}/>
+                    <Route path="/home/deposito" element={<UmaContaForm/>}/>
+                    <Route path="/home/pagamento" element={<DuasContasForm/>}/>
+                    <Route path="/home/transferencia" element={<DuasContasForm/>}/>
                 </Route>
-                {/* Rotas dos Funcionários: */}
-                <Route path="/gerente" element={<HomeGerente/>}></Route>
-                <Route path="/gerente/contas" element={<GerenteConta/>}></Route>
-                <Route path="/atendente" element={<AtendenteConta/>}></Route>
-                
+                {/* Rotas dos Gerentes: */}
+                <Route path="/gerente" element={<GerRoutes><HomeGerente/></GerRoutes>}>
+                    <Route path="/gerente/contas" element={<GerenteConta/>}/>
+                    <Route path="/gerente/perfil" element={<DadosGerente/>}/>
+                </Route>
+                {/* Rotas dos Atendentes: */}
+                <Route path="/atendente"  element={<AtdRoutes><AtendenteConta/></AtdRoutes>}>
 
+                </Route>
+                {/* Rotas dos Caixas: */}
+                <Route path="/caixa" element={<CaiRoutes><span>Página do Caixa</span></CaiRoutes>}>
+                </Route>
             </Routes>
         </BrowserRouter>
     )
