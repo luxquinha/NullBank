@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FloatingLabel from "../FloatingLabel";
 import ErrorMessage from "../ErrorMessage";
 import ButtonWithIcon from "../ButtonWithIcon";
@@ -8,12 +8,17 @@ import { useParams } from "react-router-dom";
 import useLoginContext from '../../hooks/useLoginContext'
 import { useNavigate } from "react-router-dom";
 
-export default function RegisterForm({title, buttonText, sendData, user, logoutText}){
+export default function RegisterForm({title, buttonText, sendData, users, logoutText}){
     const { cpf } = useParams()
     const irPara = useNavigate()
+    const [user, setUser] = useState()
     const { userLogOut } = useLoginContext()
     const { register, handleSubmit, formState: { errors } } = useForm()
-
+    
+    useEffect(()=>{
+        if(users !== undefined)
+            setUser(users[0])
+    },[users])
     const handleClick = ()=>{
         userLogOut()
         if(localStorage.getItem('UserData')===null)
@@ -23,6 +28,14 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
     const onSubmit = (data) => {
         sendData(data)
     };
+
+    const handleDate = (dateTime) =>{
+        if(dateTime !== undefined){
+            let divisao = dateTime.split('T')
+            return divisao[0]
+        }
+        return ''
+    }
 
     return(
         <div className="flex flex-col items-center w-full">
@@ -36,17 +49,17 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                     <div className="flex flex-row items-start w-full h-12 justify-between">
                         <div className="flex flex-col w-[50%]">
                             <FloatingLabel width={'full'} type={'text'} content={'Nome completo'} label={'name'} 
-                            register={register} rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.nome_completo}/>
+                            register={register} rules={{required: 'Campo obrigatório'}} placeholder={user?.nome_completo}/>
                             {errors.name && <ErrorMessage message={errors.name?.message}/>}
                         </div>
                         <div className="flex flex-col w-[25%]">
                             <FloatingLabel width={'full'} type={'date'} content={'Data de Nascimento'} label={'birth_date'} 
-                            register={register}  rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.data_nascimento}/>
+                            register={register}  rules={{required: 'Campo obrigatório'}} value={handleDate(user?.data_nascimento)}/>
                             {errors.birth_date && <ErrorMessage message={errors.birth_date?.message}/>}
                         </div>
                         <div className="flex flex-col w-[20%]">
                             <FloatingLabel width={'[full]'} type={'text'} content={'UF'} label={'uf'} register={register}  
-                            rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.uf}/>
+                            rules={{required: 'Campo obrigatório'}} placeholder={user?.uf}/>
                             {errors.uf && <ErrorMessage message={errors.uf?.message}/>}
                         </div>
                     </div>
@@ -55,11 +68,11 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                         <div className="flex flex-col items-start h-full w-[38%] gap-y-6">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'RG'} label={'rg'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} value={user[0]?.rg}/>
+                                rules={{required: 'Campo obrigatório'}} value={user?.rg}/>
                                 {errors.rg && <ErrorMessage message={errors.rg?.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
-                                <FloatingLabel width={'[90%]'} type={'text'} value={cpf ?? user[0]?.cpf} content={'CPF'} label={'cpf'} 
+                                <FloatingLabel width={'[90%]'} type={'text'} value={cpf ?? user?.cpf} content={'CPF'} label={'cpf'} 
                                 register={register} rules={{required: 'Campo obrigatório'}}/>
                                 {errors.cpf && <ErrorMessage message={errors.cpf?.message}/>}
                             </div>
@@ -67,12 +80,12 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                         <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[70%]'} type={'text'} content={'Orgão Emissor'} label={'ssp'} 
-                                register={register} rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.orgao_emissor}/>
+                                register={register} rules={{required: 'Campo obrigatório'}} placeholder={user?.orgao_emissor}/>
                                 {errors.ssp && <ErrorMessage message={errors.ssp?.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[70%]'} type={'text'} content={'CEP'} label={'zipCode'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.cep}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.cep}/>
                                 {errors.zipCode && <ErrorMessage message={errors.zipCode?.message}/>}
                             </div>
                         </div>
@@ -80,12 +93,12 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                         <div className="flex flex-col items-start h-full w-[30%] gap-y-6">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Cidade'} label={'city'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.cidade}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.cidade}/>
                                 {errors.city && <ErrorMessage message={errors.city?.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Estado'} label={'state'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.estado}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.estado}/>
                                 {errors.state && <ErrorMessage message={errors.state?.message}/>}
                             </div>
                         </div>
@@ -93,17 +106,17 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                     <div className="flex flex-row items-start justify-between w-full h-12">
                         <div className="flex flex-col w-[25%]">
                             <FloatingLabel width={'full'} type={'text'} content={'Tipo de logradouro'} label={'streetType'} 
-                            register={register} rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.tipo_logradouro}/>
+                            register={register} rules={{required: 'Campo obrigatório'}} placeholder={user?.tipo_logradouro}/>
                             {errors.streetType && <ErrorMessage message={errors.streetType?.message}/>}
                         </div>
                         <div className="flex flex-col w-[50%]">
                             <FloatingLabel width={'full'} type={'text'} content={'Nome do logradouro'} label={'end'} register={register} 
-                            rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.nome_logradouro}/>
+                            rules={{required: 'Campo obrigatório'}} placeholder={user?.nome_logradouro}/>
                             {errors.end && <ErrorMessage message={errors.end?.message}/>}
                         </div>
                         <div className="flex flex-col w-[20%]">
                             <FloatingLabel width={'full'} type={'text'} content={'Número'} label={'num'} register={register} 
-                            rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.numero}/>
+                            rules={{required: 'Campo obrigatório'}} placeholder={user?.numero}/>
                             {errors.num && <ErrorMessage message={errors.num?.message}/>}
                         </div>
                     </div>
@@ -112,36 +125,36 @@ export default function RegisterForm({title, buttonText, sendData, user, logoutT
                         <div className="flex flex-col items-start w-[28%] gap-y-6 h-28 justify-around">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de Telefone'} label={'phoneType'} 
-                                register={register} rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.tipo_telefone}/>
+                                register={register} rules={{required: 'Campo obrigatório'}} placeholder={user?.tipo_telefone}/>
                                 {errors.phoneType && <ErrorMessage message={errors.phoneType?.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Tipo de email'} label={'emailType'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.tipo_email}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.tipo_email}/>
                                 {errors.emailType && <ErrorMessage message={errors.emailType?.message}/>}
                             </div>
                         </div>
                         <div className="flex flex-col items-start w-[37%] gap-y-6 h-28 justify-around">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Telefone'} label={'phoneNumber'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.numero_telefone}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.numero_telefone}/>
                                 {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber?.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'email'} label={'email'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.email}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.email}/>
                                 {errors.email && <ErrorMessage message={errors.email?.message}/>}
                             </div>
                         </div>
                         <div className="flex flex-col items-start w-[25%] gap-y-6 h-28 justify-around">
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'text'} content={'Bairro'} label={'district'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.bairro}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.bairro}/>
                                 {errors.district && <ErrorMessage message={errors.district.message}/>}
                             </div>
                             <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user[0]?.senha}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={user?.senha}/>
                                 {errors.password && <ErrorMessage message={errors.password.message}/>}
                             </div>
                         </div>

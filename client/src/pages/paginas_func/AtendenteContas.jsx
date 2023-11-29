@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import styled from "styled-components";
 import "react-toastify/dist/ReactToastify.css";
+import HeaderPages from "../../componentes/HeaderPages";
 
 
 
@@ -58,6 +59,7 @@ function AtendenteConta() {
 
   return (
     <>
+      <HeaderPages title={'Atendente'} route={'/atendente'}/>
       <Container>
         <Title>Atendente - Contas</Title>
         <table className="table table-striped text-center">

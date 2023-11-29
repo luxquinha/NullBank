@@ -9,7 +9,7 @@ export const LoginProvider= ({children}) => {
     const users = useRef([{}])
     const adminUser = {
         user: 'Admin',
-        password: '1234'
+        password: 'Root'
     }
     const [userType, setUserType] = useState('')
 
@@ -36,9 +36,21 @@ export const LoginProvider= ({children}) => {
         else if(tipo === 'func'){
             usuarioExistente(data, tipo)
             .then((dados)=>{
-                if(dados.success){
-                    setUserType('func')
-                    localStorage.setItem('UserData', JSON.stringify(dataUser))
+                if(dados?.success){
+                    usuarioCargo(data.key)
+                    .then((cargo) =>{
+                        if(cargo === 'gerente'){
+                            setUserType('ger')
+                            dataUser.tipoUser = 'ger'
+                        }else if(cargo === 'caixa'){
+                            setUserType('cai')
+                            dataUser.tipoUser = 'cai'
+                        }else if(cargo === 'atendente'){
+                            setUserType('atd')
+                            dataUser.tipoUser = 'atd'
+                        }
+                        localStorage.setItem('UserData', JSON.stringify(dataUser))
+                    })
                     return true
                 }
                 else{
@@ -49,7 +61,7 @@ export const LoginProvider= ({children}) => {
         else if(tipo === 'cli'){
             usuarioExistente(data, tipo)
             .then((dados)=>{
-                if(dados.success){
+                if(dados?.success){
                     setUserType('cli')
                     localStorage.setItem('UserData', JSON.stringify(dataUser))
                     return true
@@ -78,6 +90,15 @@ export const LoginProvider= ({children}) => {
         }
     }
 
+    const usuarioCargo = async(key) =>{
+        try{
+            const resposta = await axios.get("http://localhost:8800/func/")
+            let funcChoose = resposta.data.filter((funcionarios)=> funcionarios.mat === key)
+            return funcChoose[0].cargo
+        }catch(err){
+            console.log(err);
+        }
+    }
     // Verifica se o CPF está cadastrado no BD:
     const existeCpf = async (cpf) =>{
         try{

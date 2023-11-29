@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const Container = styled.div`
+const Container = styled.div `
   width: auto;
   max-width: 800px;
   margin-top: 20px;
@@ -27,8 +27,9 @@ function GerenteConta() {
   
     const getUsers = async () => {
       try {
+        const funcStored = JSON.parse(localStorage.getItem('UserData'))
         const res = await axios.get("http://localhost:8800/contas/");
-        const matriculaGerente = '00007';
+        const matriculaGerente = funcStored.key
    
         setUsers(res.data.filter((conta) => conta.gerente_mat === matriculaGerente));
         

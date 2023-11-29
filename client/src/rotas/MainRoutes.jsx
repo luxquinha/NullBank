@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminRoutes from "./AdminRoutes";
 import ClientRoutes from "./ClientRoutes";
-import FuncRoutes from './FuncRoutes';
+import GerRoutes from './GerRoutes';
+import CaiRoutes from './CaiRoutes';
+import AtdRoutes from './AtdRoutes';
 // Importando as páginas públicas:
 import LandingPage from '../pages/paginas_iniciais/LandingPage'
 import SignIn from '../pages/paginas_iniciais/SignIn'
@@ -31,7 +33,7 @@ import DuasContasForm from '../componentes/FormAcoes/DuasContasForm'
 // Importando páginas do Funcionário:
 import HomeGerente from '../pages/paginas_func/HomeGerente'
 import GerenteConta from "../pages/paginas_func/GerenteContas";
-import DadosTransacoes from "../pages/paginas_cliente/TransacoesConta";
+import DadosGerente from '../pages/paginas_func/DadosGerente'
 import AtendenteConta from "../pages/paginas_func/AtendenteContas";
 
 export default function MainRoutes(){
@@ -67,12 +69,19 @@ export default function MainRoutes(){
                     <Route path="/home/pagamento" element={<DuasContasForm/>}/>
                     <Route path="/home/transferencia" element={<DuasContasForm/>}/>
                 </Route>
-                {/* Rotas dos Funcionários: */}
-                <Route path="/gerente" element={<HomeGerente/>}></Route>
-                <Route path="/gerente/contas" element={<GerenteConta/>}></Route>
-                <Route path="/atendente" element={<AtendenteConta/>}></Route>
-                
+                {/* Rotas dos Gerentes: */}
+                <Route path="/gerente" element={<GerRoutes><HomeGerente/></GerRoutes>}>
+                    <Route path="/gerente/contas" element={<GerenteConta/>}/>
+                    <Route path="/gerente/perfil" element={<DadosGerente/>}/>
+                </Route>
+                {/* Rotas dos Atendentes: */}
+                <Route path="/atendente"  element={<AtdRoutes><AtendenteConta/></AtdRoutes>}>
 
+                </Route>
+                {/* Rotas dos Caixas: */}
+                <Route path="/caixa" element={<CaiRoutes><span>Página do Caixa</span></CaiRoutes>}>
+
+                </Route>
             </Routes>
         </BrowserRouter>
     )

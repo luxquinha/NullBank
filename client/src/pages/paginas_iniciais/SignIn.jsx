@@ -20,7 +20,7 @@ const loginAcessSchema = z.object({
 })
 
 export default function SignIn(){
-    const { autenticarTipoUsuario } = useLoginContext()
+    const { autenticarTipoUsuario, userType } = useLoginContext()
     const [tipoUsuario, setTipoUsuario] = useState('dba')
     const irPara = useNavigate()
     const fundo = {
@@ -29,6 +29,19 @@ export default function SignIn(){
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginAcessSchema)
     })
+
+    const paginasFunc =()=>{
+        if(userType === 'ger'){
+            irPara('/gerente')
+        }
+        else if(userType === 'atd'){
+            irPara('/atendente')
+        }
+        else if(userType === 'cai'){
+            irPara('/caixa')
+        }
+    }
+
     // Verifica se é um usuário válido e envia para a rota correta:
     const onSubmit = (data)=>{
         let hasPermission = autenticarTipoUsuario(data, tipoUsuario)
@@ -36,7 +49,7 @@ export default function SignIn(){
             if(tipoUsuario === 'dba' && hasPermission)
                 irPara('/admin')
             else if(tipoUsuario === 'func' && hasPermission)
-                irPara('/funcionario')
+                paginasFunc()
             else if(tipoUsuario === 'cli' && hasPermission)
                 irPara('/home')
             else

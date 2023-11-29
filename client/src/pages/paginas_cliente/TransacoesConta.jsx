@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const Title = styled.h2``;
 
-function DadosTransacoes() {
+function TransacoesConta() {
     const [users, setUsers] = useState([]);
     const [onEdit, setOnEdit] = useState(null);
   
@@ -69,4 +69,4 @@ function DadosTransacoes() {
   );
 }
 
-export default DadosTransacoes;
+export default TransacoesConta;

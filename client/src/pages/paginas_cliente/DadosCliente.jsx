@@ -44,7 +44,7 @@ function DadosCliente() {
     }, []); 
   return (
     <>
-      <RegisterForm title={'Seu Perfil'} buttonText={'Editar'} user={users} logoutText={'Logout'}/>
+      <RegisterForm title={'Seu Perfil'} buttonText={'Editar'} users={users} logoutText={'Logout'}/>
       {/* <Container>
         <Title>Dados Cliente</Title>
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>

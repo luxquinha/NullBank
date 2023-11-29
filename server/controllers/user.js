@@ -13,7 +13,7 @@ export const getUserPassword = (_, res) => {
 
 // Rota para validação de login:
 export const validaLogin = async (req, res) => {
-  const {key, tipo_usuario, senha} = req.body;
+  const { key, tipo_usuario, senha } = req.body;
   let q
   if (tipo_usuario === "cli"){
     q = 
@@ -97,6 +97,16 @@ export const updateAgency = (req, res) => {
   };
   
   // CRUD de Funcionários:
+  export const getFuncCargo = (req, res) =>{
+    const { key } = req
+    const q = "SELECT * FROM equipe511330.funcionarios WHERE (`mat` = ?)"
+    db.query(q, [key], (err, data)=>{
+      if(err) return res.json(err);
+        
+        return res.status(200).json(data)
+    })
+  }
+  
   export const getFunc = (_, res) => {
     const q = "SELECT * FROM equipe511330.funcionarios";
 
