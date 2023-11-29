@@ -8,7 +8,6 @@ import GlobalStyle from "../../styles/global";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
 const Container = styled.div `
   width: auto;
   max-width: 800px;
@@ -30,9 +29,7 @@ function GerenteConta() {
         const funcStored = JSON.parse(localStorage.getItem('UserData'))
         const res = await axios.get("http://localhost:8800/contas/");
         const matriculaGerente = funcStored.key
-   
         setUsers(res.data.filter((conta) => conta.gerente_mat === matriculaGerente));
-        
       } catch (error) {
         toast.error(error);
       }

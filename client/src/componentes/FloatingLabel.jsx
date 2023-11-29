@@ -9,7 +9,6 @@ const FloatingLabel = ({ content, label, width, type, register, value, rules, pl
       setValorInput(event.target.value)
     }
 
-
   return (
     <div className={`relative w-${width} h-fit mr-5 mb-3`}>
       <input

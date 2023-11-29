@@ -8,9 +8,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import HeaderPages from "../../componentes/HeaderPages";
 
-
-
-const Container = styled.div`
+const Container = styled.div `
   width: auto;
   max-width: 800px;
   margin-top: 20px;

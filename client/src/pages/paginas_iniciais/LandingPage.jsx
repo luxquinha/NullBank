@@ -26,7 +26,6 @@ export default function LandingPage(){
     const { register, handleSubmit, formState: { errors } } = useForm({
       resolver: zodResolver(cpfschema)
     })
-
     // Verifica se existe algum cpf que dê match, evitando que crie dois clientes com a mesma chave:
     const onSubmit = (data)=>{
       existeCpf(data.cpf).then((resultado)=>{

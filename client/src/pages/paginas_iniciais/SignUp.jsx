@@ -1,12 +1,6 @@
 // Importando bibliotecas e seus componentes:
 import React from "react";
 import RegisterForm from "../../componentes/clientes/RegisterForm";
-// Importando componentes:
-// import FloatingLabel from "../../componentes/FloatingLabel";
-// import ButtonWithIcon from "../../componentes/ButtonWithIcon"
-// import ErrorMessage from "../../componentes/ErrorMessage";
-// Importando ícones:
-
 
 export default function SignUp(){
     const fundo = {
