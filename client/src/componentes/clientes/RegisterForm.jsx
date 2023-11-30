@@ -166,3 +166,5 @@ export default function RegisterForm({title, buttonText, sendData, users, logout
             </div>
     )
 }
+
+// Fazer tipo uma toDo list para listar os email e telefones do cliente e ele poder alterá-los

@@ -37,6 +37,8 @@ import GerenteConta from "../pages/paginas_func/GerenteContas";
 import DadosGerente from '../pages/paginas_func/DadosGerente'
 // Importando páginas de Atendente
 import AtendenteConta from "../pages/paginas_func/AtendenteContas";
+import { ClientProvider } from "../context/ClientContext";
+import Extrato from "../componentes/clientes/Extrato";
 
 export default function MainRoutes(){
     return(
@@ -66,7 +68,7 @@ export default function MainRoutes(){
                 <Route path="/home" element={<ClientRoutes> <HomeCliente/> </ClientRoutes>}>
                     <Route path="/home/conta" element={<DadosConta/>}/>
                     <Route path="/home/perfil" element={<DadosCliente/>}/>
-                    <Route path="/home/extrato" element={<TransacoesConta/>}/>
+                    <Route path="/home/extrato" element={<Extrato/>}/>
                     <Route path="/home/saque" element={<UmaContaForm/>}/>
                     <Route path="/home/deposito" element={<UmaContaForm/>}/>
                     <Route path="/home/pagamento" element={<DuasContasForm/>}/>

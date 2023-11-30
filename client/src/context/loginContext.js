@@ -1,4 +1,4 @@
-import { createContext, useReducer, useRef, useState } from "react";
+import { createContext, useRef } from "react";
 import axios from "axios";
 
 export const LoginContext = createContext(null)
@@ -12,6 +12,7 @@ export const LoginProvider= ({children}) => {
         user: 'Admin',
         password: 'Root'
     }
+    const tipoTrans = useRef('')
     const cliente = useRef()
     const users = useRef([{}])
     const actualUserType = useRef('')
@@ -117,7 +118,7 @@ export const LoginProvider= ({children}) => {
         }
         return tipo[cargo]
     }
-
+    // Atualiza os dados do cliente que está acessando a conta e compartilha com o restante da aplicação:
     const receberDadosCliente = (data) =>{
         cliente.current = data
         return 
@@ -153,9 +154,15 @@ export const LoginProvider= ({children}) => {
         }
       }
 
+    const getTypeTrans = (tipo)=>{
+    tipoTrans.current = ''
+    tipoTrans.current = tipo
+    console.log(tipoTrans.current);
+    }
+
     return(
 
-        <LoginContext.Provider value={{autenticarTipoUsuario, actualUserType, cliente, receberDadosCliente, limparDadosCliente, userLogOut, existeCpf, getConts}}>
+        <LoginContext.Provider value={{autenticarTipoUsuario, getTypeTrans, tipoTrans, actualUserType, cliente, receberDadosCliente, limparDadosCliente, userLogOut, existeCpf, getConts}}>
             {children}
         </LoginContext.Provider>
     )

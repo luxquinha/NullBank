@@ -33,8 +33,11 @@ export default function LandingPage(){
           // alert(`O cpf informado já possui uma conta`)
           irPara(`/chooseCont/${data.cpf}`)
         }
-        else
-          irPara(`/signUp/${data.cpf}`)
+        else{
+          alert("Cpf não cadastrado")
+        }
+          // irPara(`/signUp/${data.cpf}`)
+
       }).catch((erro)=>{
         console.log(erro);
       })
