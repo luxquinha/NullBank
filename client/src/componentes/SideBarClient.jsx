@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { userIcon } from "../icons/icones";
 // Saque | Depósito | Pagamentp | Tranf | Extrato (Empréstimo)
 export default function SideBarClient(){
+    const tipo= {
+        s: 'saque',
+        d: 'deposito',
+        p: 'pagamento',
+        t: 'transferencia'
+    }
+
     return(
         <div className="w-[14vw] h-[100vh] shadow-xl flex flex-col items-center justify-around fixed bottom-0 top-0 left-0">
             <div className="w-[14vw] h-[20vh] flex flex-col items-center justify-center">
@@ -13,12 +20,12 @@ export default function SideBarClient(){
                 </Link>
             </div>
             <div className="w-[14vw] h-[80vh] flex flex-col items-center justify-around ">
-                <ActivedLink route={"/home/contas"} label={'Suas Contas'}/> 
+                <ActivedLink route={"/home/conta"} label={'Sua Conta'}/> 
                 <ActivedLink route={"/home/extrato"} label={'Ver Extrato'}/> 
-                <ActivedLink route={"/home/saque"} label={'Saque'}/>
-                <ActivedLink route={"/home/deposito"} label={'Depósito'}/>
-                <ActivedLink route={"/home/pagamento"} label={'Pagamento'}/>
-                <ActivedLink route={"/home/transferencia"} label={'Transferência'}/>
+                <ActivedLink route={`/home/saque`} label={'Saque'} type={tipo['s']}/>
+                <ActivedLink route={`/home/deposito`} label={'Depósito'} type={tipo['d']}/>
+                <ActivedLink route={`/home/pagamento`} label={'Pagamento'} type={tipo['p']}/>
+                <ActivedLink route={`/home/transferencia`} label={'Transferência'} type={tipo['t']}/>
             </div>
         </div>
     )

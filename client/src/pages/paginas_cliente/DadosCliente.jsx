@@ -26,6 +26,7 @@ function DadosCliente() {
     const dadosNome = useRef('')
     const [users, setUsers] = useState([]);
     const [onEdit, setOnEdit] = useState(null);
+    let senha
   
     const getUsers = async () => {
       try {
@@ -41,10 +42,14 @@ function DadosCliente() {
   
     useEffect(() => {
       getUsers();
+      if(localStorage.getItem('UserData') !== undefined){
+        let userStored = JSON.parse(localStorage.getItem('UserData'))
+        senha = userStored.senha
+      }
     }, []); 
   return (
     <>
-      <RegisterForm title={'Seu Perfil'} buttonText={'Editar'} users={users} logoutText={'Logout'}/>
+      <RegisterForm title={'Seu Perfil'} buttonText={'Editar'} users={users} senha={senha} logoutText={'Logout'}/>
       {/* <Container>
         <Title>Dados Cliente</Title>
         <Form  onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>

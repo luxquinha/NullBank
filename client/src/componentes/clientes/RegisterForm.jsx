@@ -8,19 +8,21 @@ import { useParams } from "react-router-dom";
 import useLoginContext from '../../hooks/useLoginContext'
 import { useNavigate } from "react-router-dom";
 
-export default function RegisterForm({title, buttonText, sendData, users, logoutText}){
+export default function RegisterForm({title, buttonText, sendData, users, logoutText, senha}){
     const { cpf } = useParams()
     const irPara = useNavigate()
     const [user, setUser] = useState()
-    const { userLogOut } = useLoginContext()
+    const { userLogOut, limparDadosCliente } = useLoginContext()
     const { register, handleSubmit, formState: { errors } } = useForm()
     
     useEffect(()=>{
         if(users !== undefined)
             setUser(users[0])
     },[users])
+
     const handleClick = ()=>{
         userLogOut()
+        limparDadosCliente()
         if(localStorage.getItem('UserData')===null)
             irPara('/signIn')
     }
@@ -152,11 +154,11 @@ export default function RegisterForm({title, buttonText, sendData, users, logout
                                 rules={{required: 'Campo obrigatório'}} placeholder={user?.bairro}/>
                                 {errors.district && <ErrorMessage message={errors.district.message}/>}
                             </div>
-                            <div className="flex flex-col w-full">
+                            {/* <div className="flex flex-col w-full">
                                 <FloatingLabel width={'[90%]'} type={'password'} content={'Senha'} label={'password'} register={register} 
-                                rules={{required: 'Campo obrigatório'}} placeholder={user?.senha}/>
+                                rules={{required: 'Campo obrigatório'}} placeholder={senha ?? ''}/>
                                 {errors.password && <ErrorMessage message={errors.password.message}/>}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <ButtonWithIcon width={'[50%]'} icon={seta} content={buttonText}/>
@@ -164,3 +166,5 @@ export default function RegisterForm({title, buttonText, sendData, users, logout
             </div>
     )
 }
+
+// Fazer tipo uma toDo list para listar os email e telefones do cliente e ele poder alterá-los

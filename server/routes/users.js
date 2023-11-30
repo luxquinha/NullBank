@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCliente, getFuncCargo, getUserPassword, validaLogin } from '../controllers/user.js';
+import { getCliente, getFuncCargo, getClientCont, validaLogin } from '../controllers/user.js';
 import { getAgency, addAgency, updateAgency, deleteAgency } from '../controllers/user.js';
 import { getFunc, addFunc, updateFunc, deleteFunc} from '../controllers/user.js';
 import { getTransacoes, addTransacao, updateTransacao, deleteTransacao,} from '../controllers/user.js';
@@ -17,7 +17,7 @@ const router = express.Router();
 
 // Rota de validação de login:
 router.post('/validarLogin', validaLogin)
-router.get('/matSenha', getUserPassword)
+router.get('/clienteConta', getClientCont)
 // Rotas para agências:
 router.get('/', getAgency)
 router.post("/", addAgency)

@@ -4,7 +4,6 @@ import { useState } from 'react';
 const FloatingLabel = ({ content, label, width, type, register, value, rules, placeholder }) => {
     const [valorInput, setValorInput] = useState('')
     
-    
     const handleInputChange = (event) =>{
       setValorInput(event.target.value)
     }
