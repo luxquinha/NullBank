@@ -157,7 +157,7 @@ export const LoginProvider= ({children}) => {
     const getTypeTrans = (tipo)=>{
     tipoTrans.current = ''
     tipoTrans.current = tipo
-    console.log(tipoTrans.current);
+    // console.log(tipoTrans.current);
     }
 
     return(

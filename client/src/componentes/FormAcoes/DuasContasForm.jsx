@@ -4,11 +4,13 @@ import {seta} from '../../icons/icones'
 import ErrorMessage from "../ErrorMessage";
 import ButtonWithIcon from "../ButtonWithIcon";
 import useLoginContext from "../../hooks/useLoginContext";
+import useClientContext from "../../hooks/useClientContext";
 
 
 export default function DuasContaForm(){
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { tipoTrans } = useLoginContext()
+    const { doubleContsTransations } = useClientContext()
 
 
     const onSubmit = (data) => {
@@ -18,8 +20,7 @@ export default function DuasContaForm(){
         conta: userData.conta,
         data_trans: new Date().toLocaleDateString(),
         }
-        console.log(dadosCompleto)
-        console.log(data)
+        doubleContsTransations(dadosCompleto)
     };
 
     return(

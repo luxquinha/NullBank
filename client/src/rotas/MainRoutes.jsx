@@ -37,7 +37,6 @@ import GerenteConta from "../pages/paginas_func/GerenteContas";
 import DadosGerente from '../pages/paginas_func/DadosGerente'
 // Importando páginas de Atendente
 import AtendenteConta from "../pages/paginas_func/AtendenteContas";
-import { ClientProvider } from "../context/ClientContext";
 import Extrato from "../componentes/clientes/Extrato";
 
 export default function MainRoutes(){

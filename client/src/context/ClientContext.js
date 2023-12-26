@@ -1,11 +1,19 @@
-import { createContext, useRef } from "react";
+import { createContext } from "react";
 import axios from "axios";
 
 export const ClientContext = createContext(null)
 
 export const ClientProvider = ({children}) => {
 // Fazer transações:
-    
+//Verificar o saldo da conta(Saque) / Senha correta / o tipo de conta / tipo de transação
+    const oneContTransations = async(data) =>{
+        // Envia os dados para o backend onde vai verificar o saldo da conta e fazer ou não a transação
+        console.log(data);
+    }
+    const doubleContsTransations = async(data) =>{
+        // Envia os dados para o backend onde vai verificar o saldo da conta e fazer ou não a transação
+        console.log(data);
+    }
 // Editar Perfil:
 
 // Ver o extrato:
@@ -27,7 +35,7 @@ export const ClientProvider = ({children}) => {
         }
     }
     return(
-        <ClientContext.Provider value={{getTrasations}}>
+        <ClientContext.Provider value={{getTrasations, oneContTransations, doubleContsTransations}}>
             {children}
         </ClientContext.Provider>
     )

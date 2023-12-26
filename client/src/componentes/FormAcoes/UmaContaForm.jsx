@@ -4,11 +4,13 @@ import { seta } from "../../icons/icones";
 import ErrorMessage from "../ErrorMessage";
 import ButtonWithIcon from "../ButtonWithIcon";
 import useLoginContext from "../../hooks/useLoginContext";
+import useClientContext from "../../hooks/useClientContext"
 
 
 export default function UmaContaForm(){
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { tipoTrans } = useLoginContext()
+    const { oneContTransations } = useClientContext()
 // N° Trans | Tipo | Data | Valor | ContaP | ContaT
     const onSubmit = (data) => {
         let userData = JSON.parse(localStorage.getItem('UserData'))
@@ -18,8 +20,7 @@ export default function UmaContaForm(){
         data_trans: new Date().toLocaleDateString(),
         conta_destino: ''
         }
-        console.log(dadosCompleto)
-        console.log(data)
+        oneContTransations(dadosCompleto)
     };
 
     return(

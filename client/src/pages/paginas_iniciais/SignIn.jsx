@@ -35,7 +35,7 @@ export default function SignIn(){
         if(acesso)
             setTipoUsuario('cli')
 
-        console.log(cliente.current);
+        // console.log(cliente.current);
     },[])
 
     // Retorna a rota de acordo com o tipo de usuário:
